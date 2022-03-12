@@ -1,0 +1,10 @@
+*#
+.#*
+.gitignore~
+auto-save-list/
+elpa/
+history
+init.el~
+recentf*
+var/
+viper*

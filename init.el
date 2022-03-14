@@ -269,7 +269,7 @@ The optional argument can be generated with `make-hippie-expand-function'."
     ;; up in the same state that we began.
     (set-buffer-modified-p buffer-modified)
     ;; Provide the options in the order in which they are normally generated.
-    (delete he-search-string (reverse he-tried-table))))
+    (delete he-search-string he-tried-table)))
 
 (defun my-ido-hippie-expand-with (hippie-expand-function)
   "Offer ido-based completion using the specified hippie-expand function."

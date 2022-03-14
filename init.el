@@ -5,11 +5,14 @@
 (setq user-full-name "Alexander Brown")
 (setq user-mail-address "alex.brown7711@gmail.com")
 
-;;  Display startup time
+;; Profile emacs startup
 (add-hook 'emacs-startup-hook
-(lambda ()
-            (message "Emacs loaded in %s."
-                     (emacs-init-time))))
+          (lambda ()
+            (message "*** Emacs loaded in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
 
 ;; Defines the user configuration var and etc folders and ensure they exist
 (defvar config-etc-dir (expand-file-name "etc/" user-emacs-directory)
@@ -50,6 +53,10 @@
 (global-set-key (kbd (concat "C-" leader)) nil)
 
 ;;------------------------------------------------------------------------------
+;; Escape cancels all
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;;------------------------------------------------------------------------------
 ;; General
 
 ;; Disable backup files
@@ -69,7 +76,7 @@
 (cua-mode 1)
 
 ;; Disable tool bar
-;;(menu-bar-mode -1)
+(menu-bar-mode -1)
 
 ;; Disable tool bar
 (tool-bar-mode -1)
@@ -117,6 +124,8 @@
 (global-set-key (kbd "C-SPC j") 'windmove-down)
 (global-set-key (kbd "C-SPC k") 'windmove-up)
 (global-set-key (kbd "C-SPC l") 'windmove-right)
+
+(global-set-key (kbd (concat "C-" leader " f")) 'ido-find-file)
 
 ;;------------------------------------------------------------------------------
 ;; IDO
@@ -202,6 +211,11 @@
 ;; Theme
 (use-package doom-themes
   :init (load-theme 'doom-gruvbox t))
+
+;;------------------------------------------------------------------------------
+;; Transparent Emacs
+(set-frame-parameter (selected-frame) 'alpha '(95 . 95))
+(add-to-list 'default-frame-alist '(alpha . (95 . 95)))
 
 ;;------------------------------------------------------------------------------
 ;; Font
@@ -333,6 +347,10 @@ The optional argument can be generated with `make-hippie-expand-function'."
 
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
+
+;;==============================================================================
+;; C/C++
+(add-hook 'prog-mode-hook 'cwarn-mode)
 
 ;;==============================================================================
 ;; Scripting

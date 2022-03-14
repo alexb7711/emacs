@@ -164,6 +164,14 @@
        ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]"
         " [Not readable]" " [Too big]" " [Confirm]")))
 
+;; Remap next/previous match keys
+(add-hook 'ido-set-hook 'ido-my-keys)
+
+(defun ido-my-keys()
+          "Add my keybindings for ido"
+          (define-key ido-completions-map (kbd "C-n") 'ido-next-match)
+          (define-key ido-completions-map (kbd "C-p") 'ido-prev-match))
+
 ;; Enable ido
 (ido-mode 1)
 

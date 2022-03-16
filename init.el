@@ -69,6 +69,9 @@
 ;; Require 'y' or 'n' instead of 'yes' or 'no' response
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Set default directory to root
+(setq default-directory "~/")
+
 ;;------------------------------------------------------------------------------
 ;; Modes
 
@@ -105,6 +108,7 @@
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wf")) 'find-file-other-window)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wh")) 'split-window-right)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wk")) 'kill-buffer-and-window)
+(define-key viper-vi-global-user-map (kbd (concat "C-" leader " d")) 'delete-window)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " ws")) 'split-window-below)
 
 (define-key viper-vi-global-user-map (kbd (concat"C-" leader " h")) 'windmove-left)
@@ -357,8 +361,33 @@ The optional argument can be generated with `make-hippie-expand-function'."
 (setq-default indent-tabs-mode nil)
 
 ;;==============================================================================
+;; ipynb files
+(use-package code-cells)
+
+;; Use pandoc to convert
+(setq code-cells-convert-ipynb-style '(("pandoc" "--to" "ipynb" "--from" "org")
+                                       ("pandoc" "--to" "org" "--from" "ipynb")
+                                       org-mode))
+;; Some nice keys
+(with-eval-after-load 'code-cells
+  (let ((map code-cells-mode-map))
+    (define-key map (kbd "M-p") 'code-cells-backward-cell)
+    (define-key map (kbd "M-n") 'code-cells-forward-cell)
+    (define-key map (kbd "C-c C-c") 'code-cells-eval)
+    ;; Overriding other minor mode bindings requires some insistence...
+    (define-key map [remap jupyter-eval-line-or-region] 'code-cells-eval)))
+
+;;==============================================================================
+;; Debugging
+(add-hook 'debugger-mode-hook tool-bar-mode)
+
+;;==============================================================================
 ;; C/C++
-(add-hook 'prog-mode-hook 'cwarn-mode)
+(add-hook 'pre-command-hook
+          (lambda ()
+            (if (or (get-buffer "*gud-pdb*") (get-buffer "*gud-gdb*"))
+                (tool-bar-mode 1)
+              (tool-bar-mode -1))))
 
 ;;==============================================================================
 ;; Scripting
@@ -372,7 +401,7 @@ The optional argument can be generated with `make-hippie-expand-function'."
  ;; If there is more than one, they won't work right.
  '(fast-but-imprecise-scrolling t)
  '(global-auto-revert-non-file-buffers t)
- '(package-selected-packages '(doom-themes use-package))
+ '(package-selected-packages '(code-cells doom-themes use-package))
  '(scroll-conservatively 101)
  '(scroll-margin 0)
  '(scroll-preserve-screen-position t))

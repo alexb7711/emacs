@@ -105,11 +105,11 @@
 
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wb")) 'buffer-menu-other-window)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wd")) 'dired-other-window)
-(define-key viper-vi-global-user-map (kbd (concat "C-" leader " wf")) 'find-file-other-window)
-(define-key viper-vi-global-user-map (kbd (concat "C-" leader " wh")) 'split-window-right)
+(define-key viper-vi-global-user-map (kbd (concat "C-" leader " wf")) 'ido-find-file-other-window)
+(define-key viper-vi-global-user-map (kbd (concat "C-" leader " wv")) 'split-window-right)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wk")) 'kill-buffer-and-window)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " d")) 'delete-window)
-(define-key viper-vi-global-user-map (kbd (concat "C-" leader " ws")) 'split-window-below)
+(define-key viper-vi-global-user-map (kbd (concat "C-" leader " wh")) 'split-window-below)
 
 (define-key viper-vi-global-user-map (kbd (concat"C-" leader " h")) 'windmove-left)
 (define-key viper-vi-global-user-map (kbd (concat"C-" leader " j")) 'windmove-down)
@@ -119,7 +119,7 @@
 ;; Emacs mode
 (global-set-key (kbd "C-SPC wb") 'buffer-menu-other-window)
 (global-set-key (kbd "C-SPC wd") 'dired-other-window)
-(global-set-key (kbd "C-SPC wf") 'find-file-other-window)
+(global-set-key (kbd "C-SPC wf") 'ido-find-file-other-window)
 (global-set-key (kbd "C-SPC wh") 'split-window-right)
 (global-set-key (kbd "C-SPC wk") 'kill-buffer-and-window)
 (global-set-key (kbd "C-SPC ws") 'split-window-below)
@@ -130,6 +130,21 @@
 (global-set-key (kbd "C-SPC l") 'windmove-right)
 
 (global-set-key (kbd (concat "C-" leader " f")) 'ido-find-file)
+
+;;------------------------------------------------------------------------------
+;; Terminal
+
+;; Scroll to bottom of buffer
+(setq term-show-maximum-output 1)
+
+;;------------------------------------------------------------------------------
+;; Ctags
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (shell-command
+   (format "%s -f TAGS -e -R %s" "ctags" (directory-file-name dir-name)))
+  )
 
 ;;------------------------------------------------------------------------------
 ;; IDO
@@ -379,15 +394,16 @@ The optional argument can be generated with `make-hippie-expand-function'."
 
 ;;==============================================================================
 ;; Debugging
-(add-hook 'debugger-mode-hook tool-bar-mode)
-
-;;==============================================================================
-;; C/C++
 (add-hook 'pre-command-hook
           (lambda ()
             (if (or (get-buffer "*gud-pdb*") (get-buffer "*gud-gdb*"))
                 (tool-bar-mode 1)
               (tool-bar-mode -1))))
+
+;;==============================================================================
+;; C/C++
+;; Get this back from git
+;; Also add the code to cycle through ido minibuffer with C-n C-p
 
 ;;==============================================================================
 ;; Scripting

@@ -326,6 +326,10 @@ The optional argument can be generated with `make-hippie-expand-function'."
 (add-hook 'prog-mode-hook #'whitespace-mode)
 
 ;;------------------------------------------------------------------------------
+;; Delete trailing whitespace
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;;------------------------------------------------------------------------------
 ;; Highlighting text
 
 ;; If text is highlighted and a character is typed, delete the text
@@ -402,8 +406,16 @@ The optional argument can be generated with `make-hippie-expand-function'."
 
 ;;==============================================================================
 ;; C/C++
-;; Get this back from git
-;; Also add the code to cycle through ido minibuffer with C-n C-p
+
+;; Set C/C++ style
+(setq c-default-style "linux")
+(setq c-basic-offset 2)
+
+;;==============================================================================
+;; Python
+(add-hook 'python-mode-hook 'guess-style-guess-tabs-mode)
+(add-hook 'python-mode-hook (lambda ()
+                                    (guess-style-gues-tab-width)))
 
 ;;==============================================================================
 ;; Scripting

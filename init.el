@@ -103,13 +103,14 @@
 (setq viper-mode t)
 (require 'viper)
 
+(define-key viper-vi-global-user-map (kbd (concat "C-" leader " sh")) 'split-window-right)
+(define-key viper-vi-global-user-map (kbd (concat "C-" leader " sh")) 'split-window-below)
+
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wb")) 'buffer-menu-other-window)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wd")) 'dired-other-window)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wf")) 'ido-find-file-other-window)
-(define-key viper-vi-global-user-map (kbd (concat "C-" leader " wv")) 'split-window-right)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wk")) 'kill-buffer-and-window)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " d")) 'delete-window)
-(define-key viper-vi-global-user-map (kbd (concat "C-" leader " wh")) 'split-window-below)
 
 (define-key viper-vi-global-user-map (kbd (concat"C-" leader " h")) 'windmove-left)
 (define-key viper-vi-global-user-map (kbd (concat"C-" leader " j")) 'windmove-down)
@@ -188,8 +189,8 @@
 
 (defun ido-my-keys()
           "Add my keybindings for ido"
-          (define-key ido-completions-map (kbd "C-n") 'ido-next-match)
-          (define-key ido-completions-map (kbd "C-p") 'ido-prev-match))
+          (define-key ido-mode-map (kbd "C-n") 'ido-next-match)
+          (define-key ido-mode-map (kbd "C-p") 'ido-prev-match))
 
 ;; Enable ido
 (ido-mode 1)

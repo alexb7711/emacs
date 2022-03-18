@@ -8,3 +8,4 @@ init.el~
 recentf*
 var/
 viper*
+ido.*

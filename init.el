@@ -20,6 +20,10 @@
 (defvar config-var-dir (expand-file-name "var/" user-emacs-directory)
   "User's var/ directory")
 
+;; Change in custom file
+(setq custom-file (locate-user-emacs-file "custom-vars.el"))
+(load custom-file 'noerror 'nomessage)
+
 ;; Create dump directories
 (mkdir config-etc-dir t)
 (mkdir config-var-dir t)
@@ -58,6 +62,9 @@
 
 ;;------------------------------------------------------------------------------
 ;; General
+
+;; Disable GUI dialog boxes
+(setq use-dialog-box nil)
 
 ;; Disable backup files
 (setq make-backup-files nil)
@@ -103,10 +110,11 @@
 (setq viper-mode t)
 (require 'viper)
 
-(define-key viper-vi-global-user-map (kbd (concat "C-" leader " sh")) 'split-window-right)
+(define-key viper-vi-global-user-map (kbd (concat "C-" leader " sv")) 'split-window-right)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " sh")) 'split-window-below)
 
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wb")) 'buffer-menu-other-window)
+(define-key viper-vi-global-user-map (kbd (concat "C-" leader " b")) 'ido-switch-buffer)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wd")) 'dired-other-window)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wf")) 'ido-find-file-other-window)
 (define-key viper-vi-global-user-map (kbd (concat "C-" leader " wk")) 'kill-buffer-and-window)
@@ -185,12 +193,12 @@
         " [Not readable]" " [Too big]" " [Confirm]")))
 
 ;; Remap next/previous match keys
-(add-hook 'ido-set-hook 'ido-my-keys)
+(add-hook 'ido-setup-hook #'bind-ido-keys)
 
-(defun ido-my-keys()
+(defun bind-ido-keys()
           "Add my keybindings for ido"
-          (define-key ido-mode-map (kbd "C-n") 'ido-next-match)
-          (define-key ido-mode-map (kbd "C-p") 'ido-prev-match))
+          (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+          (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
 
 ;; Enable ido
 (ido-mode 1)
@@ -423,20 +431,3 @@ The optional argument can be generated with `make-hippie-expand-function'."
 
 ;; Make shebang file executable when saved
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(fast-but-imprecise-scrolling t)
- '(global-auto-revert-non-file-buffers t)
- '(package-selected-packages '(code-cells doom-themes use-package))
- '(scroll-conservatively 101)
- '(scroll-margin 0)
- '(scroll-preserve-screen-position t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

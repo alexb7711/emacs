@@ -138,6 +138,11 @@
 (global-set-key (kbd "C-SPC k") 'windmove-up)
 (global-set-key (kbd "C-SPC l") 'windmove-right)
 
+(global-set-key (kbd "C-SPC tn") 'tab-new)
+(global-set-key (kbd "C-SPC tc") 'tab-close)
+(global-set-key (kbd "C-SPC tl") 'tab-next)
+(global-set-key (kbd "C-SPC th") 'tab-previous)
+
 (global-set-key (kbd (concat "C-" leader " f")) 'ido-find-file)
 
 ;;------------------------------------------------------------------------------
@@ -145,6 +150,10 @@
 
 ;; Scroll to bottom of buffer
 (setq term-show-maximum-output 1)
+
+;;------------------------------------------------------------------------------
+;; Compile
+(setq compileation-scroll-output 1)
 
 ;;------------------------------------------------------------------------------
 ;; Ctags
@@ -431,3 +440,10 @@ The optional argument can be generated with `make-hippie-expand-function'."
 
 ;; Make shebang file executable when saved
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+;;==============================================================================
+;; LaTeX
+
+;; Compile on save
+(add-hook 'tex-mode-hook (lambda()
+                            (add-hook 'after-save-hook 'tex-compile)))

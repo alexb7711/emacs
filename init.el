@@ -94,14 +94,26 @@
 ;; Disable scroll bar
 (scroll-bar-mode -1)
 
-;; Auto reload files on save
+;; Auto reload files
 (global-auto-revert-mode t)
 
 ;; Auto reload dired buffers
-(customize-set-variable 'global-auto-revert-non-file-buffers t)
+(customize-set-variable 'global-auto-revert-non-file-buffers nil)
 
 ;; Turn on recentf mode (remembers recent files)
-(add-hook 'after-init-hook #'recentf-mode)
+(recentf-mode 1)
+
+(defun recentf-ido-find-file ()
+  "Find a recent file using Ido."
+  (interactive)
+  (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+    (when file
+      (find-file file))))
+
+(setq recentf-max-menu-items 25)
+
+(setq recentf-max-saved-items 25)
+(global-set-key (kbd (concat "C-" leader " rf")) 'recentf-ido-find-file)
 
 ;; Enable tar-bar mode
 (tab-bar-mode 1)
@@ -126,22 +138,23 @@
 (define-key viper-vi-global-user-map (kbd (concat"C-" leader " l")) 'windmove-right)
 
 ;; Emacs mode
-(global-set-key (kbd "C-SPC wb") 'buffer-menu-other-window)
-(global-set-key (kbd "C-SPC wd") 'dired-other-window)
-(global-set-key (kbd "C-SPC wf") 'ido-find-file-other-window)
-(global-set-key (kbd "C-SPC wh") 'split-window-right)
-(global-set-key (kbd "C-SPC wk") 'kill-buffer-and-window)
-(global-set-key (kbd "C-SPC ws") 'split-window-below)
+(global-set-key (kbd (concat "C-" leader " wb")) 'buffer-menu-other-window)
+(global-set-key (kbd (concat "C-" leader " b")) 'ido-switch-buffer)
+(global-set-key (kbd (concat "C-" leader " wd")) 'dired-other-window)
+(global-set-key (kbd (concat "C-" leader " wf")) 'ido-find-file-other-window)
+(global-set-key (kbd (concat "C-" leader " wh")) 'split-window-right)
+(global-set-key (kbd (concat "C-" leader " wk")) 'kill-buffer-and-window)
+(global-set-key (kbd (concat "C-" leader " ws")) 'split-window-below)
 
-(global-set-key (kbd "C-SPC h") 'windmove-left)
-(global-set-key (kbd "C-SPC j") 'windmove-down)
-(global-set-key (kbd "C-SPC k") 'windmove-up)
-(global-set-key (kbd "C-SPC l") 'windmove-right)
+(global-set-key (kbd (concat "C-" leader " h")) 'windmove-left)
+(global-set-key (kbd (concat "C-" leader " j")) 'windmove-down)
+(global-set-key (kbd (concat "C-" leader " k")) 'windmove-up)
+(global-set-key (kbd (concat "C-" leader " l")) 'windmove-right)
 
-(global-set-key (kbd "C-SPC tn") 'tab-new)
-(global-set-key (kbd "C-SPC tc") 'tab-close)
-(global-set-key (kbd "C-SPC tl") 'tab-next)
-(global-set-key (kbd "C-SPC th") 'tab-previous)
+(global-set-key (kbd (concat "C-" leader " tn")) 'tab-new)
+(global-set-key (kbd (concat "C-" leader " tc")) 'tab-close)
+(global-set-key (kbd (concat "C-" leader " tl")) 'tab-next)
+(global-set-key (kbd (concat "C-" leader " th")) 'tab-previous)
 
 (global-set-key (kbd (concat "C-" leader " f")) 'ido-find-file)
 
@@ -152,8 +165,48 @@
 (setq term-show-maximum-output 1)
 
 ;;------------------------------------------------------------------------------
+;; Eshell
+(use-package eshell
+  :init
+  (setq ;; eshell-buffer-shorthand t ...  Can't see Bug#19391
+        eshell-scroll-to-bottom-on-input 'all
+        eshell-error-if-no-glob t
+        eshell-hist-ignoredups t
+        eshell-save-history-on-exit t
+        eshell-prefer-lisp-functions nil
+        eshell-destroy-buffer-when-process-dies t))
+
+;; Tab completion
+ (add-hook 'eshell-mode-hook
+           '(lambda ()
+              (viper-go-away)
+              (define-key eshell-mode-map (kbd "TAB") 'pcomplete-expand-and-complete)))
+;; Helper function for prompt
+(defun with-face (str &rest face-plist)
+  (propertize str 'face face-plist))
+
+;; Set prompt
+(setq eshell-prompt-function
+      (lambda ()
+        (concat
+         (with-face (format-time-string "[%H:%M] " (current-time)) :foreground "green")
+         ": "
+         (with-face (eshell/pwd) :foreground "blue")
+         (with-face "\n└─ " "grey"))))
+
+(setq eshell-highlight-prompt nil)
+
+;;------------------------------------------------------------------------------
 ;; Compile
 (setq compileation-scroll-output 1)
+
+;; Auto Compile
+(add-hook 'after-save-hook #'compiler-script)
+
+;; Compile script
+(defun compiler-script ()
+  "Run compile command on currently opened buffer"
+  (call-process-shell-command (concat "compile " (buffer-file-name)) nil 0))
 
 ;;------------------------------------------------------------------------------
 ;; Ctags
@@ -325,6 +378,29 @@ The optional argument can be generated with `make-hippie-expand-function'."
         (he-substitute-string selection t)
       (message "No expansion found"))))
 
+;; Set hippie default search list
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev
+        try-expand-dabbrev-all-buffers
+        try-complete-tag
+        try-complete-file-name-partially
+        try-complete-file-name
+        try-expand-all-abbrevs
+        try-expand-list
+        try-expand-line
+        ;;try-expand-dabbrev-from-kill
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol))
+
+;; Tag completion for syntax expanding
+(defun try-complete-tag (old)
+  "Add a completion option for hippie expand to complete over etags"
+	;; If the tags file is not set, don't try to complete using tags
+  (when tags-file-name
+  (unless old
+    (complete-tag))))
+
+;; Syntax expanding
 (defun my-ido-hippie-expand ()
   "Offer ido-based completion for the word at point."
   (interactive)
@@ -332,9 +408,27 @@ The optional argument can be generated with `make-hippie-expand-function'."
 
 (global-set-key (kbd "C-/") 'my-ido-hippie-expand)
 
+;; Tag expanding
+;; (defun tags-complete-tag (string predicate what)
+;;   (save-excursion
+;;     ;; If we need to ask for the tag table, allow that.
+;;     (if (eq what t)
+;; 	      (all-completions string (tags-completion-table) predicate)
+;;       (try-completion string (tags-completion-table) predicate))))
+
+;; Filename expanding
+(defun my-ido-hippie-expand-filename ()
+  "Offer ido-based completion for filenames at point"
+  (interactive)
+  (my-ido-hippie-expand-with
+   (make-hippie-expand-function '(try-complete-file-name))))
+
+(define-key viper-insert-global-user-map (kbd "C-c C-f") 'my-ido-hippie-expand-filename)
+
 ;;------------------------------------------------------------------------------
 ;; Line numbers
 (add-hook 'prog-mode-hook #'display-line-numbers-mode 1)
+(add-hook 'latex-mode-hook #'display-line-numbers-mode 1)
 
 ;;------------------------------------------------------------------------------
 ;; 80 character marker
@@ -342,6 +436,7 @@ The optional argument can be generated with `make-hippie-expand-function'."
  whitespace-style '(face indentation trailing lines-tail)
  whitespace-line-column 80)
 (add-hook 'prog-mode-hook #'whitespace-mode)
+(add-hook 'latex-mode-hook #'whitespace-mode)
 
 ;;------------------------------------------------------------------------------
 ;; Delete trailing whitespace
@@ -360,6 +455,13 @@ The optional argument can be generated with `make-hippie-expand-function'."
 
 (global-set-key (kbd "C-v") #'set-mark-command)
 (define-key viper-vi-global-user-map (kbd "v") #'set-mark-command)
+
+;;------------------------------------------------------------------------------
+;; Align text
+(defun align-non-space (BEG END)
+  "Align non-space columns in region BEG END."
+  (interactive "r")
+  (align-regexp BEG END "\\(\\s-*\\)\\S-+" 1 1 t))
 
 ;;------------------------------------------------------------------------------
 ;; Highlight current line
@@ -387,6 +489,7 @@ The optional argument can be generated with `make-hippie-expand-function'."
 ;; Indicate end of file
 (setq-default indicate-empty-lines t)
 (add-hook 'prog-mode-hook 'toggle-indicate-empty-lines)
+(add-hook 'latex-mode-hook 'toggle-indicate-empty-lines)
 
 ;;------------------------------------------------------------------------------
 ;; General
@@ -442,8 +545,23 @@ The optional argument can be generated with `make-hippie-expand-function'."
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 ;;==============================================================================
-;; LaTeX
+;; Version control
 
-;; Compile on save
-(add-hook 'tex-mode-hook (lambda()
-                            (add-hook 'after-save-hook 'tex-compile)))
+;;------------------------------------------------------------------------------
+;; Git gutter
+(use-package git-gutter
+  :hook
+  (prog-mode . git-gutter-mode)
+  (shell-mode . git-gutter-mode)
+  (latex-mode . git-gutter-mode)
+  :config
+  (global-git-gutter-mode +1))
+
+;;------------------------------------------------------------------------------
+;; Don't prompt for file to be checked out if using git
+(defadvice viper-maybe-checkout (around viper-svn-checkin-fix activate)
+  "Advise viper-maybe-checkout to ignore git files."
+  (let ((file (expand-file-name (buffer-file-name buf))))
+    (when (and (featurep 'vc-hooks)
+               (not (memq (vc-backend file) '(nil Git))))
+      ad-do-it)))

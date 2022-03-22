@@ -10,3 +10,4 @@ var/
 viper*
 ido.*
 custom-vars.el
+eshell

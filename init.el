@@ -163,6 +163,7 @@
 
 ;; Scroll to bottom of buffer
 (setq term-show-maximum-output 1)
+(setq term-scroll-to-bottom-on-output 1)
 
 ;;------------------------------------------------------------------------------
 ;; Eshell
@@ -198,7 +199,7 @@
 
 ;;------------------------------------------------------------------------------
 ;; Compile
-(setq compileation-scroll-output 1)
+(setq compilation-scroll-output 1)
 
 ;; Auto Compile
 (add-hook 'after-save-hook #'compiler-script)
@@ -436,7 +437,6 @@ The optional argument can be generated with `make-hippie-expand-function'."
  whitespace-style '(face indentation trailing lines-tail)
  whitespace-line-column 80)
 (add-hook 'prog-mode-hook #'whitespace-mode)
-(add-hook 'latex-mode-hook #'whitespace-mode)
 
 ;;------------------------------------------------------------------------------
 ;; Delete trailing whitespace

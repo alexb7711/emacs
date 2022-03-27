@@ -143,6 +143,7 @@
 (global-set-key (kbd (concat "C-" leader " wd")) 'dired-other-window)
 (global-set-key (kbd (concat "C-" leader " wf")) 'ido-find-file-other-window)
 (global-set-key (kbd (concat "C-" leader " wk")) 'kill-buffer-and-window)
+(global-set-key (kbd (concat "C-" leader " d")) 'delete-window)
 
 (global-set-key (kbd (concat "C-" leader " sv")) 'split-window-below)
 (global-set-key (kbd (concat "C-" leader " sh")) 'split-window-right)
@@ -557,7 +558,7 @@ The optional argument can be generated with `make-hippie-expand-function'."
       ad-do-it)))
 
 ;;------------------------------------------------------------------------------
-;; Flmake
+;; Flymake
 ;; Requires:
 ;; 	- Python: python-pyflakes
 (add-hook 'prog-mode-hook 'flymake-mode t)
@@ -567,6 +568,8 @@ The optional argument can be generated with `make-hippie-expand-function'."
 (setq semantic-default-submodes
       '(;; Perform semantic actions during idle time
         global-semantic-idle-scheduler-mode
+        ;; Display information about current tag when in idle time
+        global-semantic-idle-summary-mode
         ;; Use a database of parsed tags
         global-semanticdb-minor-mode
         ;; Decorate buffers with additional semantic information
@@ -581,9 +584,12 @@ The optional argument can be generated with `make-hippie-expand-function'."
         global-semantic-idle-breadcrumbs-mode
         ;; Switch to recently changed tags with `semantic-mrub-switch-tags',
         ;; or `C-x B'
-        global-semantic-mru-bookmark-mode))
+        global-semantic-mru-bookmark-mode
+        ;; Display possible name completions in idle time
+        global-semantic-idle-completions-mode
+        ;; Display parser state in modeline
+        global-semantic-show-parser-state-mode))
 
 (add-hook 'emacs-lisp-mode-hook 'semantic-mode)
 (add-hook 'python-mode-hook 'semantic-mode)
-(add-hook 'java-mode-hook 'semantic-mode)
 (add-hook 'c-mode-hook 'semantic-mode)

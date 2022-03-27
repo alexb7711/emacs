@@ -142,9 +142,10 @@
 (global-set-key (kbd (concat "C-" leader " b")) 'ido-switch-buffer)
 (global-set-key (kbd (concat "C-" leader " wd")) 'dired-other-window)
 (global-set-key (kbd (concat "C-" leader " wf")) 'ido-find-file-other-window)
-(global-set-key (kbd (concat "C-" leader " wh")) 'split-window-right)
 (global-set-key (kbd (concat "C-" leader " wk")) 'kill-buffer-and-window)
-(global-set-key (kbd (concat "C-" leader " ws")) 'split-window-below)
+
+(global-set-key (kbd (concat "C-" leader " sv")) 'split-window-below)
+(global-set-key (kbd (concat "C-" leader " sh")) 'split-window-right)
 
 (global-set-key (kbd (concat "C-" leader " h")) 'windmove-left)
 (global-set-key (kbd (concat "C-" leader " j")) 'windmove-down)
@@ -166,38 +167,6 @@
 (setq term-scroll-to-bottom-on-output 1)
 
 ;;------------------------------------------------------------------------------
-;; Eshell
-(use-package eshell
-  :init
-  (setq ;; eshell-buffer-shorthand t ...  Can't see Bug#19391
-        eshell-scroll-to-bottom-on-input 'all
-        eshell-error-if-no-glob t
-        eshell-hist-ignoredups t
-        eshell-save-history-on-exit t
-        eshell-prefer-lisp-functions nil
-        eshell-destroy-buffer-when-process-dies t))
-
-;; Tab completion
- (add-hook 'eshell-mode-hook
-           '(lambda ()
-              (viper-go-away)
-              (define-key eshell-mode-map (kbd "TAB") 'pcomplete-expand-and-complete)))
-;; Helper function for prompt
-(defun with-face (str &rest face-plist)
-  (propertize str 'face face-plist))
-
-;; Set prompt
-(setq eshell-prompt-function
-      (lambda ()
-        (concat
-         (with-face (format-time-string "[%H:%M] " (current-time)) :foreground "green")
-         ": "
-         (with-face (eshell/pwd) :foreground "blue")
-         (with-face "\n└─ " "grey"))))
-
-(setq eshell-highlight-prompt nil)
-
-;;------------------------------------------------------------------------------
 ;; Compile
 (setq compilation-scroll-output 1)
 
@@ -215,8 +184,7 @@
   "Create tags file."
   (interactive "DDirectory: ")
   (shell-command
-   (format "%s -f TAGS -e -R %s" "ctags" (directory-file-name dir-name)))
-  )
+   (format "%s -f TAGS -e -R %s" "ctags" (directory-file-name dir-name))))
 
 ;;------------------------------------------------------------------------------
 ;; IDO
@@ -269,6 +237,8 @@
 ;;------------------------------------------------------------------------------
 ;; Flyspell
 ;; https://www.emacswiki.org/emacs/FlySpell
+;; Requires:
+;; 	- ispell
 
 (defun flyspell-on-for-buffer-type ()
   "Enable Flyspell appropriately for the major mode of the current buffer.
@@ -278,15 +248,16 @@
   (interactive)
   (if (not (symbol-value flyspell-mode)) ; if not already on
       (progn
-        (if (derived-mode-p 'prog-mode)
+        ;; When programming
+        (when (derived-mode-p 'prog-mode)
             (progn
               (message "Flyspell on (code)")
-              (flyspell-prog-mode))
-          ;; else
+              (flyspell-prog-mode)))
+        ;; When editing a document type text file
+        (when (or (derived-mode-p 'latex-mode) (derived-mode-p 'markdown-mode))
           (progn
             (message "Flyspell on (text)")
             (flyspell-mode 1)))
-        ;; I tried putting (flyspell-buffer) here but it didn't seem to work
         )))
 
 (defun flyspell-toggle ()
@@ -368,7 +339,7 @@ The optional argument can be generated with `make-hippie-expand-function'."
     ;; up in the same state that we began.
     (set-buffer-modified-p buffer-modified)
     ;; Provide the options in the order in which they are normally generated.
-    (delete he-search-string he-tried-table)))
+    (delete he-search-string (reverse he-tried-table))))
 
 (defun my-ido-hippie-expand-with (hippie-expand-function)
   "Offer ido-based completion using the specified hippie-expand function."
@@ -383,7 +354,7 @@ The optional argument can be generated with `make-hippie-expand-function'."
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev
         try-expand-dabbrev-all-buffers
-        try-complete-tag
+        try-expand-tag
         try-complete-file-name-partially
         try-complete-file-name
         try-expand-all-abbrevs
@@ -394,12 +365,6 @@ The optional argument can be generated with `make-hippie-expand-function'."
         try-complete-lisp-symbol))
 
 ;; Tag completion for syntax expanding
-(defun try-complete-tag (old)
-  "Add a completion option for hippie expand to complete over etags"
-	;; If the tags file is not set, don't try to complete using tags
-  (when tags-file-name
-  (unless old
-    (complete-tag))))
 
 ;; Syntax expanding
 (defun my-ido-hippie-expand ()
@@ -410,12 +375,39 @@ The optional argument can be generated with `make-hippie-expand-function'."
 (global-set-key (kbd "C-/") 'my-ido-hippie-expand)
 
 ;; Tag expanding
-;; (defun tags-complete-tag (string predicate what)
-;;   (save-excursion
-;;     ;; If we need to ask for the tag table, allow that.
-;;     (if (eq what t)
-;; 	      (all-completions string (tags-completion-table) predicate)
-;;       (try-completion string (tags-completion-table) predicate))))
+(require 'cc-mode)
+
+(defun he-tag-beg ()
+  (let ((p
+         (save-excursion
+           (backward-word 1)
+           (point))))
+    p))
+
+(defun try-expand-tag (old)
+  (unless  old
+    (he-init-string (he-tag-beg) (point))
+    (setq he-expand-list (sort
+                          (all-completions he-search-string 'tags-complete-tag) 'string-lessp)))
+  (while (and he-expand-list
+              (he-string-member (car he-expand-list) he-tried-table))
+    (setq he-expand-list (cdr he-expand-list)))
+  (if (null he-expand-list)
+      (progn
+        (when old (he-reset-string))
+        ())
+    (he-substitute-string (car he-expand-list))
+    (setq he-expand-list (cdr he-expand-list))
+    t))
+
+(defun tags-complete-tag (string predicate what)
+  (save-excursion
+    ;; When there is a tags file name specified, try to auto complete
+    (when tags-file-name
+    ;; If we need to ask for the tag table, allow that.
+    (if (eq what t)
+	(all-completions string (tags-completion-table) predicate)
+      (try-completion string (tags-completion-table) predicate)))))
 
 ;; Filename expanding
 (defun my-ido-hippie-expand-filename ()
@@ -500,6 +492,9 @@ The optional argument can be generated with `make-hippie-expand-function'."
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
+;; Display which function you are under
+(add-hook 'prog-mode-hook 'which-function-mode)
+
 ;;==============================================================================
 ;; ipynb files
 (use-package code-cells)
@@ -533,12 +528,6 @@ The optional argument can be generated with `make-hippie-expand-function'."
 (setq c-basic-offset 2)
 
 ;;==============================================================================
-;; Python
-(add-hook 'python-mode-hook 'guess-style-guess-tabs-mode)
-(add-hook 'python-mode-hook (lambda ()
-                                    (guess-style-gues-tab-width)))
-
-;;==============================================================================
 ;; Scripting
 
 ;; Make shebang file executable when saved
@@ -551,9 +540,10 @@ The optional argument can be generated with `make-hippie-expand-function'."
 ;; Git gutter
 (use-package git-gutter
   :hook
-  (prog-mode . git-gutter-mode)
-  (shell-mode . git-gutter-mode)
-  (latex-mode . git-gutter-mode)
+  (prog-mode     . git-gutter-mode)
+  (shell-mode    . git-gutter-mode)
+  (latex-mode    . git-gutter-mode)
+  (markdown-mode . git-gutter-mode)
   :config
   (global-git-gutter-mode +1))
 
@@ -565,3 +555,35 @@ The optional argument can be generated with `make-hippie-expand-function'."
     (when (and (featurep 'vc-hooks)
                (not (memq (vc-backend file) '(nil Git))))
       ad-do-it)))
+
+;;------------------------------------------------------------------------------
+;; Flmake
+;; Requires:
+;; 	- Python: python-pyflakes
+(add-hook 'prog-mode-hook 'flymake-mode t)
+
+;;------------------------------------------------------------------------------
+;; Semantic (better auto complete options)
+(setq semantic-default-submodes
+      '(;; Perform semantic actions during idle time
+        global-semantic-idle-scheduler-mode
+        ;; Use a database of parsed tags
+        global-semanticdb-minor-mode
+        ;; Decorate buffers with additional semantic information
+        global-semantic-decoration-mode
+        ;; Highlight the name of the function you're currently in
+        global-semantic-highlight-func-mode
+        ;; show the name of the function at the top in a sticky
+        global-semantic-stickyfunc-mode
+        ;; Generate a summary of the current tag when idle
+        global-semantic-idle-summary-mode
+        ;; Show a breadcrumb of location during idle time
+        global-semantic-idle-breadcrumbs-mode
+        ;; Switch to recently changed tags with `semantic-mrub-switch-tags',
+        ;; or `C-x B'
+        global-semantic-mru-bookmark-mode))
+
+(add-hook 'emacs-lisp-mode-hook 'semantic-mode)
+(add-hook 'python-mode-hook 'semantic-mode)
+(add-hook 'java-mode-hook 'semantic-mode)
+(add-hook 'c-mode-hook 'semantic-mode)

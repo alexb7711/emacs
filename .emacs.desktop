@@ -1,0 +1,67 @@
+;; -*- mode: emacs-lisp; lexical-binding:t; coding: utf-8-emacs; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Sun May 21 15:22:49 2023
+;; Desktop file format version 208
+;; Emacs version 28.2
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (25706 35753 134289 560000) (desktop . "208") "alex@Newty" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font . "-UKWN-Mononoki Nerd Font-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1") (font-parameter . "-UKWN-Mononoki Nerd Font-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 0) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "wheat") (background-color . "black") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground . "white") (scroll-bar-background) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 16) (alpha 95 . 95) (no-focus-on-map) (no-accept-focus) (fullscreen) (visibility) (skip-taskbar) (z-group) (display-type . mono) (background-mode . dark) (cursor-color . "white") (modeline . t) (unsplittable) (viper-vi-state-cursor-color . "white") (frameset--id . "323C-46BB-5E6B-6D1E") (frameset--mini t) (display . ":0") (icon-name) (explicit-name) (frameset--text-pixel-width . 84) (frameset--text-pixel-height . 100) (height . 5) (width . 8) (left . 0) (top . 0)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 80) (min-pixel-width . 100) (min-pixel-height-ignore . 40) (min-pixel-width-ignore . 40) (min-pixel-height-safe . 20) (min-pixel-width-safe . 20)) leaf (pixel-width . 100) (pixel-height . 80) (total-width . 10) (total-height . 4) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))) (((minibuffer . t) (undecorated) (override-redirect) (font . "-UKWN-Mononoki Nerd Font-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1") (font-parameter) (border-width . 0) (internal-border-width . 0) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "wheat") (background-color . "black") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground . "white") (scroll-bar-background) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 16) (alpha 95 . 95) (no-focus-on-map) (no-accept-focus) (fullscreen . fullboth) (visibility . t) (skip-taskbar) (z-group) (environment "_=/usr/local/bin/dwm" "OLDPWD=/home/alex" "_JAVA_OPTIONS=-Djava.util.prefs.userRoot=/home/alex/.config/java" "MAIL=/var/spool/mail/alex" "PASSWORD_STORE_DIR=/home/alex/.local/share/password-store" "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus" "PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/home/alex/code/scripts:/home/alex/code/scripts/dmenu:/opt/gurobi911/linux64/bin" "BROWSER=brave" "XDG_RUNTIME_DIR=/run/user/1000" "LD_LIBRARY_PATH=:/opt/gurobi911/linux64/lib" "TERMINFO_DIRS=/terminfo:/usr/share/terminfo" "XDG_SESSION_ID=1" "XDG_VTNR=1" "SHLVL=3" "DISPLAY=:0" "NPM_CONFIG_USERCONFIG=/home/alex/.config/npm/npmrc" "XMONAD_CACHE_HOME=/home/alex/.config/xmonad/" "USER=alex" "ZDOTDIR=/home/alex/.config/zsh/" "RUSTUP_HOME=/home/alex/.local/share/rustup" "GUROBI_HOME=/opt/gurobi911/linux64" "TERMINFO=/terminfo" "TERM=linux" "XDG_SESSION_CLASS=user" "INVOCATION_ID=caea58958e664ac29df375f8a2a145c0" "SSB_HOME=/zoom" "PDF_READER=masterpdfeditor5" "CARGO_HOME=/home/alex/.local/cargo" "_JAVA_AWT_WM_NONREPARENTING=1" "HISTFILE=/zsh/history" "LANG=en_US.UTF-8" "HOME=/home/alex" "MOTD_SHOWN=pam" "WINDOWPATH=1" "TERMINAL=st" "XAUTHORITY=/home/alex/.Xauthority" "SYSTEMD_EXEC_PID=619" "XDG_SESSION_TYPE=tty" "QT_QPA_PLATFORMTHEME=qt5ct" "LOGNAME=alex" "VIFMRC=~/.config/vifm/vifmrc" "PWD=/home/alex" "XDG_SEAT=seat0" "EDITOR=emacsclient -a \"emacs\"" "GNUPGHOME=/home/alex/.local/share/.gnupg" "CUDA_CACHE_PATH=/home/alex/.cache/nv" "MATLAB_LOG_DIR=/tmp" "NOTMUCH_CONFIG=/home/alex/.config/notmuch/notmuchrc" "XMONAD_DATA_HOME=/home/alex/.config/xmonad/" "XMONAD_CONFIG_HOME=/home/alex/.config/xmonad/" "LESSHISTFILE=-" "SHELL=/usr/bin/zsh") (display-type . color) (background-mode . dark) (cursor-color . "thistle") (viper-saved-cursor-color-in-replace-mode . "thistle") (last-focus-update . t) (viper-saved-cursor-color-in-insert-mode . "thistle") (frameset--id . "96E1-AE3F-5057-A25F") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (viper-vi-state-cursor-color . "thistle") (sticky) (height . 52) (width . 188) (left . 5) (top . 5)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 80) (min-pixel-width . 100) (min-pixel-height-ignore . 40) (min-pixel-width-ignore . 40) (min-pixel-height-safe . 20) (min-pixel-width-safe . 20)) leaf (pixel-width . 1904) (pixel-height . 1024) (total-width . 190) (total-height . 51) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)) (prev-buffers ("*Messages*" 1276 1357))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '(#("~/Mail" 0 6 (isearch-regexp-function nil isearch-case-fold-search nil)) #("arch" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("urgen" 0 5 (isearch-regexp-function nil isearch-case-fold-search t)) #("con" 0 3 (isearch-regexp-function nil isearch-case-fold-search t)) #("outputkkk" 0 9 (isearch-case-fold-search t isearch-regexp-function nil))))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/.config/emacs/modules/1-ab-general.el" "~/.xinitrc" "~/code/dotfiles/setConfig" "~/.config/emacs/modules/ab-gnus.el" "~/code/dotfiles/setConfig" "~/code/dotfiles/emacs/.config/emacs/modules/ab-gnus.el" "~/code/dotfiles/setConfig" "~/.newsrc.eld" "~/.new" "~/NextCloud/Documents/docs/milp/milp-pap/main.pdf" "~/NextCloud/Documents/docs/milp/milp-pap/" "~/Documents/docs/milp/milp-pap/" "~/Documents/notes/content/" "~/code/scripts/monitorSwapper" "~/RMAIL" "~/.config/emacs/modules/ab-mail.el" "~/code/dotfiles/isync/.config/isync/mbsyncrc" "~/code/dotfiles/setConfig" "~/code/dotfiles/isync/mbsyncrc" "~/code/dotfiles/zshenv/.zshenv" "~/.zshenv" "~/code/dotfiles/mbsync/.config/mu4e/mbsyncrc" "~/.config/emacs/bookmarks" "~/NextCloud/spring2023/hwk8/p29.m" "~/NextCloud/Documents/library/introduction-to-linear-algebra.pdf" "~/NextCloud/Documents/notes/content/doc-notes/moon-1999-mathem-method.org" "~/Documents/library/signals-and-systems-hwei-p-hsu.epub" "~/Documents/library/ref.bib" "/usr/share/emacs/28.2/lisp/org/org.el.gz" "~/.newsrc.eld" "~/NextCloud/spring2023/midterm/midterm.pdf" "~/Documents/library/mathematical-methods-and-algorithms-for-signal-processing.pdf" "~/NextCloud/Documents/notes/content/doc-notes/oppenheim-1996-signal-system.org" "~/NextCloud/Documents/docs/fuzzy-pap/fuzzy-pap.org" "~/.config/emacs/url/cookies" "~/Documents/library/signals-and-systems-alan.pdf" "~/Documents/library/emacs-tutorial.epub" "~/Documents/library/signals-and-systems-baraniuk.pdf" "~/NextCloud/Documents/docs/fuzzy-pap/.gitignore" "~/Documents/docs/fuzzy-pap/fuzzy-pap.tex" "~/Documents/docs/fuzzy-pap/fuzzy-pap.org" "~/Documents/docs/sa-pap/tab/variables.org" "~/Documents/docs/sa-pap/main.pdf" "~/Documents/docs/sa-pap/main.org" "~/Documents/docs/milp/milp-pap/main.tex"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/home/alex/code/dotfiles/emacs/.config/emacs/modules/1-ab-general.el"
+  "1-ab-general.el"
+  'emacs-lisp-mode
+  '(auto-fill-mode visual-line-mode eldoc-mode override-global-mode global-auto-revert-mode which-key-mode flyspell-mode whitespace-mode superword-mode flycheck-mode olivetti-mode company-mode git-gutter-mode rainbow-delimiters-mode)
+  2310
+  '(1715 nil)
+  nil
+  nil
+  '((buffer-display-time 25706 36283 974441 231000) (buffer-file-coding-system . prefer-utf-8-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/alex/code/dotfiles/xinitrc/.xinitrc"
+  ".xinitrc"
+  'sh-mode
+  '(auto-fill-mode visual-line-mode override-global-mode global-auto-revert-mode which-key-mode flyspell-mode whitespace-mode superword-mode flycheck-mode olivetti-mode company-mode git-gutter-mode rainbow-delimiters-mode)
+  375
+  '(375 nil)
+  nil
+  nil
+  '((buffer-display-time 25706 36250 231950 305000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/alex/code/dotfiles/emacs/.config/emacs/modules/ab-gnus.el"
+  "ab-gnus.el"
+  'emacs-lisp-mode
+  '(auto-fill-mode visual-line-mode eldoc-mode override-global-mode global-auto-revert-mode which-key-mode flyspell-mode whitespace-mode superword-mode flycheck-mode olivetti-mode company-mode git-gutter-mode rainbow-delimiters-mode)
+  2214
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 25706 35564 57313 148000) (buffer-file-coding-system . prefer-utf-8-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/alex/code/dotfiles/setConfig"
+  "setConfig"
+  'sh-mode
+  '(auto-fill-mode visual-line-mode override-global-mode global-auto-revert-mode which-key-mode flyspell-mode whitespace-mode superword-mode flycheck-mode olivetti-mode company-mode git-gutter-mode rainbow-delimiters-mode)
+  736
+  '(349 nil)
+  nil
+  nil
+  '((buffer-display-time 25706 36258 468710 535000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring (349 349 349))))
+

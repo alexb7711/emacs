@@ -1,0 +1,48 @@
+;;; -*- coding: utf-8; mode: lisp-data -*-
+(("/home/alex/Downloads/23.09.01_Droge_bus_pap.pdf" .
+  [((pdf-view-bookmark "23.09.01_Droge_bus_pap.pdf"
+                       (filename . "~/Downloads/23.09.01_Droge_bus_pap.pdf")
+                       (position . 1)
+                       (last-modified 25945 13932 335639 426000)
+                       (page . 2)
+                       (slice)
+                       (size . fit-width)
+                       (origin)
+                       (handler . pdf-view-bookmark-jump-handler)))])
+ ("/home/alex/Documents/docs/sa-pap/main.pdf" .
+  [((pdf-view-bookmark "main.pdf"
+                       (filename . "~/Documents/docs/sa-pap/main.pdf")
+                       (position . 1)
+                       (last-modified 25898 55097 441901 74000)
+                       (page . 14)
+                       (slice)
+                       (size . fit-page)
+                       (origin)
+                       (handler . pdf-view-bookmark-jump-handler)))])
+ ("/home/alex/code/research/sa-pap/sa-pap-paper/sa-pap.pdf"
+  (pdf-view-bookmark "sa-pap.pdf"
+                     (filename . "~/code/research/sa-pap/sa-pap-paper/sa-pap.pdf")
+                     (position . 1)
+                     (page . 11)
+                     (slice)
+                     (size . fit-width)
+                     (origin)
+                     (handler . pdf-view-bookmark-jump-handler)))
+ ("/home/alex/NextCloud/cad/gridfinity/242711-gridfinity-master-collection-44bc5e11-a614-487b-8349-7bf7f1fc4122.pdf"
+  (pdf-view-bookmark "242711-gridfinity-master-collection-44bc5e11-a614-487b-8349-7bf7f1fc4122.pdf"
+                     (filename . "~/NextCloud/cad/gridfinity/242711-gridfinity-master-collection-44bc5e11-a614-487b-8349-7bf7f1fc4122.pdf")
+                     (position . 1)
+                     (page . 2)
+                     (slice)
+                     (size . fit-width)
+                     (origin 0.0 . 0.0)
+                     (handler . pdf-view-bookmark-jump-handler)))
+ ("/home/alex/Documents/library/a-first-course-in-differential-equations.pdf"
+  (pdf-view-bookmark "a-first-course-in-differential-equations.pdf"
+                     (filename . "~/Documents/library/a-first-course-in-differential-equations.pdf")
+                     (position . 1)
+                     (page . 26)
+                     (slice)
+                     (size . fit-page)
+                     (origin 0.0 . 0.0)
+                     (handler . pdf-view-bookmark-jump-handler))))

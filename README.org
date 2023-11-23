@@ -1,0 +1,263 @@
+* My Emacs Configuration
+This Emacs configuration is designed to try and use as few external packages as possible, and attempting to improve on
+the built-in functionality when possible. The inspiration behind the design of the Emacs configuration is due to the
+inability to access external packages on my work computer.
+
+This configuration is also designed to be cross-platform between Linux and Windows; although the primary testing is done
+on Linux.
+
+This version of Emacs utilizes =viper=, so make sure you have your =Vi= hats on. If you are new to Emacs, it probably
+would be worthwhile disabling it by changing the name of =y-mod-viper.el= to something like =y-mode-viper.el.hide/=.
+Once you get a good handle on how Emacs works, then I would try migrating back to =Vi= bindings. Note that there is a
+superior mode called [[https://search.brave.com/search?q=emacs+evil&source=desktop][Evil]]. The only reason I stick with Viper is that I can't install Evil at work, so may as well get
+good with what I got.
+
+* New to Emacs?
+- Within Emacs type: =C-h t=
+- [[https://www.masteringemacs.org/article/beginners-guide-to-emacs][Beginners Guide To Emacs]]
+- [[https://www2.lib.uchicago.edu/keith/emacs/][Use GNU Emacs]]
+
+* Configuration Structure
+The configuration is initialized via =init.el=. This does some early configuration. It would probably be a good idea to
+update you personal information (name and email). This file first loads all the packages from =pkg-setup.el= and may
+attempt to update them. It then loads all the modules and language configurations. The files and a brief description
+follow for the modules. All the language configuration is found in the =lang= directory in the =mod= directory.
+
+** Modules
+- =1-mod-general.el=: Some general configuration for Emacs. Mainly disables stuff.
+- =2-mod-aethstetics.el=: Configuration for most of how Emacs looks.
+- =mod-buffer-completion.el=: Configuration for completion in buffers.
+- =mod-compile.el=: Configuration for how the compile command behaves.
+- =mod-debugging.el=: Configuration for debugging. Needs major work still.
+- =mod-dired.el=: Configuration for the directory editor.
+- =mod-doc-view.el=: Configuration for document viewing (mainly PDF, may change the name)
+- =mod-epub.el=: Configures the EPUB reader, may consolidate with =mod-doc-view.el=.
+- =mod-eww.el=: Configuration for the Emacs browser.
+- =mod-gnus.el=: Configuration for =gnus=. It has stuff for Emacs and RSS. =gnus= is not for the feint of heart.
+- =mod-imenu.el=: Configuration for =imenu=
+- =mod-minibuffer-completion.el=: Completion for the =minibuffer=. Heavily utilizes =icomplete=.
+- =mod-project.el=: Adds configuration for how Emacs behaves when in a project.
+- =mod-shell.el=: Adds configuration for the various shells in Emacs.
+- =mod-text-editing.el=: Adds various general configurations for editing text. Note that not all the language stuff has
+  been migrated out from there.
+- =mod-tramp.el=: Configuration for TRAMP.
+- =mod-vc.el=: Configuration for how Emacs deals with version control.
+- =mod-window.el=: Configuration for how Emacs handles certain windows.
+- =y-mod-viper.el=: Enables =Vi= bindings.
+- =z-mod-keybindings.el=: All the custom key bindings.
+
+* Configuration
+This section covers the requirements to use this Emacs configuration. The only thing that is *required* to get Emacs
+going is [[#sec:fonts]].
+
+** Fonts
+:PROPERTIES:
+:CUSTOM_ID: sec:fonts
+:END:
+
+The following are the fonts utilized in this configuration. Note that on my Windows PC, when I installed Iosevka the
+font installed as =Iosevka NF=. A check does exist to look for the font name =Iosevka NF= on Windows, but your mileage
+may vary.
+
+- [[https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Mononoki][Mononokai Nerd Font]] (mono pitch font)
+  - Arch Linux: =pacman -Syu ttf-mononoki-nerd=
+- [[https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Iosevka][Iosevka Nerd Font]] (variable pitch font)
+  - Arch Linux: =pacman -Syu ttf-iosevka-nerd=
+
+** OS Configuration
+*** Linux
+**** Git
+You know what =git= is.
+
+#+begin_src shell
+  pacman -Syu git
+#+end_src
+
+**** LanguageTool/Flyspell
+This section consists of the spell/grammar checker. =flyspell= is the spell checker, for it to work correctly it needs
+the correct dictionary. These are installed via =MSYS2=:
+
+#+begin_src shell
+  pacman -Syu aspell aspell-en languagetool jre-openjdk-headless
+#+end_src
+
+**** Language Server Protocol
+[[https://github.com/Microsoft/language-server-protocol/][Language Server Protocol (LSP)]] is the tool that provides an IDE-like experience when editing text. Some of the features
+include, but are not limited to,
+
+- Diagnostics/linting,
+- Code completion,
+- Hovers,
+- Code actions,
+- Code outline,
+
+and much more. The [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode package website]] describes is full capabilities. The only downside to LSP is that you need to
+install the server executable for each language. If you place the executable binaries in the =C:/msys64/usr/bin=
+directory, Emacs should be able to find them.
+
+#+begin_src shell
+pacman -Syu python-lsp-server ccls rust-analyzer
+#+end_src
+
+**** Tree-Sitter
+#+begin_quote
+Tree-sitter is a parser generator tool and an incremental parsing library. It can build a concrete syntax tree for a source file and efficiently update the syntax tree as the source file is edited. Tree-sitter aims to be:
+
+- General enough to parse any programming language
+- Fast enough to parse on every keystroke in a text editor
+- Robust enough to provide useful results even in the presence of syntax errors
+- Dependency-free so that the runtime library (which is written in pure C) can be embedded in any application
+#+end_quote
+
+Tree-sitter requires an external application to be ran to parse the source code (just like LSP). Most of the languages
+in this configuration auto-detect if the grammar is installed for that specific language. By grammar, I mean the
+application that tree-sitter uses to parse the source code (it's just weird terminology that is used).
+
+Luckily, unlike LSP, Emacs provides a sure easy way to install tree-sitter for new languages. Type
+=treesit-install-language-grammar= then type the language you are interested. For the main languages, a URL to a
+repository will be provided. If one is not, you can search Google for one (such is the case for YAML). You can run with
+the defaults for the rest. If you get a error saying that the "cc" could not be found, that means =gcc= is not in your
+path or is not installed. Note that tree-sitter has a standard that the applications are written in C without external
+dependencies which makes compiling a breeze.
+
+**** Figlet
+Allows ASCII art in code.
+
+#+begin_src shell
+pacman -Syu figlet
+#+end_src
+
+*** Windows
+The =init.el= location on Windows is a =C:/Users/USERNAME/AppData/Roaming/.emacs.d/init.el=. All the Windows specific
+configuration can be found by running =grep -R "windows-nt" modules= from the directory that this file (=READEME.org=)
+is located.
+
+It is also recommended to use the built-in Windows package manager =winget=.
+
+**** MSYS2
+Most of the applications will be installed via =MSYS2=. It contains a lot of the basic shell commands for Emacs to do
+its thing. It also includes some extra packages that mush be installed. To install =MSYS2= enter the following into
+=powershell=:
+
+#+begin_src powershell
+winget install -e --id MSYS2.MSYS2
+#+end_src
+
+**** Git
+You know what =git= is. My experience with the =vc= commands built in to Emacs has issues with the MSYS2 installation.
+For now I recommend using "git bash".
+
+#+begin_src shell
+pacman -Syu git
+#+end_src
+
+**** LanguageTool/Flyspell
+This section consists of the spell/grammar checker. =flyspell= is the spell checker, for it to work correctly it needs
+the correct dictionary. These are installed via =MSYS2=:
+
+#+begin_src shell
+pacman -Syu aspell aspell-en
+#+end_src
+
+=languagetool= is installed from [[https://languagetool.org/download/][this link]]. Note that the path for =languagetool= is
+=C:/msys64/usr/share/languagetool/languagetool-commandline.jar=, so be sure to place =languagetool= directory
+accordingly. The file to edit is =mod-text-editing.el=. The program requires [[https://www.java.com/][Java]], so ensure that the JRE is installed.
+This is simply done by typing =java --version= in a terminal. If Java is not installed, it can be installed via =winget=
+by typing
+
+#+begin_src powershell
+winget install -e --id Oracle.JavaRuntimeEnvironment
+#+end_src
+
+**** Language Server Protocol
+[[https://github.com/Microsoft/language-server-protocol/][Language Server Protocol (LSP)]] is the tool that provides an IDE-like experience when editing text. Some of the features
+include, but are not limited to,
+
+- Diagnostics/linting,
+- Code completion,
+- Hovers,
+- Code actions,
+- Code outline,
+
+and much more. The [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode package website]] describes is full capabilities. The only downside to LSP is that you need to
+install the server executable for each language. If you place the executable binaries in the =C:/msys64/usr/bin=
+directory, Emacs should be able to find them.
+
+- [[https://github.com/MaskRay/ccls][C/C++]]
+- Python (=MSYS2=): =pacman -Syu mingw-w64-python-lsp-server= or =pip install python-lsp-server=
+- [[https://github.com/rust-lang/rust-analyzer/releases][Rust]]
+
+**** Tree-Sitter
+#+begin_quote
+Tree-sitter is a parser generator tool and an incremental parsing library. It can build a concrete syntax tree for a source file and efficiently update the syntax tree as the source file is edited. Tree-sitter aims to be:
+
+- General enough to parse any programming language
+- Fast enough to parse on every keystroke in a text editor
+- Robust enough to provide useful results even in the presence of syntax errors
+- Dependency-free so that the runtime library (which is written in pure C) can be embedded in any application
+#+end_quote
+
+Tree-sitter requires an external application to be ran to parse the source code (just like LSP). Most of the languages
+in this configuration auto-detect if the grammar is installed for that specific language. By grammar, I mean the
+application that tree-sitter uses to parse the source code (it's just weird terminology that is used).
+
+Luckily, unlike LSP, Emacs provides a sure easy way to install tree-sitter for new languages. Type
+=treesit-install-language-grammar= then type the language you are interested. For the main languages, a URL to a
+repository will be provided. If one is not, you can search Google for one (such is the case for YAML). You can run with
+the defaults for the rest. If you get a error saying that the "cc" could not be found, that means =gcc= is not in your
+path or is not installed. You can install =gcc= via MSYS2. You can then add the path to =gcc= in your environment
+variables or just type out the path when it asks about the C and C++ compilers. Note that tree-sitter has a standard
+that the applications are written in C without external dependencies which makes compiling a breeze.
+
+**** Figlet
+Allows ASCII art in your code. The only easy way I can see how to install =figlet= in windows is using [[https://www.npmjs.com/][NPM]]
+
+#+begin_src powershell
+npm install figlet
+#+end_src
+
+* Languages
+This section covers any extras specific to a language that may be required.
+
+** Rust
+Rust has a text formatter called [[https://github.com/rust-lang/rustfmt][rustfmt]]. It's default configuration file can be found in
+=~/.config/rustfmt/rustfmt.toml=. I believe =rustfmt= comes with an installation of Rust. There is default configuration
+included in this dotfiles repository, but if you want to make your own [[https://rust-lang.github.io/rustfmt/?version=v1.6.0&search=#control_brace_style][here is the configuration syntax]]. By
+default, =rustfmt= will be run after a =*.rs= file is saved.
+
+* Packages
+The following list are the external packages used in this configuration:
+
+- [[https://github.com/domtronn/all-the-icons.el][all-the-icons]]: Adds cool icons.
+- [[https://github.com/jtbm37/all-the-icons-dired][all-the-icons-dired]]: Adds cool icons to =dired=.
+- [[https://github.com/nlamirault/all-the-icons-gnus/][all-the-icons-gnus]]: Adds cool icons to =gnus=.
+- [[https://github.com/rranelli/auto-package-update.el][auto-package-update]]: Periodically checks for updates for you and prompts for update.
+- [[https://github.com/emacsmirror/csv-mode][csv-mode]]: Major mode for editing CSV files.
+- [[https://github.com/jojojames/dired-sidebar][dired-sidebar]]: A sidebar built from =dired=
+- [[https://github.com/doomemacs/themes][doom-themes]]: Adds extra cool themes. Type =M-x customize-themes=. Defaults to =doom-gruvbox=.
+- [[https://github.com/joaotavora/eglot][eglot]]: Light-weight LSP client built into Emacs
+- [[https://github.com/emacsmirror/figlet][figlet]]: Runs =figlet= from Emacs, so you can insert big ASCII art words into code.
+- [[https://github.com/flycheck/flycheck][flycheck]]: On-the-fly syntax checking extension for GNU Emacs. Like =flymake=, but more supported languages.
+- [[https://github.com/emacsorphanage/git-gutter][git-gutter]]: Adds =+=, =-=, and === on the side.
+- [[https://github.com/tmalsburg/helm-bibtex][helm-bibtex]]: This is only used for the function that opens PDFs in bibtex files.
+- [[https://github.com/jojojames/ibuffer-sidebar][ibuffer-sidebar]]: Adds a toggle-able sidebar for =ibuffer=
+- [[https://github.com/purcell/ibuffer-vc/blob/master/ibuffer-vc.el][ibuffer-vc]]: Organizes buffers by project
+- [[https://github.com/bmag/imenu-list/][imenu-list]]: Creates a persistent window with the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Imenu.html][imenu]] items.
+- [[https://github.com/mhayashi1120/Emacs-langtool][langtool]]: Checks spelling and grammar using [[https://languagetool.org][LanguageTool]].
+- [[https://depp.brause.cc/nov.el/][nov]]: A major mode for reading EPUB books.
+- [[https://github.com/rnkn/olivetti][olivetti]]: A minor mode for focused editing.
+- [[https://orgmode.org/][org]]: This is built-in to Emacs. This installs the update version of Emacs.
+- [[https://orgmode.org/][org-caldav]]: Syncs =org= documents with a =caldav= calendar.
+- [[https://github.com/fuxialexander/org-pdftools][org-pdftools]]: Adds =org= links to PDF files.
+- [[https://github.com/arbox/org-sync][org-sync]]: Syncs online bug trackers with org documents.
+- [[https://github.com/vedang/pdf-tools][pdf-tools]]: An all-around better major mode for viewing PDF files.
+- [[https://github.com/skuro/plantuml-mode][plantuml-mode]]: A major mode to edit/preview PlantUML files.
+- [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]]: Adds colors to parenthesis. A must for LISP.
+- [[https://github.com/rust-lang/rust-mode][rust-mode]]: Major mode for editing Rust code.
+- [[https://tree-sitter.github.io/tree-sitter/][tree-sitter]]: A is a super quick, grammar based parser that is syntax aware an is built in!
+- [[https://github.com/nicolaisingh/saveplace-pdf-view][saveplace-pdf-view]]: Allows locations in PDF files to be retained.
+- [[https://github.com/openscad/emacs-scad-mode][scad-mode]]: Major mode for editing SCAD files.
+- [[https://www.gnu.org/software/auctex/][auctex]]: An improved LaTeX experience.
+- [[https://github.com/justbur/emacs-which-key][which-key]]: A minor mode for Emacs that displays the key bindings following your currently entered incomplete command
+  (a prefix) in a popup
+- [[https://github.com/yoshiki/yaml-mode][yaml-mode]]: Major mode for editing YAML files.

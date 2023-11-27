@@ -42,7 +42,7 @@
 ;;
 ;; Requirements: `python-black'
 ;;
-(use-package python-black :demand t :after python :hook (python-ts-mode . python-black-on-save-mode))
+(use-package python-black :ensure t :demand t :after python :hook (python-ts-mode . python-black-on-save-mode))
 
 (provide 'lang-python)
 ;;; lang-text-editing.el ends here

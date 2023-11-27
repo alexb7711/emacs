@@ -69,6 +69,7 @@
           pdf-tools
           org-pdftools
           plantuml-mode
+          python-black
           rainbow-delimiters
           rust-mode
           saveplace-pdf-view

@@ -105,7 +105,7 @@ want to use in the modeline *in lieu of* the original.")
 ;; Functions
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;;
+;; https://emacsredux.com/blog/2021/12/22/check-if-a-font-is-available-with-emacs-lisp/
 (defun mod/font-available-p (font-name)
   "Helper function to check if a FONT-NAME is installed."
   (find-font (font-spec :name font-name)))
@@ -113,7 +113,7 @@ want to use in the modeline *in lieu of* the original.")
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;
 (defun mod/load-fonts (&optional frame)
-  "Function to load fonts in FRAME when running daemon (or not, I'm cool with whatever)."
+  "Function to load fonts in the current FRAME."
   (when frame
     (select-frame frame))
 

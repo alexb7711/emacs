@@ -43,9 +43,9 @@
    ((derived-mode-p 'org-mode)
     (setq compile-command (concat compile-command "emacs")))
    ((derived-mode-p 'tex-mode)
-    (setq compile-command compile-cmd))
+    (setq compile-command compile-command))
    ((derived-mode-p 'emacs-lisp-mode)
-    (setq compile-command compile-cmd))))
+    (setq compile-command compile-command))))
 
 ;;------------------------------------------------------------------------------
 ;;

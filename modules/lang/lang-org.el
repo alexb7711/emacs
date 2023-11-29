@@ -287,8 +287,19 @@ the bibliography directory to `./citiation-database."
 
   (add-to-list
    'org-latex-classes
-   '("usuthesis"
-     "\\documentclass[ee,msthesis]{usuthesis}"
+   '("usuproposal"
+     "\\documentclass[ee,proposal]{usuthesis}"
+     ("\\chapter{%s}" . "\\chapter*{%s}")
+     ("\\section{%s}" . "\\section*{%s}")
+     ("\\subsection{%s}" . "\\subsection*{%s}")
+     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+     ("\\paragraph{%s}" . "\\paragraph*{%s}")
+     ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+  (add-to-list
+   'org-latex-classes
+   '("usudissertation"
+     "\\documentclass[ee,dissertation]{usuthesis}"
      ("\\chapter{%s}" . "\\chapter*{%s}")
      ("\\section{%s}" . "\\section*{%s}")
      ("\\subsection{%s}" . "\\subsection*{%s}")

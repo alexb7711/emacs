@@ -37,6 +37,7 @@
 
 (setq
  gdb-many-windows t
+ gdb-debuginfod-enable-setting t
  gdb-restore-window-configuration-after-quit t)
 
 (provide 'mod-debugging)

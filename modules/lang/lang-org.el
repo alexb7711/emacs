@@ -87,7 +87,7 @@ the bibliography directory to `./citiation-database."
  org-display-remote-inline-images 'download ; Download web images
  org-export-with-smart-quotes t ; Put the correct quotes
  org-export-headline-levels 5 ; Max level that `org' will export a
- org-latex-prefer-user-labels 1 ; Use user labels, not gereated ones
+ org-latex-prefer-user-labels t ; Use user labels, not generated ones
  org-confirm-babel-evaluate nil ; Just run the code
  org-image-actual-width nil ; Don't use actual image size when
  ; header to LaTeX

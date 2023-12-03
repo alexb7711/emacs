@@ -48,6 +48,7 @@
           all-the-icons
           all-the-icons-dired
           all-the-icons-gnus
+          auctex
           auto-package-update
           csv-mode
           dired-sidebar
@@ -65,16 +66,15 @@
           olivetti
           org
           org-caldav
+          org-pdftools
           org-sync
           pdf-tools
-          org-pdftools
           plantuml-mode
           python-black
           rainbow-delimiters
           rust-mode
           saveplace-pdf-view
           scad-mode
-          auctex
           which-key
           yaml-mode
           ))

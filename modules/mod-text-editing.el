@@ -98,13 +98,14 @@ displayed."
 
 ;; Set visual attributes
 
-(set-face-attribute 'hl-line nil :inherit nil :box "light grey") ; Set a box around line to not break
+; Underline selected line
+(set-face-attribute 'hl-line nil :inherit nil :box nil :underline '(:color "dim gray" :position 0))
 
 ;; Hooks
 
 (add-hook 'prog-mode-hook 'hl-line-mode) ; Enable when in text mode
 (add-hook 'text-mode-hook 'hl-line-mode) ; and when programming.
-; syntax highlighting.
+
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Searching
 
@@ -356,7 +357,7 @@ If somewhere inside the line, toggle the comment status of the entire line."
   "Function to load whitspace when running daemon (or not, I'm cool with whatever)."
   (interactive)
   ;; (select-frame frame)
-  (set-face-attribute 'whitespace-indentation nil :background "black" :foreground "dim gray" :strike-through t)
+  (set-face-attribute 'whitespace-indentation nil :inherit nil :background nil :foreground "dim gray" :strike-through t)
   (add-hook 'prog-mode-hook #'whitespace-mode))
 
 ;; Defaults

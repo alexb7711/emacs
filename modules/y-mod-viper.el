@@ -16,8 +16,7 @@
 ;; Configuration
 
 (setq-default
- viper-auto-indent t
- n ; Enable auto indenting
+ viper-auto-indent t ; Enable auto indenting
  )
 
 (setq

@@ -356,14 +356,12 @@ If somewhere inside the line, toggle the comment status of the entire line."
   "Function to load whitspace when running daemon (or not, I'm cool with whatever)."
   (interactive)
   ;; (select-frame frame)
-  (set-face-attribute 'whitespace-indentation nil :background nil :foreground "gray30" :strike-through t)
+  (set-face-attribute 'whitespace-indentation nil :background "black" :foreground "dim gray" :strike-through t)
   (add-hook 'prog-mode-hook #'whitespace-mode))
 
 ;; Defaults
 
-(setq-default
- whitespace-style '(face tabs indentation::tab trailing)
- whitespace-line-column 81)
+(setq-default whitespace-style '(face tabs indentation::tab trailing))
 
 ;; Hooks
 

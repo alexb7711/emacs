@@ -24,7 +24,7 @@
 
 ;;; Code:
 (if (display-graphic-p)
-    (require 'all-the-icons-dired-mode nil t))
+    (require 'all-the-icons-dired nil t))
 
 ;;==============================================================================
 ;; Defaults

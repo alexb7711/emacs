@@ -29,10 +29,12 @@
 
 ;;==============================================================================
 ;; Configure packages
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("elpa"  . "https://elpa.gnu.org/packages/")))
+(if (eq system-type 'gnu/linux)
+    (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                             ("elpa"  . "https://elpa.gnu.org/packages/")))
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/"))))
 
-;;==============================================================================
+ ;;==============================================================================
 ;; Enable package manager
 ;; https://stackoverflow.com/questions/73199800/emacs-warning-package-unnecessary-call-to-package-initialize-in-init-file
 (when (< emacs-major-version 27)

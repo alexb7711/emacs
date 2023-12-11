@@ -1,3 +1,4 @@
+
 ;;; mod-text-editing.el -- Summary
 ;;; Commentary:
 ;;;
@@ -7,12 +8,15 @@
 ;;; Code:
 
 (require 'display-line-numbers nil t)
+(require 'flycheck nil t)
 (require 'flyspell nil t)
+(require 'git-gutter nil t)
 (require 'hideshow nil t)
 (require 'hl-line nil t)
 (require 'langtool nil t)
 (require 'newcomment nil t)
 (require 'org-ref nil t)
+(require 'rainbow-delimiters nil t)
 (require 'whitespace nil t)
 
 ;;==============================================================================

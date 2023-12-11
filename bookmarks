@@ -31,7 +31,7 @@
  (rear-context-string . "0K Jun 17 14:15 ")
  (position . 208))
 ("emacs"
- (filename . "~/Code/dotfiles/emacs/.config/emacs/modules/")
+ (filename . "~/.config/emacs")
  (front-context-string . "1-my-general.el\n")
  (rear-context-string . "5K Mar 26 10:16 ")
  (position . 243))

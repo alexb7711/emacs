@@ -102,13 +102,14 @@ displayed."
 
 ;; Set visual attributes
 
-(set-face-attribute 'hl-line nil :inherit nil :box "light grey") ; Set a box around line to not break
+; Underline selected line
+(set-face-attribute 'hl-line nil :inherit nil :box nil :underline '(:color "dim gray" :position 0))
 
 ;; Hooks
 
 (add-hook 'prog-mode-hook 'hl-line-mode) ; Enable when in text mode
 (add-hook 'text-mode-hook 'hl-line-mode) ; and when programming.
-; syntax highlighting.
+
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Searching
 
@@ -241,7 +242,24 @@ If somewhere inside the line, toggle the comment status of the entire line."
  comment-multi-line t ; Continue comment on `comment-indent-newline'
  comment-style 'indent)
 
+;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Filling
+
+;; Functions
+
+(defun mod/run-fill-paragraph()
+  "Run the `fill-paragraph' function automatically in certain modes."
+  (interactive)
+  (when (eq major-mode 'org-mode)
+    (message "HERE")
+    (fill-paragraph)))
+
+;; Configuration
+
 ;; Hooks
+
+;; Fill paragraphs before saving
+(add-hook 'before-save-hook #'mod/run-fill-paragraph)
 
 ;; Auto fill in comments
 (add-hook
@@ -303,8 +321,7 @@ If somewhere inside the line, toggle the comment status of the entire line."
 (add-hook 'markdown-mode-hook #'flyspell-mode)
 (add-hook 'org-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-(add-hook 'before-save-hook #'flyspell-buffer)
-(add-hook 'before-save-hook #'flyspell-buffer)
+(add-hook 'after-save-hook #'flyspell-buffer)
 
 ;;==============================================================================
 ;; Natural language
@@ -352,28 +369,26 @@ If somewhere inside the line, toggle the comment status of the entire line."
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode) ; Turn on marker
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Display tabs and trailing whitespace
+;; Display tabs and trailing `whitespace'
 
 ;; Functions
 
 (defun mod/load-whitespace (&optional frame)
-  "Function to load whitspace when running daemon (or not, I'm cool with whatever)."
+  "Function to load `whitespace' parameters in FRAME when running daemon."
   (interactive)
-  ;; (select-frame frame)
-  (set-face-attribute 'whitespace-indentation nil :background nil :foreground "gray30" :strike-through t)
+  (set-face-attribute 'whitespace-indentation nil :inherit nil :background "black" :foreground "dim gray" :strike-through t)
   (add-hook 'prog-mode-hook #'whitespace-mode))
 
 ;; Defaults
 
-(setq-default
- whitespace-style '(face tabs indentation::tab trailing)
- whitespace-line-column 81)
+(setq-default whitespace-style '(face tabs indentation::tab trailing))
 
 ;; Hooks
 
+;; Load in `whitespace'
 (if (daemonp)
     (add-hook 'after-make-frame-functions #'mod/load-whitespace)
-  (funcall #'mod/load-whitespace frame-initial-frame))
+  (funcall #'mod/load-whitespace))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Display which function you are under in the modeline

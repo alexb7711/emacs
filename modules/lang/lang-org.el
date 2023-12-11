@@ -70,6 +70,7 @@ the bibliography directory to `./citiation-database."
     (setq org-cite-global-bibliography
           `(,(concat (expand-file-name (vc-root-dir)) "citation-database/lit-ref.bib")
             ,(concat (expand-file-name (vc-root-dir)) "citation-database/lib-ref.bib")))))
+
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;
 (defun mod/async-latex-pdf-export ()
@@ -101,9 +102,6 @@ the bibliography directory to `./citiation-database."
 
 ;; Enable `org-indent-mode'
 (add-hook 'org-mode-hook 'org-indent-mode)
-
-;; Update bibliography database directory
-;; (add-hook 'org-mode-hook #'mod/update-citiation-database-path)
 
 ;; Enable `auto-fill'
 (add-hook

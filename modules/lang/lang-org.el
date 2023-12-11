@@ -112,7 +112,6 @@ the bibliography directory to `./citiation-database."
 
 ;; `org-babel' languages
 (org-babel-do-load-languages
-
  'org-babel-load-languages '((emacs-lisp . t) (latex . t) (octave . t) (plantuml . t)))
 
 ;;------------------------------------------------------------------------------

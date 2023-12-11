@@ -251,7 +251,6 @@ If somewhere inside the line, toggle the comment status of the entire line."
   "Run the `fill-paragraph' function automatically in certain modes."
   (interactive)
   (when (eq major-mode 'org-mode)
-    (message "HERE")
     (fill-paragraph)))
 
 ;; Configuration

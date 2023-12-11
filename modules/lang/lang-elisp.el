@@ -40,7 +40,7 @@
 ;;
 (defun elisp/autofmt-on-save ()
   "Auto format `elisp' files before saving buffer."
-  (when (eq major-mode emacs-lisp-mode)
+  (when (eq major-mode 'emacs-lisp-mode)
     (elisp-autofmt-buffer)))
 
 ;;==============================================================================

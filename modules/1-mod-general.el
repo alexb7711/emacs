@@ -114,7 +114,7 @@
       (setq exec-path
             (append
              exec-path
-             '("C:/Users/1556048963C/AppData/Local/Programs/MiKTeX/miktex/bin/x64/" "C:/msys64/mingw64/bin/")))
+             '("C:/msys64/usr/bin" "C:/msys64/mingw64/bin/" "C:/msys64/clang64/bin" "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/" "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/")))
       (setenv
        "PATH" ; Set envirenment variables
        (concat
@@ -125,10 +125,8 @@
         "C:/msys64/clang64/bin"
         path-separator
         "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
-        path-separator
-        "C:/Users/1556048963C/AppData/Local/Microsoft/WinGet/Packages/Task.Task_Microsoft.Winget.Source_8wekyb3d8bbwe/"
-        path-separator
-        "C:/Users/1556048963C/AppData/Local/Programs/MiKTeX/miktex/bin/x64/"
+        ;; path-separator
+        ;; "C:/Users/1556048963C/AppData/Local/Programs/MiKTeX/miktex/bin/x64/"
         path-separator
         "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
         path-separator

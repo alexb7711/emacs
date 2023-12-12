@@ -300,7 +300,12 @@ If somewhere inside the line, toggle the comment status of the entire line."
 
 ;; Specify path to aspell on Windows
 (if (eq system-type 'windows-nt)
-    (setq ispell-program-name "C:/msys64/mingw64/bin/aspell.exe")
+    (progn
+      (setq
+       ispell-program-name "hunspell.exe"
+       ispell-local-dictionary "en_US")
+      (setenv "LANG" "en_US")
+      (ispell-hunspell-add-multi-dic "en_US"))
   (setq ispell-program-name "aspell"))
 
 ;; Add correction to abbreviation table.

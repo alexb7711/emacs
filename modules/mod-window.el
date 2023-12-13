@@ -47,7 +47,7 @@
 ;;------------------------------------------------------------------------------
 ;; Configuration
 (if (eq system-type 'windows-nt)
-    (setq olivetti-body-width 0.8
+    (setq-default olivetti-body-width 0.8
           olivetti-minimum-body-width 40
           olivetti-recall-visual-line-mode-entry-state t)
   (setq olivetti-body-width 0.4

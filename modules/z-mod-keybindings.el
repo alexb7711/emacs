@@ -97,7 +97,7 @@
 ;; `org' (`mod-org.el')
 (define-key org-mode-map (kbd "C-c ]") 'org-cite-insert)
 (define-key org-mode-map (kbd "C-c i") 'latex-insert-block)
-(define-key org-mode-map (kbd "<f1>") 'org-latex-export-to-pdf)
+(define-key org-mode-map (kbd "<f1>") 'compile)
 (define-key prog-mode-map (kbd "<f2>") 'compile)
 
 ;;------------------------------------------------------------------------------

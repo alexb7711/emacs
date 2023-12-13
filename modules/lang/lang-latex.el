@@ -24,8 +24,8 @@
 
 ;;; Code:
 
-(require 'tex nil t)
-(require 'reftex nil t)
+;; (require 'tex nil t)
+;; (require 'reftex nil t)
 
 
 ;;==============================================================================
@@ -47,8 +47,9 @@
 ;;==============================================================================
 ;; Autoloaded Functions
 
-(load "auctex.el" nil t t)
-
+(unless (eq system-type 'windows-nt)
+  (use-package tex
+    :ensure auctex))
 
 (provide 'lang-latex)
 ;;; lang-latex.el ends here

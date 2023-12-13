@@ -1,7 +1,6 @@
 *.elc
 *.signed
 *~
-rust-analyzer
 .last-package-update-day
 .lsp-session-v1
 .org-id*
@@ -17,10 +16,14 @@ ido.last
 image-dired/
 network-security.data
 org-caldav-*
+org-persist/
+places
 projectile-bookmarks.eld
 projects
 recentf
 request/curl-cookie-jar
+rust-analyzer
+server/server
 srecode-map.el
 tramp
 transient
@@ -28,4 +31,3 @@ tree-sitter/
 url/cache/
 url/cookies
 zsh/.config/zsh/
-server/server

@@ -46,15 +46,18 @@
 
 ;;------------------------------------------------------------------------------
 ;; Configuration
-(setq olivetti-body-width 0.4)
-(setq olivetti-minimum-body-width 130)
-(setq olivetti-recall-visual-line-mode-entry-state t)
+(if (eq system-type 'windows-nt)
+    (setq olivetti-body-width 0.8
+          olivetti-minimum-body-width 40
+          olivetti-recall-visual-line-mode-entry-state t)
+  (setq olivetti-body-width 0.4
+        olivetti-minimum-body-width 130
+        olivetti-recall-visual-line-mode-entry-state t))
 
 ;;------------------------------------------------------------------------------
 ;; Hooks
 
 ;; Center when there is one window
-(add-hook 'text-mode-hook #'mod/olivetti)
 (add-hook 'text-mode-hook #'mod/olivetti)
 (add-hook 'prog-mode-hook #'mod/olivetti)
 (add-hook 'latex-mode-hook #'mod/olivetti)

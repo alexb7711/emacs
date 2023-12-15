@@ -230,11 +230,6 @@ the bibliography directory to `./citiation-database."
 (advice-add 'org-caldav-sync :after (lambda (&rest args) (org-save-all-org-buffers)))
 
 ;;==============================================================================
-;; `org-pdftools'
-(with-eval-after-load 'pdf-tools
-  (add-hook 'org-mode-hook #'org-pdftools-setup-link))
-
-;;==============================================================================
 ;; `org-sync'
 
 ;;------------------------------------------------------------------------------

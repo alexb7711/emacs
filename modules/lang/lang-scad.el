@@ -23,7 +23,7 @@
 ;; https://github.com/openscad/emacs-scad-mode
 
 ;;; Code:
-(require 'scad-mode)
+(require 'scad-mode nil t)
 
 ;;==============================================================================
 ;; Functions

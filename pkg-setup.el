@@ -68,7 +68,6 @@
           olivetti
           org
           org-caldav
-          org-pdftools
           org-sync
           pdf-tools
           plantuml-mode

@@ -23,7 +23,6 @@
 ;; https://github.com/rust-lang/rust-mode
 
 ;;; Code:
-(require 'rust-mode)
 
 ;;==============================================================================
 ;; Functions
@@ -49,26 +48,30 @@
 ;;==============================================================================
 ;; Configuration
 
-(setq
- rust-format-on-save t ; Run `rustfmt' on save
- )
+(use-package
+ rust-mode
+ :ensure t
+ :defer t
 
-;; Enable `tree-sitter' when available
-(when (treesit-language-available-p 'rust)
-  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode)))
+ :init
+ (setq
+  rust-format-on-save t ; Run `rustfmt' on save
+  )
 
-(if (eq system-type 'windows-nt)
-    (setq rust-rustfmt-bin "C:/msys64/mingw64/bin/rustfmt.exe")
-  (setq rust-rustfmt-bin "/usr/bin/rustfmt"))
+ :config
+ ;; Enable `tree-sitter' when available
+ (when (treesit-language-available-p 'rust)
+   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode)))
 
-;; Set up `rustfmt'
-(dolist (item `(,(concat (getenv "HOME") "/.config/rustfmt/rustfmt.toml") "--config-path"))
-  (add-to-list 'rust-rustfmt-switches item))
+ (if (eq system-type 'windows-nt)
+     (setq rust-rustfmt-bin "C:/msys64/mingw64/bin/rustfmt.exe")
+   (setq rust-rustfmt-bin "/usr/bin/rustfmt"))
 
-;;==============================================================================
-;; Hooks
+ ;; Set up `rustfmt'
+ (dolist (item `(,(concat (getenv "HOME") "/.config/rustfmt/rustfmt.toml") "--config-path"))
+   (add-to-list 'rust-rustfmt-switches item))
 
-(add-hook 'before-save-hook #'rust/format-on-save)
+ :hook (before-save . rust/format-on-save))
 
 (provide 'lang-rust)
 ;;; lang-rust.el ends here

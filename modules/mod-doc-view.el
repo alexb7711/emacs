@@ -26,18 +26,23 @@
 ;;; Code:
 
 (require 'saveplace-pdf-view)
-(require 'pdf-tools)
 
 ;;==============================================================================
 ;; PDF
+(use-package
+ pdf-tools
+ :ensure t
+ :defer t
 
-;; Load `pdf-tools' when required
-(pdf-loader-install)
+ :config
+ ;; Load `pdf-tools' when required
+ (pdf-loader-install) (save-place-mode 1))
 
-;; Add hook
-(add-hook 'pdf-view-mode-hook #'save-place-local-mode)
-(add-hook 'doc-view-mode-hook #'save-place-local-mode)
-(add-hook 'doc-view-mode-hook #'pdf-tools-enable-minor-modes)
+;; :hook
+;; ;; Add hook
+;; (pdf-view-mode #'save-place-local-mode)
+;; (doc-view-mode #'save-place-local-mode)
+;; (doc-view-mode #'pdf-tools-enable-minor-modes))
 
 (provide 'mod-doc-view)
 

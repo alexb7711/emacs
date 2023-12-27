@@ -25,9 +25,6 @@
 
 ;;; Code:
 
-(require 'company nil t)
-(require 'eglot nil t)
-
 ;;==============================================================================
 ;; Defaults
 
@@ -35,32 +32,18 @@
 ;; Symbol completion
 
 ;;------------------------------------------------------------------------------
-;; `company'
-
-;; Add hooks
-;; (add-hook 'after-init-hook 'global-company-mode)
-;;
-;; ;; Configuration
-;; (setq
-;;  company-tooltip-align-annotations t                                          ; Align annotations to the right
-;;  company-tooltip-offset-display    'lines                                     ; Display output with line count instead
-;;                                                                                  ; of scroll bar
-;;  company-tooltip-flip-when-above   t                                          ; Invert tooltip when displayed above
-;;  company-format-margin-function    'company-text-icons-margin                 ; Set margins to have a character
-;;  company-text-icons-add-background t                                          ; Add a shaded background to margin
-;;  company-backends                  '((company-capf))                          ; Use compbletion at point functions
-;;  company-transformers '(delete-consecutive-dups                               ; Post processing on candidates
-;;                         company-sort-by-occurrence))
-
-;;------------------------------------------------------------------------------
 ;; `*Completions*'
 
-;; Configuration
-(setq
- completion-auto-help 'visible
- completion-auto-select 'second-tab
- completions-max-height 4
- completions-header-format nil)
+(use-package
+ completion
+ :defer t
+
+ :init
+ (setq
+  completion-auto-help 'visible
+  completion-auto-select 'second-tab
+  completions-max-height 4
+  completions-header-format nil))
 
 ;;------------------------------------------------------------------------------
 ;; Add file completion at point
@@ -75,10 +58,14 @@
 ;;------------------------------------------------------------------------------
 ;; `abbrev'
 
+;;------------------------------------------------------------------------------
+;; Functions
+
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Automatically add spelling corrections into `abbrev' file
-(if (file-exists-p abbrev-file-name)
-    (quietly-read-abbrev-file))
+;;
+(defun mod/language-text-completion ()
+  "Adds the completion functions when editing natural lanugage files."
+  (add-to-list 'completion-at-point-functions '(mod/complete-path-at-point mod/dabbrev-completion-at-point)))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Add` dabbrev'
@@ -89,14 +76,18 @@
          (bnd (bounds-of-thing-at-point 'symbol)))
     (list (car bnd) (cdr bnd) candidates)))
 
-;;-----------------------------------------------------------------------------
-;; Add completions to `completions-at-point-functions'
+;;------------------------------------------------------------------------------
+;; Configuration
+
+;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Automatically add spelling corrections into `abbrev' file
+(if (file-exists-p abbrev-file-name)
+    (quietly-read-abbrev-file))
+
+;;------------------------------------------------------------------------------
+;; Hooks
 (add-hook 'text-mode #'mod/language-text-completion)
 (add-hook 'org-mode #'mod/language-text-completion)
-
-(defun mod/language-text-completion ()
-  "Adds the completion functions when editing natural lanugage files."
-  (add-to-list 'completion-at-point-functions '(mod/complete-path-at-point mod/dabbrev-completion-at-point)))
 
 ;;-----------------------------------------------------------------------------
 ;; LSP (Eglot)
@@ -104,35 +95,26 @@
 ;;    - C/C++: `ccls'
 ;;    - Python: `python-lsp-server'
 ;;    - Rust: `rust-analyzer'
+(use-package
+ eglot
+ :ensure t
+ :defer t
 
-;; Add hooks
+ :init (setq eglot-autoshutdown t)
 
-;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-(add-hook 'python-mode-hook #'eglot-ensure)
-(add-hook 'rust-mode-hook #'eglot-ensure)
-(add-hook 'c++-mode-hook #'eglot-ensure)
-(add-hook 'c-mode-hook #'eglot-ensure)
-(add-hook 'python-ts-mode-hook #'eglot-ensure)
-(add-hook 'rust-ts-mode-hook #'eglot-ensure)
-(add-hook 'c++-ts-mode-hook #'eglot-ensure)
-(add-hook 'c-ts-mode-hook #'eglot-ensure)
-;; (add-hook 'lsp-mode-hook    #'lsp-enable-which-key-integration)                  ; `which-key' integration
+ :config
+ (if (eq system-type 'windows-nt)
+     (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "C:/msys64/usr/bin/rust-analyzer.exe")))
 
-;; Configuration
-
-(setq eglot-autoshutdown t)
-
-(if (eq system-type 'windows-nt)
-    (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "C:/msys64/usr/bin/rust-analyzer.exe")))
-
-;; (setq
-;;  lsp-headerline-breadcrumb-enable   nil                                          ; Disable breadcrumbs
-;;  lsp-modeline-diagnostics-enable t                                               ; Show diagnostics in modeline
-;;  lsp-keymap-prefix "C-c l"                                                       ; Set prefix for lsp-command-keymap
-;;  lsp-enable-snippet 0                                                            ; Disable snippets
-;;  lsp-rust-server 'rust-analyzer)                                                 ;
-
-(require 'lsp-mode nil t) ; This needs to stay here
+ :hook
+ (c++-mode . eglot-ensure)
+ (c++-ts-mode . eglot-ensure)
+ (c-mode . eglot-ensure)
+ (c-ts-mode . eglot-ensure)
+ (python-mode . eglot-ensure)
+ (python-ts-mode . eglot-ensure)
+ (rust-mode . eglot-ensure)
+ (rust-ts-mode . eglot-ensure))
 
 (provide 'mod-buffer-completion)
 ;;; mod-buffer-completion.el ends here

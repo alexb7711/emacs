@@ -41,18 +41,20 @@
 
 ;;==============================================================================
 ;; Configuration
-(when (treesit-language-available-p 'c++)
-  (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-ts-mode)))
-(when (treesit-language-available-p 'c)
-  (add-to-list 'auto-mode-alist '("\\.c\\'" . c-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.h\\'" . c-ts-mode)))
+(use-package
+ cc-mode
+ :ensure t
+ :defer t
 
-;;==============================================================================
-;; Hooks
+ :config
+ (when (treesit-language-available-p 'c++)
+   (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-ts-mode))
+   (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-ts-mode)))
+ (when (treesit-language-available-p 'c)
+   (add-to-list 'auto-mode-alist '("\\.c\\'" . c-ts-mode))
+   (add-to-list 'auto-mode-alist '("\\.h\\'" . c-ts-mode)))
 
-(add-hook 'c-mode-hook #'c/config-c-c++-modes)
-(add-hook 'c++-mode-hook #'c/config-c-c++-modes)
+ :hook (c-mode . c/config-c-c++-modes) (c++-mode . c/config-c-c++-modes))
 
 (provide 'lang-cc)
 ;;; lang-cc.el ends here

@@ -33,7 +33,11 @@
 ;;==============================================================================
 ;; Hooks
 
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+(use-package
+ sh-script
+ :defer t
+
+ :hook (after-save-hook . executable-make-buffer-file-executable-if-script-p))
 
 (provide 'lang-shell)
 ;;; lang-shell.el ends here

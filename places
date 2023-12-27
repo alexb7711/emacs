@@ -1,11 +1,27 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/main.pdf" .
-  [((pdf-view-bookmark "main.pdf"
-                       (filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/main.pdf")
+(("/home/alex/code/research/sa-pap/src/main.rs" . 297)
+ ("/home/alex/Documents/agenda/self.org" . 1227)
+ ("/home/alex/Documents/agenda/routine.org" . 1585)
+ ("/home/alex/Documents/agenda/exercise.org" . 731)
+ ("/home/alex/Documents/agenda/agenda.org" . 622)
+ ("/home/alex/code/emacs/pkg-setup.el" . 282)
+ ("/home/alex/"
+  (dired-filename . "/home/alex/.aspell.en.prepl"))
+ ("/home/alex/Documents/library/"
+  (dired-filename . "/home/alex/Documents/library/gendreau-2018-handb-metah.pdf"))
+ ("/home/alex/Documents/library/gendreau-2018-handb-metah.pdf" .
+  [((pdf-view-bookmark "gendreau-2018-handb-metah.pdf"
+                       (filename . "~/Documents/library/gendreau-2018-handb-metah.pdf")
                        (position . 1)
-                       (last-modified 25977 44655 638804 0)
-                       (page . 10)
+                       (last-modified 25995 30864 91444 731000)
+                       (page . 5)
                        (slice)
                        (size . fit-page)
-                       (origin)
-                       (handler . pdf-view-bookmark-jump-handler)))]))
+                       (origin 0.0 . 0.0)
+                       (handler . pdf-view-bookmark-jump-handler)))])
+ ("/home/alex/Documents/docs/sa-pap/main.tex" . 71956)
+ ("/home/alex/Documents/"
+  (dired-filename . "/home/alex/Documents/library"))
+ ("/home/alex/Documents/library/emacs-tutorial.epub" . 432021)
+ ("/home/alex/Documents/literature/"
+  (dired-filename . "/home/alex/Documents/literature/.git")))

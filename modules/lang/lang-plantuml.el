@@ -23,21 +23,23 @@
 ;;
 
 ;;; Code:
-(require 'plantuml-mode)
 
 ;;==============================================================================
 ;; Functions
 
 ;;==============================================================================
 ;; Configuration
-(add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
-(setq
- plantuml-output-type "txt"
- plantuml-executable-path "/usr/bin/plantuml" ; Path to plantuml
- plantuml-default-exec-mode 'executable) ; Set exec mode
+(use-package
+ plantuml-mode
+ :ensure t
+ :defer t
 
-;;==============================================================================
-;; Hooks
+ :init (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
+ (setq
+  plantuml-output-type "txt"
+  plantuml-executable-path "/usr/bin/plantuml" ; Path to plantuml
+  plantuml-default-exec-mode 'executable) ; Set exec mode
+ )
 
 (provide 'lang-plantuml)
 ;;; lang-plantuml.el ends here

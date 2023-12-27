@@ -37,19 +37,23 @@
 ;;==============================================================================
 ;; Configuration
 
-(setq-default
- TeX-master nil) ;; Required for multifile documents
+(use-package
+ auctex
+ :defer t
 
-(setq
- TeX-auto-save t
- TeX-parse-self t)
+ :init
+ (setq-default
+  TeX-master nil) ;; Required for multifile documents
+
+ (setq
+  TeX-auto-save t
+  TeX-parse-self t))
 
 ;;==============================================================================
 ;; Autoloaded Functions
 
 (unless (eq system-type 'windows-nt)
-  (use-package tex
-    :ensure auctex))
+  (use-package tex :ensure auctex))
 
 (provide 'lang-latex)
 ;;; lang-latex.el ends here

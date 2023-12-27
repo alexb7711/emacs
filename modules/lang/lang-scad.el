@@ -23,16 +23,8 @@
 ;; https://github.com/openscad/emacs-scad-mode
 
 ;;; Code:
-(require 'scad-mode nil t)
 
-;;==============================================================================
-;; Functions
-
-;;==============================================================================
-;; Configuration
-
-;;==============================================================================
-;; Hooks
+(use-package scad-mode :ensure t :defer t)
 
 (provide 'lang-scad)
 ;;; lang-scad.el ends here

@@ -28,21 +28,26 @@
 
 ;;==============================================================================
 ;; Enable `nov'
-(with-eval-after-load 'org
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
-
-;;==============================================================================
-;; Configuration
-(setq-default nov-text-width 100)
 
 ;;------------------------------------------------------------------------------
-;; Font
-(add-hook
- 'nov-mode-hook
- #'(lambda ()
-     (if (eq system-type 'windows-nt)
-         (face-remap-add-relative 'variable-pitch :family "Iosevka NF" :weight 'normal :height 150)
-       (face-remap-add-relative 'variable-pitch :family "Iosevka Nerd Font" :weight 'normal :height 150))))
+;; Functions
+(defun mod/epub-font ()
+  (if (mod/font-available-p "Iosevka Nerd Font")
+      (face-remap-add-relative 'variable-pitch :family "Iosevka Nerd Font" :weight 'normal :height 150)
+    (face-remap-add-relative 'variable-pitch :family "Iosevka NF" :weight 'normal :height 150)))
+
+;;------------------------------------------------------------------------------
+;; Configure
+(use-package
+ nov
+ :ensure t
+ :defer t
+
+ :init (setq-default nov-text-width 100)
+
+ :config (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+ :hook (nov-mode . mod/epub-font))
 
 (provide 'mod-epub)
 ;;; mod-epub.el ends here

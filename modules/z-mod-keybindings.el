@@ -5,17 +5,11 @@
 ;;; Code:
 
 (require 'bibtex nil t)
-(require 'eglot nil t)
-(require 'flyspell nil t)
 (require 'gnus-topic nil t)
-(require 'ibuffer nil t)
 (require 'org nil t)
 (require 'pdf-tools nil t)
-(require 'rust-mode nil t)
 (require 'tex-mode nil t)
 (require 'vc-dir nil t)
-(require 'windmove nil t)
-(require 'yaml-mode nil t)
 
 ;;==============================================================================
 ;; Package specific custom key-bindings
@@ -34,19 +28,36 @@
 
 ;;------------------------------------------------------------------------------
 ;; `pdf-tools'
-(define-key pdf-view-mode-map (kbd "<return>") 'pdf-annot-add-highlight-markup-annotation)
-(define-key pdf-view-mode-map (kbd "x") 'pdf-annot-delete)
+(use-package
+ pdf-tools
+ :ensure t
+ :defer t
+
+ :bind (:map pdf-view-mode-map ("<return>" . pdf-annot-add-highlight-markup-annotation) ("x" . pdf-annot-delete)))
 
 ;;------------------------------------------------------------------------------
 ;; `dired' (`mod-dired.el')
-(global-set-key (kbd "C-c b") 'mod/sidebar-toggle)
+(use-package
+ dired-sidebar
+ :ensure t
+ :defer t
+
+ :bind ("C-c b" . mod/sidebar-toggle))
 
 ;;------------------------------------------------------------------------------
 ;; `eglot' (`mod-buffer-completion.el')
-(define-key eglot-mode-map (kbd "C-c r") 'eglot-rename)
-;; (define-key eglot-mode-map (kbd "C-c o") 'eglot-code-action-organize-imports)
-(define-key eglot-mode-map (kbd "C-c h") 'eldoc)
-(define-key eglot-mode-map (kbd "<f5>") 'xref-find-definitions)
+(use-package
+ eglot
+ :ensure t
+ :defer t
+
+ :bind
+ (:map
+  eglot-mode-map
+  ("C-c e r" . eglot-rename)
+  ("C-c e o" . eglot-code-action-organize-imports)
+  ("C-c e h" . eldoc)
+  ("C-c e d" . xref-find-definitions)))
 
 ;;------------------------------------------------------------------------------
 ;; `eshell' (`mod-shell.el')
@@ -63,15 +74,31 @@
 
 ;;------------------------------------------------------------------------------
 ;; `flyspell' (`mod-text-editing.el')
-(add-hook (or 'text-mode-hook 'prog-mode-hook) 'mod/flyspell-keybindings)
+
+;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Functions
 
 (defun mod/flyspell-keybindings ()
   "Key bindings for `Flyspell'."
   (define-key flyspell-mode-map (kbd "C-'") 'flyspell-auto-correct-previous-word))
 
+;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Configuration
+
+(use-package
+ flyspell
+ :ensure t
+ :defer t
+
+ :hook (text-mode . mod/flyspell-keybindings) (text-mode-hook . mod/flyspell-keybindings))
+
 ;;------------------------------------------------------------------------------
 ;; `ibuffer'
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(use-package
+ ibuffer
+ :defer t
+
+ :bind ("C-x C-b" . ibuffer))
 
 ;;------------------------------------------------------------------------------
 ;; `icomplete' (`mod-minibuffer-completions.el')
@@ -95,33 +122,49 @@
 
 ;;-----------------------------------------------------------------------------
 ;; `org' (`mod-org.el')
-(define-key org-mode-map (kbd "C-c ]") 'org-cite-insert)
-(define-key org-mode-map (kbd "C-c i") 'latex-insert-block)
-(define-key org-mode-map (kbd "<f1>") 'compile)
-(define-key prog-mode-map (kbd "<f2>") 'compile)
+(use-package
+ org
+ :defer t
+ :ensure t
+
+ :bind
+ (:map org-mode-map ("C-c ]" . org-cite-insert) ("C-c i" . latex-insert-block) ("<f1>" . compile) ("<f2>" . compile))
+ ("C-c o t" . org-timer-set-timer))
 
 ;;------------------------------------------------------------------------------
 ;; `recentf' (`mod-minibuffer-completion.el')
 ;; Open `recenctf-ido-find-file' function
-(global-set-key (kbd "C-c r") 'recentf-open)
+(use-package
+ recentf
+ :defer t
+
+ :bind ("C-c r" . recentf-open))
 
 ;;------------------------------------------------------------------------------
 ;; `rust-mode'
-(define-key rust-mode-map (kbd "C-c C-c r") 'rust-run)
-(define-key rust-mode-map (kbd "C-c C-c t") 'rust-test)
-(define-key rust-mode-map (kbd "C-c C-c c") 'rust-compile)
+(use-package
+ rust-mode
+ :ensure t
+ :defer t
+
+ :bind (:map rust-mode-map ("C-c C-c r" . rust-run) ("C-c C-c t" . rust-test) ("C-c C-c c" . rust-compile)))
 
 ;;------------------------------------------------------------------------------
 ;; `windmove'
-(global-set-key (kbd "C-S-J") 'windmove-down)
-(global-set-key (kbd "C-S-K") 'windmove-up)
-(global-set-key (kbd "C-S-L") 'windmove-right)
-(global-set-key (kbd "C-S-H") 'windmove-left)
-;;(with-demoted-errors "%s" (windmove-default-keybindings))
+(use-package
+ windmove
+ :defer t
+
+ :bind ("C-S-J" . windmove-down) ("C-S-K" . windmove-up) ("C-S-L" . windmove-right) ("C-S-H" . windmove-left))
 
 ;;------------------------------------------------------------------------------
 ;; `yaml-mode'
-(define-key yaml-mode-map (kbd "<tab>") 'yaml-indent-line)
+(use-package
+ yaml-mode
+ :ensure t
+ :defer t
+
+ :bind ("<tab>" . 'yaml-indent-line))
 
 ;;------------------------------------------------------------------------------
 ;; `vc' (`vc-el.org')
@@ -167,10 +210,6 @@
   (local-set-key (kbd "C-;") 'mod/comment-dwim)
   (local-set-key (kbd "M-;") 'comment-kill)
   (local-set-key (kbd "C-x C-;") 'comment-box))
-
-;;------------------------------------------------------------------------------
-;; pomodoro timer
-(global-set-key (kbd "C-c o t") 'org-timer-set-timer)
 
 ;;------------------------------------------------------------------------------
 ;; Scrolling

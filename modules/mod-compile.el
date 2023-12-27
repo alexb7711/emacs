@@ -29,22 +29,17 @@
 ;; Functions
 
 ;;------------------------------------------------------------------------------
-;; TODO: Make the default compile command be based on whether there is a
-;; Makefile to Taskfile in the project.
+;;
 (defun mod/compile-cmd-on-mode ()
   "Changes the default compile command based on the `major-mode'."
   (setq compile-command "make -k")
 
   (cond
-   ((derived-mode-p 'rust-ts-mode)
-    (setq compile-command "cargo build"))
-   ((derived-mode-p 'rust-mode)
+   ((or (derived-mode-p 'rust-ts-mode) (derived-mode-p 'rust-mode))
     (setq compile-command "cargo build"))
    ((derived-mode-p 'org-mode)
     (setq compile-command (concat compile-command " emacs")))
-   ((derived-mode-p 'tex-mode)
-    (setq compile-command compile-command))
-   ((derived-mode-p 'emacs-lisp-mode)
+   ((or (derived-mode-p 'tex-mode) (derived-mode-p 'emacs-lisp-mode))
     (setq compile-command compile-command))))
 
 ;;------------------------------------------------------------------------------
@@ -78,11 +73,6 @@
 ;;==============================================================================
 ;; Configuration
 (setq compilation-scroll-output 1)
-
-;;==============================================================================
-;; Auto compile after saving
-;; TODO: Have this hook run only after specific file types (markdown, latex, etc)
-; (add-hook 'after-save-hook #'compiler-script)
 
 (provide 'mod-compile)
 ;;; mod-compile.el ends here

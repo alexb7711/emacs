@@ -52,26 +52,18 @@
 
 ;;==============================================================================
 ;; `which-key'
-
-;;------------------------------------------------------------------------------
-;; Configuration
-(setq which-key-allow-imprecise-window-fit nil)
-
-;;------------------------------------------------------------------------------
-;; Enable `which-key'
-(which-key-mode 1)
+(use-package which-key :init (setq which-key-allow-imprecise-window-fit nil) :config (which-key-mode 1))
 
 ;;==============================================================================
 ;; `tmod-bar'
-
-;;------------------------------------------------------------------------------
-;; Configuration
-(setq tab-bar-separator "|")
-
-(set-face-attribute 'tab-bar nil :height 90)
-(set-face-attribute 'tab-bar nil :foreground "moccasin" :background "gray2")
-(set-face-attribute 'tab-bar-tab nil :background "dimgray")
-(set-face-attribute 'tab-bar-tab-inactive nil :background "black")
+(use-package
+ tab-bar
+ :init
+ (setq tab-bar-separator "|")
+ (set-face-attribute 'tab-bar nil :height 90)
+ (set-face-attribute 'tab-bar nil :foreground "moccasin" :background "gray2")
+ (set-face-attribute 'tab-bar-tab nil :background "dimgray")
+ (set-face-attribute 'tab-bar-tab-inactive nil :background "black"))
 
 ;;------------------------------------------------------------------------------
 ;; Enable tabs
@@ -114,7 +106,11 @@
       (setq exec-path
             (append
              exec-path
-             '("C:/msys64/usr/bin" "C:/msys64/mingw64/bin/" "C:/msys64/clang64/bin" "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/" "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/")))
+             '("C:/msys64/usr/bin"
+               "C:/msys64/mingw64/bin/"
+               "C:/msys64/clang64/bin"
+               "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+               "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/")))
       (setenv
        "PATH" ; Set envirenment variables
        (concat
@@ -156,16 +152,19 @@
 
 ;;------------------------------------------------------------------------------
 ;; `recentf'
-(recentf-mode 1)
-(setq
- recentf-max-menu-items 10
- recentf-max-saved-items 50
- recentf-auto-cleanup 300
- recentf-exclude '("~$" "^#" "abbrevs_def"))
+(use-package
+ recentf
+ :init
+ (setq
+  recentf-max-menu-items 10
+  recentf-max-saved-items 50
+  recentf-auto-cleanup 300
+  recentf-exclude '("~$" "^#" "abbrevs_def"))
+ :config (recentf-mode 1))
 
 ;;------------------------------------------------------------------------------
 ;; `winner'
-(winner-mode 1)
+(use-package winner :config (winner-mode 1))
 
 
 (provide '1-mod-general)

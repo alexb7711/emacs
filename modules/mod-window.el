@@ -26,7 +26,6 @@
 ;;; Code:
 
 
-(require 'olivetti nil t)
 (require 'dired-sidebar nil t)
 (require 'ibuffer-sidebar nil t)
 (require 'ibuffer-vc nil t)
@@ -46,31 +45,35 @@
 
 ;;------------------------------------------------------------------------------
 ;; Configuration
-(if (eq system-type 'windows-nt)
-    (setq-default
-     olivetti-body-width 0.8
-     olivetti-minimum-body-width 90
-     olivetti-recall-visual-line-mode-entry-state t)
-  (setq-default
-   olivetti-body-width 120
-   olivetti-minimum-body-width 90
-   olivetti-recall-visual-line-mode-entry-state t))
+(use-package
+ olivetti
+ :ensure t
+ :defer t
 
-;;------------------------------------------------------------------------------
-;; Hooks
+ :config
+ (if (eq system-type 'windows-nt)
+     (setq-default
+      olivetti-body-width 0.8
+      olivetti-minimum-body-width 90
+      olivetti-recall-visual-line-mode-entry-state t)
+   (setq-default
+    olivetti-body-width 120
+    olivetti-minimum-body-width 90
+    olivetti-recall-visual-line-mode-entry-state t))
 
-;; Center when there is one window
-(add-hook 'text-mode-hook #'mod/olivetti)
-(add-hook 'prog-mode-hook #'mod/olivetti)
-(add-hook 'latex-mode-hook #'mod/olivetti)
-(add-hook 'nov-mode-hook #'mod/olivetti)
-(add-hook 'Info-mode-hook #'mod/olivetti)
+ :hook
+ ;; Center when there is one window
+ (text-mode . mod/olivetti)
+ (prog-mode . mod/olivetti)
+ (latex-mode . mod/olivetti)
+ (nov-mode . mod/olivetti)
+ (Info-mode . mod/olivetti)
 
-;; Center all the time
-(add-hook 'gnus-article-mode-hook #'olivetti-mode)
-(add-hook 'gnus-summary-mode-hook #'olivetti-mode)
-(add-hook 'gnus-topic-mode-hook #'olivetti-mode)
-(add-hook 'vc-dir-mode-hook #'olivetti-mode)
+ ;; Center all the time
+ (gnus-article-mode . olivetti-mode)
+ (gnus-summary-mode . olivetti-mode)
+ (gnus-topic-mode . olivetti-mode)
+ (vc-dir-mode . olivetti-mode))
 
 ;;==============================================================================
 ;; Dedicated Windows
@@ -145,27 +148,36 @@ ARGS are args for `ibuffer-update-title-and-summary'."
 
 ;;------------------------------------------------------------------------------
 ;; Configuration
-(setq
- ;; `dired-sidebar'
- dired-sidebar-theme 'icons ; Display icons
- dired-sidebar-subtree-line-prefix "  |" ; Column separator
- dired-sidebar-use-term-integration t ; Display +/- when in term mode
- dired-sidebar-use-magit-integration nil ; Disable `magit' integration
- dired-sidebar-pop-to-sidebar-on-toggle-open nil ; Set `dired-sidebar' as active window
- dired-sidebar-no-delete-other-windows t
 
- ;; `ibuffer-sidebar'
- ibuffer-sidebar-pop-to-sidebar-on-toggle-open nil ; Set `ibuffer-sidebar' as active window
- ibuffer-sidebar-display-alist
- '((side . left) ; Set position/height of ...
-   (slot . 1) ; `ibuffer-sidebar' window
-   (window-height . 0.3)))
+(use-package
+ dired-sidebar
+ :ensure t
+ :defer t
+
+ :init
+ (setq
+  dired-sidebar-theme 'icons ; Display icons
+  dired-sidebar-subtree-line-prefix "  |" ; Column separator
+  dired-sidebar-use-term-integration t ; Display +/- when in term mode
+  dired-sidebar-use-magit-integration nil ; Disable `magit' integration
+  dired-sidebar-pop-to-sidebar-on-toggle-open nil ; Set `dired-sidebar' as active window
+  dired-sidebar-no-delete-other-windows t
+
+  ;; `ibuffer-sidebar'
+  ibuffer-sidebar-pop-to-sidebar-on-toggle-open nil ; Set `ibuffer-sidebar' as active window
+  ibuffer-sidebar-display-alist
+  '((side . left) ; Set position/height of ...
+    (slot . 1) ; `ibuffer-sidebar' window
+    (window-height . 0.3)))
+
+ :config
+ (advice-add 'ibuffer-sidebar-refresh-buffer :after #'mod/restart-ibuffer-sidebar-mode-after-refresh)
+ (advice-add 'buffer-sidebar-remove-column-headings :override #'mod/buffer-sidebar-remove-column-headings)
+ (advice-add 'ibuffer-vc-set-filter-groups-by-vc-root :override #'mod/ibuffer-vc-set-filter-groups-by-vc-root))
 
 ;;------------------------------------------------------------------------------
 ;; Advice
-(advice-add 'ibuffer-sidebar-refresh-buffer :after #'mod/restart-ibuffer-sidebar-mode-after-refresh)
-(advice-add 'buffer-sidebar-remove-column-headings :override #'mod/buffer-sidebar-remove-column-headings)
-(advice-add 'ibuffer-vc-set-filter-groups-by-vc-root :override #'mod/ibuffer-vc-set-filter-groups-by-vc-root)
+
 
 ;;------------------------------------------------------------------------------
 ;; Hooks

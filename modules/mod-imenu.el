@@ -24,15 +24,19 @@
 
 ;;; Code:
 
-(require 'imenu-list nil t)
-
 ;;==============================================================================
 ;; `imenu-list'
+(use-package
+ imenu-list
+ :ensure t
+ :defer t
 
-(setq
- imenu-list-auto-resize nil ; Auto resize based on text
- imenu-list-focus-after-activation t ; Make active window after opening
- )
+ :init
+ (setq
+  imenu-list-auto-resize nil ; Auto resize based on text
+  imenu-list-focus-after-activation t ; Make active window after opening
+  ))
+
 
 (provide 'mod-imenu)
 ;;; mod-imenu.el ends here

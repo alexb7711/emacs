@@ -12,9 +12,6 @@
 ;; Configuration
 
 ;; Add `treesitter' when available
-(when (treesit-language-available-p 'python)
-  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode)))
-
 ;; Python mode
 (use-package
  python
@@ -31,18 +28,24 @@
 
   ;; PEP8
   tab-width 4 ; Set tab width
-  ))
+  )
 
-;;==============================================================================
-;; Hooks
-
+ :config
+ (when (treesit-language-available-p 'python)
+   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))))
 
 ;;==============================================================================
 ;; Python formatting
 ;;
 ;; Requirements: `python-black'
 ;;
-(use-package python-black :ensure t :demand t :after python :hook (python-ts-mode . python-black-on-save-mode))
+(use-package
+ python-black
+ :ensure t
+ :defer t
+ :after (python)
+
+ :hook (python-ts-mode . python-black-on-save-mode))
 
 (provide 'lang-python)
 ;;; lang-text-editing.el ends here

@@ -35,15 +35,16 @@
 
 ;;==============================================================================
 ;; Configuration
-(setq
- auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist)
- auto-mode-alist (cons '("\\.octaverc$" . octave-mode) auto-mode-alist))
+(use-package
+ octave
+ :defer t
 
+ :init
+ (setq
+  auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist)
+  auto-mode-alist (cons '("\\.octaverc$" . octave-mode) auto-mode-alist))
 
-;;==============================================================================
-;; Hooks
-
-(add-hook 'octave-mode-hook #'octave/octave-configuration)
+ :hook (octave-mode . octave/octave-configuration))
 
 (provide 'lang-octave)
 ;;; lang-octave.el ends here

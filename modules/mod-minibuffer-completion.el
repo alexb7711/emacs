@@ -9,7 +9,6 @@
 ;;; Code:
 
 (require 'minibuffer nil t)
-(require 'icomplete nil t)
 
 ;;------------------------------------------------------------------------------
 ;; `'minibuffer'
@@ -25,23 +24,21 @@
 
 ;;------------------------------------------------------------------------------
 ;; `'Icomplete'
-(icomplete-mode 1)
-(icomplete-vertical-mode t)
+(use-package
+ icomplete
 
-;; Default parameters
-(setq
- fido-mode -1
- icomplete-compute-delay 0
- icomplete-delay-completions-threshold 0
- icomplete-in-buffer nil
- icomplete-max-delay-chars 0
- icomplete-prospects-height 1
- icomplete-show-matches-on-no-input t
- icomplete-with-completion-tables t)
+ :config (icomplete-mode 1) (icomplete-vertical-mode t)
 
-;;------------------------------------------------------------------------------
-;; `Icomplete' functions
-
+ :init
+ (setq
+  fido-mode -1
+  icomplete-compute-delay 0
+  icomplete-delay-completions-threshold 0
+  icomplete-in-buffer nil
+  icomplete-max-delay-chars 0
+  icomplete-prospects-height 1
+  icomplete-show-matches-on-no-input t
+  icomplete-with-completion-tables t))
 
 (provide 'mod-minibuffer-completion.el)
 ;;; mod-minibuffer-completion.el ends here

@@ -24,8 +24,6 @@
 
 ;;; Code:
 
-(require 'bibtex nil t)
-(require 'bibtex-completion nil t)
 (require 'reftex nil t)
 (require 'reftex-cite nil t)
 
@@ -64,6 +62,7 @@
 ;;
 (defun bib/open-bibtex-pdf ()
   "Open the pdf associated with the bibtex entry at point."
+  (require 'bibtex-completion nil t)
   (interactive)
   (save-excursion
     (bibtex-beginning-of-entry)
@@ -83,53 +82,63 @@
 
 ;;------------------------------------------------------------------------------
 ;; Configuration
-(setq
- bibtex-autokey-year-length 4
- bibtex-autokey-name-year-separator "-"
- bibtex-autokey-year-title-separator "-"
- bibtex-autokey-titleword-separator "-"
- bibtex-autokey-titlewords 2
- bibtex-autokey-titlewords-stretch 1
- bibtex-autokey-titleword-length 5
- bibtex-completion-notes-path "~/NextCloud/Documents/notes/content/doc-notes/"
- bibtex-completion-bibliography '("~/NextCloud/Documents/literature/ref.bib" "~/NextCloud/Documents/library/ref.bib")
- bibtex-completion-library-path '("~/NextCloud/Documents/library/" "~/NextCloud/Documents/literature/")
- bibtex-completion-notes-template-multiple-files "* ${title}, ${author-or-editor}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
+(use-package
+ bibtex
+ :ensure t
+ :defer t
 
- bibtex-completion-additional-search-fields '(keywords)
- bibtex-completion-display-formats
- '((article . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
-   (inbook . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
-   (incollection . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-   (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-   (t . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}")))
+ :init
+ (setq
+  bibtex-autokey-year-length 4
+  bibtex-autokey-name-year-separator "-"
+  bibtex-autokey-year-title-separator "-"
+  bibtex-autokey-titleword-separator "-"
+  bibtex-autokey-titlewords 2
+  bibtex-autokey-titlewords-stretch 1
+  bibtex-autokey-titleword-length 5
+  bibtex-completion-notes-path "~/NextCloud/Documents/notes/content/doc-notes/"
+  bibtex-completion-bibliography '("~/NextCloud/Documents/literature/ref.bib" "~/NextCloud/Documents/library/ref.bib")
+  bibtex-completion-library-path '("~/NextCloud/Documents/library/" "~/NextCloud/Documents/literature/")
+  bibtex-completion-notes-template-multiple-files "* ${title}, ${author-or-editor}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
+
+  bibtex-completion-additional-search-fields '(keywords)
+  bibtex-completion-display-formats
+  '((article . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+    (inbook . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+    (incollection . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+    (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+    (t . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))))
 
 ;;==============================================================================
 ;; `reftex'
 
 ;;------------------------------------------------------------------------------
-;; Configuration
-
-;; Activate nice interface between RefTeX and AUCTeX
-(setq
- reftex-plug-into-AUCTeX t
- reftex-default-bibliography '("~/Documents/citation-database/lit-ref.bib" "~/Documents/citation-database/lib-ref.bib"))
+;; Functions
+(defun lang/latex-configure ()
+  "Configuration for LaTeX."
+  (auto-fill-mode 1)
+  (toggle-truncate-lines 1))
 
 ;;------------------------------------------------------------------------------
-;; Hooks
+;; Configuration
 
-;; Turn on RefTeX in AUCTeX
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(use-package
+ reftex
+ :ensure t
+ :defer t
 
-;; Assistance managing references
-(add-hook 'latex-mode-hook 'turn-on-reftex)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+ :init
+ ;; Activate nice interface between RefTeX and AUCTeX
+ (setq
+  reftex-plug-into-AUCTeX t
+  reftex-default-bibliography '("~/Documents/citation-database/lit-ref.bib" "~/Documents/citation-database/lib-ref.bib"))
 
-(add-hook
- 'LaTeX-mode-hook
- #'(lambda ()
-     (auto-fill-mode 1)
-     (toggle-truncate-lines 1)))
+ :hook
+ ;; Turn on RefTeX in AUCTeX
+ (LaTeX-mode . turn-on-reftex)
+
+ ;; Assistance managing references
+ (latex-mode . turn-on-reftex) (LaTeX-mode . turn-on-reftex) (LaTeX-mode-hook . mod/latex-configure))
 
 
 (provide 'lang-bibtex)

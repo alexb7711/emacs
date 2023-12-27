@@ -48,6 +48,7 @@
 ;;------------------------------------------------------------------------------
 ;; Set the SMTP Server according to the mail address we use for sending
 (defun set-smtp-server-message-send-and-exit ()
+
   "Set SMTP server from list of multiple ones and send mail."
   (interactive)
   (message-remove-header "X-Message-SMTP-Method")

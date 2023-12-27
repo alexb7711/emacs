@@ -68,7 +68,6 @@ When you add a new element to the alist, keep in mind that you
 must pass the correct minor/major mode symbol and a string you
 want to use in the modeline *in lieu of* the original.")
 
-
 (defun clean-mode-line ()
   "Cleanup the modeline."
   (interactive)
@@ -121,16 +120,16 @@ want to use in the modeline *in lieu of* the original.")
   (if (eq system-type 'windows-nt)
       (progn
         (when (mod/font-available-p "Mononoki Nerd Font")
-               (set-face-attribute 'fixed-pitch nil :font "Mononoki Nerd Font" :height 110)
-               (set-face-attribute 'default nil :font "Mononoki Nerd Font" :height 110))
+          (set-face-attribute 'fixed-pitch nil :font "Mononoki Nerd Font" :height 110)
+          (set-face-attribute 'default nil :font "Mononoki Nerd Font" :height 110))
         (when (mod/font-available-p "Iosevka Nerd Font")
           (set-face-attribute 'variable-pitch nil :font "Iosevka Nerd Font" :weight 'normal :height 130))
         (when (mod/font-available-p "Iosevka NF")
           (set-face-attribute 'variable-pitch nil :font "Iosevka NF" :weight 'normal :height 130)))
     (progn
       (when (mod/font-available-p "Mononoki Nerd Font")
-             (set-face-attribute 'fixed-pitch nil :font "Mononoki Nerd Font" :height 130)
-             (set-face-attribute 'default nil :font "Mononoki Nerd Font" :height 130))
+        (set-face-attribute 'fixed-pitch nil :font "Mononoki Nerd Font" :height 130)
+        (set-face-attribute 'default nil :font "Mononoki Nerd Font" :height 130))
       (when (mod/font-available-p "Iosevka Nerd Font")
         (set-face-attribute 'variable-pitch nil :font "Iosevka Nerd Font" :weight 'normal :height 135))
       (when (mod/font-available-p "Iosevka NF")
@@ -147,7 +146,6 @@ want to use in the modeline *in lieu of* the original.")
 (if (daemonp)
     (add-hook 'after-make-frame-functions #'mod/load-fonts)
   (funcall #'mod/load-fonts frame-initial-frame))
-
 
 (provide '2-mod-aethstetics)
 ;;; 2-mod-aethstetics.el ends here

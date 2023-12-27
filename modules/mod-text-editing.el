@@ -10,8 +10,6 @@
 (require 'display-line-numbers nil t)
 (require 'flycheck nil t)
 (require 'flyspell nil t)
-(require 'git-gutter nil t)
-(require 'hideshow nil t)
 (require 'hl-line nil t)
 (require 'langtool nil t)
 (require 'newcomment nil t)
@@ -63,10 +61,7 @@
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Folding
 
-;; Hooks
-
-(add-hook 'latex-mode-hook 'hs-minor-mode)
-(add-hook 'prog-mode-hook 'hs-minor-mode)
+(use-package hideshow :hook (latex-mode . hs-minor-mode) (prog-mode . hs-minor-mode))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Line numbers
@@ -93,22 +88,21 @@ displayed."
 ;; Git gutter
 
 ;; Hooks
+(use-package
+ git-gutter
+ :ensure t
+ :defer t
 
-(add-hook 'prog-mode-hook 'git-gutter-mode)
-(add-hook 'text-mode-hook 'git-gutter-mode)
+ :hook (prog-mode . git-gutter-mode) (text-mode . git-gutter-mode))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Highlight current line
 
-;; Set visual attributes
+(use-package
+ hl-line
+ :init (set-face-attribute 'hl-line nil :inherit nil :box nil :underline '(:color "dim gray" :position 0))
 
-; Underline selected line
-(set-face-attribute 'hl-line nil :inherit nil :box nil :underline '(:color "dim gray" :position 0))
-
-;; Hooks
-
-(add-hook 'prog-mode-hook 'hl-line-mode) ; Enable when in text mode
-(add-hook 'text-mode-hook 'hl-line-mode) ; and when programming.
+ :hook (prog-mode . hl-line-mode) (text-mode . hl-line-mode))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Searching
@@ -247,7 +241,7 @@ If somewhere inside the line, toggle the comment status of the entire line."
 
 ;; Functions
 
-(defun mod/run-fill-paragraph()
+(defun mod/run-fill-paragraph ()
   "Run the `fill-paragraph' function automatically in certain modes."
   (interactive)
   (when (eq major-mode 'org-mode)
@@ -270,10 +264,6 @@ If somewhere inside the line, toggle the comment status of the entire line."
 ;;------------------------------------------------------------------------------
 ;; `langtool'
 
-(add-hook 'latex-mode-hook #'mod/langtool)
-(add-hook 'markdown-mode-hook #'mod/langtool)
-(add-hook 'org-mode-hook #'mod/langtool)
-
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; `langtool' function
 (defun mod/langtool ()
@@ -285,9 +275,23 @@ If somewhere inside the line, toggle the comment status of the entire line."
 
   (add-hook 'after-save-hook 'langtool-check nil 'make-it-local) ; Check after save
   (require 'langtool nil t))
-(add-hook 'latex-mode-hook #'mod/langtool)
-(add-hook 'markdown-mode-hook #'mod/langtool)
-(add-hook 'org-mode-hook #'mod/langtool)
+
+
+;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Configure
+(use-package
+ langtool
+ :ensure t
+ :defer t
+
+ :hook
+ (latex-mode . mod/langtool)
+ (markdown-mode . mod/langtool)
+ (org-mode . mod/langtool)
+ (latex-mode . mod/langtool)
+ (markdown-mode . mod/langtool)
+ (org-mode . mod/langtool))
+
 
 ;;------------------------------------------------------------------------------
 ;; Flyspell
@@ -297,35 +301,39 @@ If somewhere inside the line, toggle the comment status of the entire line."
 ;;
 
 ;; Configuration
+(use-package
+ flyspell
+ :defer t
 
-;; Specify path to aspell on Windows
-(if (eq system-type 'windows-nt)
-    (progn
-      (setq
-       ispell-program-name "hunspell.exe"
-       ispell-local-dictionary "en_US")
-      (setenv "LANG" "en_US")
-      (ispell-hunspell-add-multi-dic "en_US"))
-  (setq ispell-program-name "aspell"))
+ :init
+ ;; Add correction to abbreviation table.
+ (setq
+  flyspell-abbrev-p t
+  flyspell-issue-message-flag nil
+  flyspell-issue-welcome-flag nil)
 
-;; Add correction to abbreviation table.
-(setq
- flyspell-abbrev-p t
- flyspell-issue-message-flag nil
- flyspell-issue-welcome-flag nil)
+ :config
+ ;; Specify path to aspell on Windows
+ (if (eq system-type 'windows-nt)
+     (progn
+       (setq
+        ispell-program-name "hunspell.exe"
+        ispell-local-dictionary "en_US")
+       (setenv "LANG" "en_US")
+       (ispell-hunspell-add-multi-dic "en_US"))
+   (setq ispell-program-name "aspell"))
 
-;; Ignore source code blocks in org mode
-(add-to-list 'ispell-skip-region-alist '("^#+BEGIN_SRC" . "^#+END_SRC"))
-(add-to-list 'ispell-skip-region-alist '("~" . "~"))
-(add-to-list 'ispell-skip-region-alist '("=" . "="))
+ ;; Ignore source code blocks in org mode
+ (add-to-list 'ispell-skip-region-alist '("^#+BEGIN_SRC" . "^#+END_SRC"))
+ (add-to-list 'ispell-skip-region-alist '("~" . "~"))
+ (add-to-list 'ispell-skip-region-alist '("=" . "="))
 
-;; Hooks
-
-(add-hook 'latex-mode-hook #'flyspell-mode)
-(add-hook 'markdown-mode-hook #'flyspell-mode)
-(add-hook 'org-mode-hook #'flyspell-mode)
-(add-hook 'prog-mode-hook #'flyspell-prog-mode)
-(add-hook 'after-save-hook #'flyspell-buffer)
+ :hook
+ (latex-mode . flyspell-mode)
+ (markdown-mode . flyspell-mode)
+ (org-mode . flyspell-mode)
+ (prog-mode . flyspell-prog-mode)
+ (after-save . flyspell-buffer))
 
 ;;==============================================================================
 ;; Natural language
@@ -380,7 +388,11 @@ If somewhere inside the line, toggle the comment status of the entire line."
 (defun mod/load-whitespace (&optional frame)
   "Function to load `whitespace' parameters in FRAME when running daemon."
   (interactive)
-  (set-face-attribute 'whitespace-indentation nil :inherit nil :background "black" :foreground "dim gray" :strike-through t)
+  (set-face-attribute 'whitespace-indentation nil
+                      :inherit nil
+                      :background "black"
+                      :foreground "dim gray"
+                      :strike-through t)
   (add-hook 'prog-mode-hook #'whitespace-mode))
 
 ;; Defaults
@@ -409,8 +421,12 @@ If somewhere inside the line, toggle the comment status of the entire line."
 ;;    - Rust: `rust-cargo'
 ;;
 
-;; Autoloaded Functions
-(flycheck-mode 1)
+(use-package
+ flycheck
+ :ensure t
+ :defer t
+
+ :config (flycheck-mode 1))
 
 (provide 'mod-text-editing)
 ;;; mod-text-editing.el ends here

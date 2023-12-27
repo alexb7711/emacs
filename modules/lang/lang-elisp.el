@@ -32,8 +32,8 @@
 (defun elisp/config-elisp-mode ()
   "Configure Emacs LISP mode."
   (setq
-   comment-column 80
-   comment-fill-column 120
+   comment-column 40
+   comment-fill-column 80
    display-fill-column-indicator-column 80))
 
 ;;------------------------------------------------------------------------------
@@ -50,13 +50,18 @@
 (use-package
  elisp-autofmt
  :defer t
+ :after (elisp-mode)
  :commands (elisp-autofmt-mode elisp-autofmt-buffer)
  :hook (before-save . elisp/autofmt-on-save))
 
 ;;==============================================================================
 ;; Hooks
 
-(add-hook 'emacs-lisp-mode-hook #'elisp/config-elisp-mode)
+(use-package
+ elisp-mode
+ :defer t
+
+ :hook (emacs-lisp-mode . elisp/config-elisp-mode))
 
 (provide 'lang-elisp)
 ;;; lang-elisp.el ends here

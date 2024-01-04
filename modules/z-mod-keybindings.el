@@ -164,7 +164,7 @@
  :ensure t
  :defer t
 
- :bind ("<tab>" . 'yaml-indent-line))
+ :bind (:map yaml-mode-map ("<tab>" . 'yaml-indent-line)))
 
 ;;------------------------------------------------------------------------------
 ;; `vc' (`vc-el.org')

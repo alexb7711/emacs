@@ -63,7 +63,8 @@
  (set-face-attribute 'tab-bar nil :height 90)
  (set-face-attribute 'tab-bar nil :foreground "moccasin" :background "gray2")
  (set-face-attribute 'tab-bar-tab nil :background "dimgray")
- (set-face-attribute 'tab-bar-tab-inactive nil :background "black"))
+ (set-face-attribute 'tab-bar-tab-inactive nil :background "black")
+ :config (tab-bar-history-mode 1))
 
 ;;------------------------------------------------------------------------------
 ;; Enable tabs

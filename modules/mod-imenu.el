@@ -33,9 +33,9 @@
 
  :init
  (setq
-  imenu-list-auto-resize nil ; Auto resize based on text
+  imenu-list-auto-resize t ; Auto resize based on text
   imenu-list-focus-after-activation t ; Make active window after opening
-  ))
+  imenu-list-size 35))
 
 
 (provide 'mod-imenu)

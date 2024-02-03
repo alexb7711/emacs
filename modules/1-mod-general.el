@@ -162,10 +162,5 @@
   recentf-exclude '("~$" "^#" "abbrevs_def"))
  :config (recentf-mode 1))
 
-;;------------------------------------------------------------------------------
-;; `winner'
-(use-package winner :config (winner-mode 1))
-
-
 (provide '1-mod-general)
 ;;; 1-mod-general.el ends here

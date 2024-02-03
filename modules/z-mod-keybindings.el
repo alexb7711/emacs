@@ -241,6 +241,8 @@
 (global-set-key (kbd "C-<up>") 'enlarge-window)
 (global-set-key (kbd "C-<down>") 'shrink-window)
 (global-set-key (kbd "<f12>") 'window-toggle-side-windows)
+(global-set-key (kbd "C-x <left>") 'tab-bar-history-back)
+(global-set-key (kbd "C-x <right>") 'tab-bar-history-forward)
 
 ;;------------------------------------------------------------------------------
 ;; Misc key bindings

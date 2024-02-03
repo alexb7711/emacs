@@ -70,6 +70,7 @@
  (Info-mode . mod/olivetti)
 
  ;; Center all the time
+ (help-mode . olivetti-mode)
  (gnus-article-mode . olivetti-mode)
  (gnus-summary-mode . olivetti-mode)
  (gnus-topic-mode . olivetti-mode)
@@ -92,10 +93,11 @@
          (window-height . 0.25)
          (side . bottom)
          (slot . 1))
-        ("\\*grep\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . bottom) (slot . -1))
-        ("\\*[Hh]elp\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . top) (slot . 1))
+        ("\\*grep\\*" (display-buffer-in-side-window) (window-height . 0.15) (side . bottom) (slot . -1))
+        ("\\*[Hh]elp\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . bottom) (slot . 1))
         ("\\*Completions\\*" (display-buffer-below-selected) (window-height . 0.2) (side . bottom) (slot . 0))
-        ("\\*compilation\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . right) (slot . 0))
+        ("\\*compilation\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . top) (slot . 0))
+        ("\\*vc-dir\\*" (display-buffer-in-side-window) (window-height . 0.15) (side . right) (slot . -1))
         ("\\*Ilist\\*" (display-buffer-in-side-window) (window-width . 0.1) (side . right) (slot . 0))
         ("\\*Flycheck Errors\\*" (display-buffer-below-selected) (window-width . 0.2) (side . right) (slot . 1))))
 
@@ -174,13 +176,6 @@ ARGS are args for `ibuffer-update-title-and-summary'."
  (advice-add 'ibuffer-sidebar-refresh-buffer :after #'mod/restart-ibuffer-sidebar-mode-after-refresh)
  (advice-add 'buffer-sidebar-remove-column-headings :override #'mod/buffer-sidebar-remove-column-headings)
  (advice-add 'ibuffer-vc-set-filter-groups-by-vc-root :override #'mod/ibuffer-vc-set-filter-groups-by-vc-root))
-
-;;------------------------------------------------------------------------------
-;; Advice
-
-
-;;------------------------------------------------------------------------------
-;; Hooks
 
 (provide 'mod-window)
 ;;; mod-window.el ends here

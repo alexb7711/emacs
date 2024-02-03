@@ -39,6 +39,10 @@
    (lambda (mod/maildir) (not (seq-some (lambda (x) (string-match x mod/maildir)) mod/maildir-skip)))
    (directory-files-recursively mod/maildir "\\`[^.]*\\'" t))
   "List of `maildir'")
+(setq mod/mailsubdir (cl-delete-if (lambda (k) (string-match-p "new$" k)) mod/mailsubdir))
+(setq mod/mailsubdir (cl-delete-if (lambda (k) (string-match-p "cur$" k)) mod/mailsubdir))
+(setq mod/mailsubdir (cl-delete-if (lambda (k) (string-match-p "tmp$" k)) mod/mailsubdir))
+(setq mod/mailsubdir (cl-delete-if (lambda (k) (string-match-p "[0-9]$" k)) mod/mailsubdir))
 
 
 ;;==============================================================================
@@ -49,7 +53,7 @@
  "/var/mail/RMAIL" ; Primary Rmail file
  rmail-secondary-file-directory "/var/mail/"
  rmail-remote-password-required nil
- rmail-preserve-inbox 1
+ rmail-preserve-inbox 0
  rmail-delete-after-output 1)
 
 (provide 'mod-mail)

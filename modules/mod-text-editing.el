@@ -167,11 +167,17 @@ displayed."
 (add-hook 'prog-mode-hook 'electric-layout-mode) ; Auto indent with special character
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Delete trailing whitespace
+;; Delete trailing `whitespace'
+
+;; Functions
+(defun mod/delete-trailing-whitespace ()
+  "Function wrapper for deleting trailing whitespace."
+  (when (not (eq major-mode 'fundamental-mode))
+    (delete-trailing-whitespace)))
 
 ;; Hooks
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'mod/delete-trailing-whitespace)
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Text regions
@@ -273,7 +279,15 @@ If somewhere inside the line, toggle the comment status of the entire line."
     (setq langtool-language-tool-jar "C:/msys64/usr/share/languagetool/languagetool-commandline.jar")
     (setq langtool-java-classpath "/usr/share/languagetool:/usr/share/java/languagetool/*"))
 
-  (add-hook 'after-save-hook 'langtool-check nil 'make-it-local) ; Check after save
+  ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ;;
+  (defun mod/langtool-wrapper ()
+    "Function wrapper for deleting trailing whitespace."
+    (when (or (eq major-mode 'org-mode) (eq major-mode 'latex-mode) (eq major-mode 'markdown-mode))
+      (langtool-check)))
+
+
+  (add-hook 'after-save-hook 'mod/langtool-wrapper) ; Check after save
   (require 'langtool nil t))
 
 
@@ -332,8 +346,8 @@ If somewhere inside the line, toggle the comment status of the entire line."
  (latex-mode . flyspell-mode)
  (markdown-mode . flyspell-mode)
  (org-mode . flyspell-mode)
- (prog-mode . flyspell-prog-mode)
- (after-save . flyspell-buffer))
+ (prog-mode . flyspell-prog-mode))
+;; (after-save . flyspell-buffer))
 
 ;;==============================================================================
 ;; Natural language

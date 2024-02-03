@@ -83,8 +83,8 @@
 ;; Defaults
 
 (setq-default
- gnus-agent-directory "/var/mail/mail/agent/"
- nrss-directory "/var/mail/news/rss/"
+ gnus-agent-directory "/var/mail/agent/"
+ nrss-DIRECTORY "/var/mail/news/"
  gnus-directory "/var/mail/news/"
  message-directory "/var/mail/mail"
  nnfolder-directory "/var/mail/mail"
@@ -135,18 +135,19 @@
 (setq
  gnus-select-method '(nnnil "") ; Set default method
  gnus-secondary-select-methods ; Secondary methods
- '((nnml "")
-   (nntp "news.gwene.org")
-   (nnimap
-    "gmail" ; Server `gmail'
-    (nnimap-address "imap.gmail.com")
-    (nnimap-server-port "imaps")
-    (nnimap-stream ssl)
-    (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
-    (nnmail-expiry-wait 90))
-   (nnimap
-    "usu" ; Server `usu'
-    (nnimap-address "localhost") (nnimap-server-port 1143) (nnimap-stream plain) (nnir-search-engine imap))))
+ ;; '((nnml "")))
+ '((nnmaildir "usu" (directory "/var/mail/usu")) (nnmaildir "gmail" (directory "/var/mail/gmail"))))
+;; (nntp "news.gwene.org")
+;; (nnimap
+;;  "gmail" ; Server `gmail'
+;;  (nnimap-address "imap.gmail.com")
+;;  (nnimap-server-port "imaps")
+;;  (nnimap-stream ssl)
+;;  (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
+;;  (nnmail-expiry-wait 90))
+;; (nnimap
+;;  "usu" ; Server `usu'
+;;  (nnimap-address "localhost") (nnimap-server-port 1143) (nnimap-stream plain) (nnir-search-engine imap))))
 
 ;;==============================================================================
 ;; SMTP

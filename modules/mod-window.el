@@ -70,7 +70,6 @@
  (Info-mode . mod/olivetti)
 
  ;; Center all the time
- (help-mode . olivetti-mode)
  (gnus-article-mode . olivetti-mode)
  (gnus-summary-mode . olivetti-mode)
  (gnus-topic-mode . olivetti-mode)
@@ -94,12 +93,11 @@
          (side . bottom)
          (slot . 1))
         ("\\*grep\\*" (display-buffer-in-side-window) (window-height . 0.15) (side . bottom) (slot . -1))
-        ("\\*[Hh]elp\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . bottom) (slot . 1))
+        ;; ("\\*[Hh]elp\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . bottom) (slot . 1))
         ("\\*Completions\\*" (display-buffer-below-selected) (window-height . 0.2) (side . bottom) (slot . 0))
         ("\\*compilation\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . top) (slot . 0))
-        ("\\*vc-diff\\*" (display-buffer-in-side-window) (window-height . 0.15) (side . right) (slot . -1))
         ("\\*Ilist\\*" (display-buffer-in-side-window) (window-width . 0.1) (side . right) (slot . 0))
-        ("\\*Flycheck Errors\\*" (display-buffer-below-selected) (window-width . 0.2) (side . right) (slot . 1))))
+        ("\\*Flycheck Errors\\*" (display-buffer-below-selected) (window-width . 0.3) (side . right) (slot . 1))))
 
 ;;==============================================================================
 ;; Sidebars

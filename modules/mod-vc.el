@@ -25,7 +25,6 @@
 ;;; Code:
 
 (require 'ediff nil t)
-(require 'winner nil t)
 (require 'vc nil t)
 (require 'vc-git nil t)
 
@@ -85,7 +84,6 @@
 (if (eq system-type 'windows-nt)
     (setq vc-git-program "C:/Users/1556048963C/AppData/Local/Programs/Git/bin/git.exe")
   (setq vc-git-program "git"))
-
 
 ;;===========================================================================
 ;; `ediff'

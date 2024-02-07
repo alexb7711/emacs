@@ -21,7 +21,6 @@
 ;;; Commentary:
 
 ;; https://github.com/rnkn/olivetti
-;; https://github.com/emacsorphanage/sr-speedbar
 
 ;;; Code:
 

@@ -25,7 +25,6 @@
 ;;; Code:
 
 (require 'package nil t)
-(require 'auto-package-update nil t)
 
 ;;==============================================================================
 ;; Configure packages

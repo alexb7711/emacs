@@ -29,7 +29,6 @@
 (use-package
  imenu-list
  :ensure t
- :defer t
 
  :init
  (setq

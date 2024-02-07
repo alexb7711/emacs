@@ -51,8 +51,9 @@
  elisp-autofmt
  :defer t
  :after (elisp-mode)
- :commands (elisp-autofmt-mode elisp-autofmt-buffer)
- :hook (before-save . elisp/autofmt-on-save))
+ :config
+ (if (not (eq system-type 'windows-nt))
+     (add-hook 'before-save #'elisp/autofmt-on-save)))
 
 ;;==============================================================================
 ;; Hooks

@@ -89,11 +89,9 @@ displayed."
 
 ;; Hooks
 (use-package
- git-gutter
- :ensure t
- :defer t
-
- :hook (prog-mode . git-gutter-mode) (text-mode . git-gutter-mode))
+  git-gutter
+  :ensure t
+  :config (global-git-gutter-mode +1))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Highlight current line

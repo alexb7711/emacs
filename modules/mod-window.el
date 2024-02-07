@@ -48,32 +48,33 @@
 (use-package
  olivetti
  :ensure t
- :defer t
 
  :config
  (if (eq system-type 'windows-nt)
      (setq-default
-      olivetti-body-width 0.8
+      olivetti-style nil
+      olivetti-body-width nil
       olivetti-minimum-body-width 90
-      olivetti-recall-visual-line-mode-entry-state t)
+      olivetti-recall-visual-line-mode-entry-state nil)
    (setq-default
-    olivetti-body-width 120
-    olivetti-minimum-body-width 90
+    olivetti-style nil
+    olivetti-body-width nil
+    olivetti-minimum-body-width 120
     olivetti-recall-visual-line-mode-entry-state t))
 
  :hook
- ;; Center when there is one window
- (text-mode . mod/olivetti)
- (prog-mode . mod/olivetti)
- (latex-mode . mod/olivetti)
- (nov-mode . mod/olivetti)
- (Info-mode . mod/olivetti)
-
- ;; Center all the time
+ (text-mode . olivetti-mode)
+ (prog-mode . olivetti-mode)
  (gnus-article-mode . olivetti-mode)
  (gnus-summary-mode . olivetti-mode)
  (gnus-topic-mode . olivetti-mode)
- (vc-dir-mode . olivetti-mode))
+ (vc-dir-mode . olivetti-mode)
+
+ :init
+ ;;-----------------------------------------------------------------------------
+ ;; Advice
+ (advice-add 'olivetti-reset-window :after #'(lambda (orig-func &rest var) (set-window-margins nil 1)))
+)
 
 ;;==============================================================================
 ;; Dedicated Windows
@@ -94,18 +95,13 @@
          (slot . 1))
         ("\\*grep\\*" (display-buffer-in-side-window) (window-height . 0.15) (side . bottom) (slot . -1))
         ("\\*vc-log\\*\\(:?<.*>\\)?" (display-buffer-below-selected) (window-height . 0.25))
-        ;; ("\\*[Hh]elp\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . bottom) (slot . 1))
+        ("\\*[Hh]elp\\*" (display-buffer-in-side-window) (window-height . 0.3) (side . right) (slot . 1))
         ("\\*Completions\\*" (display-buffer-below-selected) (window-height . 0.2) (side . bottom) (slot . 0))
         ("\\*compilation\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . top) (slot . 0))
-        ("\\*vc-dir\\*\\(:?<.*>\\)?" (display-buffer-in-direction) (direction . leftmost) (window-width . 0.2))
-        ("\\*vc-git\\(:?.*\\)?\\*"
-         (display-buffer-in-side-window)
-         (side . left)
-         (window-width . 35)
-         (window-height . 1)
-         (slot . 2))
+        ("\\*vc-dir\\*\\(:?<.*>\\)?" (display-buffer-use-some-window))
+        ("\\*vc-git\\(:?.*\\)?\\*" (display-buffer-no-window) (allow-no-window . t))
         ("\\*vc\\*" (display-buffer-in-side-window) (side . left) (window-height . 1) (slot . 2))
-        ("\\*vc-diff\\*\\(:?<.*>\\)?" (display-buffer-in-direction) (direction . rightmost) (window-width . 0.3))
+        ("\\*vc-diff\\*\\(:?<.*>\\)?" (display-buffer-pop-up-window))
         ("\\*Ilist\\*" (display-buffer-in-side-window) (window-width . 0.1) (side . right) (slot . 0))
         ("\\*Flycheck Errors\\*" (display-buffer-below-selected) (window-width . 0.3) (side . right) (slot . 1))))
 

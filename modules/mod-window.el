@@ -64,6 +64,7 @@
  :hook
  (text-mode . olivetti-mode)
  (prog-mode . olivetti-mode)
+ (comint-mode . olivetti-mode)
  (gnus-article-mode . olivetti-mode)
  (gnus-summary-mode . olivetti-mode)
  (gnus-topic-mode . olivetti-mode)

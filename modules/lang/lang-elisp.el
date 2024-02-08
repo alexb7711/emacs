@@ -53,7 +53,7 @@
  :after (elisp-mode)
  :config
  (if (not (eq system-type 'windows-nt))
-     (add-hook 'before-save #'elisp/autofmt-on-save)))
+     (add-hook 'before-save-hook #'elisp/autofmt-on-save)))
 
 ;;==============================================================================
 ;; Hooks

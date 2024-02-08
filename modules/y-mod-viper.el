@@ -15,25 +15,28 @@
 ;;==============================================================================
 ;; Configuration
 
-(setq-default
- viper-auto-indent t ; Enable auto indenting
- )
+(use-package
+ viper
+ :init
+ (setq-default
+  viper-auto-indent t ; Enable auto indenting
+  )
 
-(setq
- viper-mode t ; Enable `viper'
- viper-electric-mode t ; Enable electric mode in viper
- viper-inhibit-startup-message 't ; Don't ask to start `viper'
- viper-want-ctl-h-help t ; `C-h' is for help
- viper-ex-style-motion nil ; Move to start/end of lines
- viper-ex-style-editing nil ; Edit to start/end of lines
- viper-shift-width 4 ; > and < shift amount
- viper-smart-suffix-list '("" "tex" "c" "cc" "el" "p" "py" "rs" "sh")
- viper-expert-level '3 ; Set level of `viper'
+ (setq
+  viper-mode t ; Enable `viper'
+  viper-electric-mode t ; Enable electric mode in viper
+  viper-inhibit-startup-message 't ; Don't ask to start `viper'
+  viper-want-ctl-h-help t ; `C-h' is for help
+  viper-ex-style-motion nil ; Move to start/end of lines
+  viper-ex-style-editing nil ; Edit to start/end of lines
+  viper-shift-width 4 ; > and < shift amount
+  viper-smart-suffix-list '("" "tex" "c" "cc" "el" "p" "py" "rs" "sh")
+  viper-expert-level '3 ; Set level of `viper'
+  )
+ :init
+ ;; Enable `viper'. Note that the `require' needs to be down here
+ (viper-mode) ; Enable `viper'
  )
-
-;; Enable `viper'. Note that the `require' needs to be down here
-(viper-mode) ; Enable `viper'
-(require 'viper nil t)
 
 ;;==============================================================================
 ;; Advice

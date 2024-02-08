@@ -88,7 +88,11 @@ displayed."
 ;; `diff-hl'
 
 ;; Hooks
-(use-package diff-hl :ensure t :config (global-diff-hl-mode))
+(use-package diff-hl
+  :ensure t
+  :config (global-diff-hl-mode)
+  :hook
+  (dired-mode . diff-hl-dired-mode))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Highlight current line

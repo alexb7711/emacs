@@ -23,6 +23,8 @@
  (setq
   viper-inhibit-startup-message 't ; Don't ask to start `viper'
   viper-expert-level '3 ; Set level of `viper'
+  viper-ex-style-motion nil ; Move to start/end of lines
+  viper-ex-style-editing nil ; Edit to start/end of lines
   viper-mode t)
 
  (require 'viper)
@@ -36,8 +38,6 @@
  (setq
   viper-electric-mode t ; Enable electric mode in viper
   viper-want-ctl-h-help t ; `C-h' is for help
-  viper-ex-style-motion nil ; Move to start/end of lines
-  viper-ex-style-editing nil ; Edit to start/end of lines
   viper-shift-width 4 ; > and < shift amount
   viper-smart-suffix-list '("" "tex" "c" "cc" "el" "p" "py" "rs" "sh")))
 

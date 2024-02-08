@@ -81,7 +81,10 @@
   "f"
   #'find-file
   "p"
-  #'project-switch-project)
+  #'project-switch-project
+  "r"
+  #'recentf-open
+  )
 
 ;;------------------------------------------------------------------------------
 ;;

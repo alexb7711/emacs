@@ -72,6 +72,8 @@
   "l" #'windmove-left
   "j" #'windmove-down
   "k" #'windmove-up
+  "H" #'tab-bar-history-back
+  "L" #'tab-bar-history-forward
   )
 
 ;;==============================================================================
@@ -90,6 +92,8 @@
   "h" help-map
   "p" project-prefix-map
   "v" vc-prefix-map
+  "w" mod/window-keymap
+  "x" #'execute-extended-command
   )
 
 (provide 'mod-keymaps)

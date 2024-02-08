@@ -234,7 +234,7 @@
 (viper-modify-major-mode 'eshell-mode 'insert-state mod/eshell-viper-map)
 
 ;; Viper VI prefix key
-(keymap-set viper-vi-global-user-map "SPC" 'mod/space-prefix-map)
+(keymap-set viper-vi-global-user-map "SPC" mod/space-prefix-keymap)
 
 ;;------------------------------------------------------------------------------
 ;; Window management

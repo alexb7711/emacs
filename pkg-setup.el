@@ -47,12 +47,12 @@
            auctex
            auto-package-update
            csv-mode
+           diff-hl
            dired-sidebar
            doom-themes
            elisp-autofmt
            figlet
            flycheck
-           git-gutter
            helm-bibtex
            ibuffer-sidebar
            ibuffer-vc

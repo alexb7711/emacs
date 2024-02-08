@@ -85,13 +85,14 @@ displayed."
 (add-hook 'prog-mode-hook #'display-line-numbers-mode 1)
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Git gutter
+;; `diff-hl'
 
 ;; Hooks
-(use-package
-  git-gutter
+(use-package diff-hl
   :ensure t
-  :config (global-git-gutter-mode +1))
+  :config (global-diff-hl-mode)
+  :hook
+  (dired-mode . diff-hl-dired-mode))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Highlight current line

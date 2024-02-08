@@ -22,8 +22,7 @@
  ;; Enable `viper'
  (setq
   viper-mode t
-  viper-inhibit-startup-message t ; Don't ask to start `viper'
-  viper-expert-level 3 ; Set level of `viper'
+  viper-inhibit-startup-message 't ; Don't ask to start `viper'
   )
 
  (require 'viper)
@@ -35,6 +34,7 @@
 
  ;; Setup configuration
  (setq
+  viper-expert-level '3 ; Set level of `viper'
   viper-electric-mode t ; Enable electric mode in viper
   viper-want-ctl-h-help t ; `C-h' is for help
   viper-ex-style-motion nil ; Move to start/end of lines

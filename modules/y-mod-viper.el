@@ -18,9 +18,6 @@
 (use-package
  viper
  :init
- ;; Enable `viper'. Note that the `require' needs to be down here
- (viper-mode) ; Enable `viper'
-
  (setq-default
   viper-auto-indent t ; Enable auto indenting
   )
@@ -35,7 +32,8 @@
   viper-shift-width 4 ; > and < shift amount
   viper-smart-suffix-list '("" "tex" "c" "cc" "el" "p" "py" "rs" "sh")
   viper-expert-level '3 ; Set level of `viper'
-  ))
+  )
+ (require 'viper))
 
 ;;==============================================================================
 ;; Advice

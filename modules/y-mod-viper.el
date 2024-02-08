@@ -22,8 +22,8 @@
  ;; Enable `viper'
  (setq
   viper-mode t
-  viper-inhibit-startup-message 't ; Don't ask to start `viper'
-  viper-expert-level '3 ; Set level of `viper'
+  viper-inhibit-startup-message t ; Don't ask to start `viper'
+  viper-expert-level 3 ; Set level of `viper'
   )
 
  (require 'viper)

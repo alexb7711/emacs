@@ -18,12 +18,18 @@
 (use-package
  viper
  :init
+
+ ;; Enable `viper'
+ (setq viper-mode t) ; Enable `viper'
+ (require 'viper)
+
+ ;; Setup defaults
  (setq-default
   viper-auto-indent t ; Enable auto indenting
   )
 
+ ;; Setup configuration
  (setq
-  viper-mode t ; Enable `viper'
   viper-electric-mode t ; Enable electric mode in viper
   viper-inhibit-startup-message 't ; Don't ask to start `viper'
   viper-want-ctl-h-help t ; `C-h' is for help
@@ -32,8 +38,7 @@
   viper-shift-width 4 ; > and < shift amount
   viper-smart-suffix-list '("" "tex" "c" "cc" "el" "p" "py" "rs" "sh")
   viper-expert-level '3 ; Set level of `viper'
-  )
- (require 'viper))
+  ))
 
 ;;==============================================================================
 ;; Advice

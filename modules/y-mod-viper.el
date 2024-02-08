@@ -17,13 +17,13 @@
 
 (use-package
  viper
- (setq-default
-  viper-auto-indent t ; Enable auto indenting
-  )
-
  :init
  ;; Enable `viper'. Note that the `require' needs to be down here
  (viper-mode) ; Enable `viper'
+
+ (setq-default
+  viper-auto-indent t ; Enable auto indenting
+  )
 
  (setq
   viper-mode t ; Enable `viper'

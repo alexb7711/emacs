@@ -77,7 +77,7 @@
   "B"
   #'bookmark-jump
   "b"
-  #'switch-buffer
+  #'switch-to-buffer
   "f"
   #'find-file
   "p"

@@ -58,11 +58,11 @@
   "Maps shortcuts to code actions."
   "R"
   #'rgrep
-  "b"
+  ","
   #'xref-go-back
-  "d"
+  "."
   #'xref-find-definitions
-  "f"
+  "?"
   #'xref-find-references
   "g"
   #'grep

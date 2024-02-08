@@ -127,6 +127,15 @@ Allows ASCII art in code.
 pacman -Syu figlet
 #+end_src
 
+**** Python Black
+This package exists depending on the flavor of Linux being used. For arch the command is
+
+#+begin_center shell
+paru -Syu python-black
+#+end_center
+
+It can also be installed via =pap install black=.
+
 *** Windows
 The =init.el= location on Windows is a =C:/Users/USERNAME/AppData/Roaming/.emacs.d/init.el=. All the Windows specific
 configuration can be found by running =grep -R "windows-nt" modules= from the directory that this file (=READEME.org=)
@@ -216,6 +225,8 @@ Allows ASCII art in your code. The only easy way I can see how to install =figle
 npm install figlet
 #+end_src
 
+**** Python Black
+This can be installed via =pip install black= or if you are using MSYS2 python black exists there as well.
 * Languages
 This section covers any extras specific to a language that may be required.
 
@@ -235,10 +246,11 @@ The following list are the external packages used in this configuration:
 - [[https://github.com/emacsmirror/csv-mode][csv-mode]]: Major mode for editing CSV files.
 - [[https://github.com/jojojames/dired-sidebar][dired-sidebar]]: A sidebar built from =dired=
 - [[https://github.com/doomemacs/themes][doom-themes]]: Adds extra cool themes. Type =M-x customize-themes=. Defaults to =doom-gruvbox=.
+- [[https://codeberg.org/ideasman42/emacs-elisp-autofmt][elisp-autofmt]]: Auto-format Emacs-lisp code.
 - [[https://github.com/joaotavora/eglot][eglot]]: Light-weight LSP client built into Emacs
 - [[https://github.com/emacsmirror/figlet][figlet]]: Runs =figlet= from Emacs, so you can insert big ASCII art words into code.
 - [[https://github.com/flycheck/flycheck][flycheck]]: On-the-fly syntax checking extension for GNU Emacs. Like =flymake=, but more supported languages.
-- [[https://github.com/emacsorphanage/git-gutter][git-gutter]]: Adds =+=, =-=, and === on the side.
+- [[https://github.com/dgutov/diff-hl][diff-hl]]: Displays lines added, removed, and changed in the fringe
 - [[https://github.com/tmalsburg/helm-bibtex][helm-bibtex]]: This is only used for the function that opens PDFs in bibtex files.
 - [[https://github.com/jojojames/ibuffer-sidebar][ibuffer-sidebar]]: Adds a toggle-able sidebar for =ibuffer=
 - [[https://github.com/purcell/ibuffer-vc/blob/master/ibuffer-vc.el][ibuffer-vc]]: Organizes buffers by project
@@ -252,9 +264,10 @@ The following list are the external packages used in this configuration:
 - [[https://github.com/arbox/org-sync][org-sync]]: Syncs online bug trackers with org documents.
 - [[https://github.com/vedang/pdf-tools][pdf-tools]]: An all-around better major mode for viewing PDF files.
 - [[https://github.com/skuro/plantuml-mode][plantuml-mode]]: A major mode to edit/preview PlantUML files.
+- [[https://github.com/wbolster/emacs-python-black][python-black]]: Auto-format python code using =black= (requires =python-black= to be installed).
 - [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]]: Adds colors to parenthesis. A must for LISP.
 - [[https://github.com/rust-lang/rust-mode][rust-mode]]: Major mode for editing Rust code.
-- [[https://tree-sitter.github.io/tree-sitter/][tree-sitter]]: A is a super quick, grammar based parser that is syntax aware an is built in!
+- [[https://tree-sitter.github.io/tree-sitter/][tree-sitter]]: A is a super quick, grammar based parser that is syntax aware and is built in!
 - [[https://github.com/nicolaisingh/saveplace-pdf-view][saveplace-pdf-view]]: Allows locations in PDF files to be retained.
 - [[https://github.com/openscad/emacs-scad-mode][scad-mode]]: Major mode for editing SCAD files.
 - [[https://www.gnu.org/software/auctex/][auctex]]: An improved LaTeX experience.

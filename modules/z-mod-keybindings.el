@@ -218,7 +218,6 @@
 
 ;;------------------------------------------------------------------------------
 ;; `viper'
-(define-key viper-vi-global-user-map (kbd "C-h") 'help)
 (define-key viper-insert-global-user-map (kbd "<backspace>") 'backward-delete-char-untabify)
 (define-key viper-vi-global-user-map (kbd "C-<up>") 'enlarge-window)
 (define-key viper-vi-global-user-map (kbd "C-<down>") 'shrink-window)
@@ -233,6 +232,9 @@
 (setq mod/eshell-viper-map (make-sparse-keymap))
 (define-key mod/eshell-viper-map (kbd "<return>") 'eshell-send-input)
 (viper-modify-major-mode 'eshell-mode 'insert-state mod/eshell-viper-map)
+
+;; Viper VI prefix key
+(keymap-set viper-vi-global-user-map "SPC" mod/space-prefix-keymap)
 
 ;;------------------------------------------------------------------------------
 ;; Window management

@@ -28,7 +28,6 @@
 (require 'desktop nil t)
 (require 'tooltip nil t)
 (require 'recentf nil t)
-(require 'which-key nil t)
 
 ;;==============================================================================
 ;; Cleanup Emacs
@@ -49,10 +48,6 @@
 (setq
  initial-scratch-message nil ; Disable scratch buffer text
  initial-major-mode 'org-mode) ; Enable `Org' mode in scratch buffer
-
-;;==============================================================================
-;; `which-key'
-(use-package which-key :init (setq which-key-allow-imprecise-window-fit nil) :config (which-key-mode 1))
 
 ;;==============================================================================
 ;; `tmod-bar'

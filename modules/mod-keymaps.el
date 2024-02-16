@@ -29,6 +29,16 @@
 
 ;;------------------------------------------------------------------------------
 ;;
+(defvar-keymap mod/alignment-keymap
+  :doc "Maps key shortcuts to alignment actions."
+  "a" 'align
+  "c" 'align-column
+  "l" 'sort-lines
+  "r" 'align-regexp
+  )
+
+;;------------------------------------------------------------------------------
+;;
 (defvar-keymap mod/bookmark-keymap
   :doc
   "Maps key shortcuts to bookmark actions."
@@ -58,11 +68,11 @@
   "Maps shortcuts to code actions."
   "R"
   #'rgrep
-  "b"
+  ","
   #'xref-go-back
-  "d"
+  "."
   #'xref-find-definitions
-  "f"
+  "?"
   #'xref-find-references
   "g"
   #'grep
@@ -124,6 +134,8 @@
   mod/bookmark-keymap
   "SPC"
   #'set-mark-command
+  "="
+  mod/alignment-keymap
   "b"
   mod/buffer-keymap
   "c"
@@ -139,7 +151,8 @@
   "w"
   mod/window-keymap
   "x"
-  #'execute-extended-command)
+  #'execute-extended-command
+  )
 
 ;;==============================================================================
 ;; `which-key'
@@ -149,6 +162,7 @@
  :init (setq which-key-allow-imprecise-window-fit nil)
  :config
  (which-key-add-keymap-based-replacements mod/space-prefix-keymap
+   "=" `("Alignment" . ,mod/alignment-keymap)
    "B" `("Bookmark" . ,mod/bookmark-keymap)
    "b" `("Buffer" . ,mod/buffer-keymap)
    "c" `("Coding" . ,mod/code-keymap)

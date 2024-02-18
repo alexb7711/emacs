@@ -98,10 +98,6 @@
         ("\\*[Hh]elp\\*" (display-buffer-in-side-window) (window-height . 0.3) (side . right) (slot . 1))
         ("\\*Completions\\*" (display-buffer-below-selected) (window-height . 0.2) (side . bottom) (slot . 0))
         ("\\*compilation\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . top) (slot . 0))
-        ("\\*vc-dir\\*\\(:?<.*>\\)?" (display-buffer-use-some-window))
-        ("\\*vc-git\\(:?.*\\)?\\*" (display-buffer-reuse-window) (inhibit-same-window . t))
-        ("\\*vc\\*" (display-buffer-in-side-window) (side . left) (window-height . 1) (slot . 2))
-        ("\\*vc-diff\\*\\(:?<.*>\\)?" (display-buffer-pop-up-window))
         ("\\*Ilist\\*" (display-buffer-in-side-window) (window-width . 0.1) (side . right) (slot . 0))
         ("\\*Flycheck Errors\\*" (display-buffer-below-selected) (window-width . 0.3) (side . right) (slot . 1))))
 

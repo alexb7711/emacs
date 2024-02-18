@@ -128,7 +128,7 @@
  :ensure t
 
  :bind
- (:map org-mode-map ("C-c ]" . org-cite-insert) ("C-c i" . latex-insert-block) ("<f1>" . compile) ("<f2>" . compile))
+ (:map org-mode-map ("C-c ]" . org-cite-insert) ("C-c i" . latex-insert-block) ("<f1>" . compile) ("<f2>" . recompile))
  ("C-c o t" . org-timer-set-timer))
 
 ;;------------------------------------------------------------------------------

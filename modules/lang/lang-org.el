@@ -110,7 +110,10 @@ the bibliography directory to `./citiation-database."
   org-plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
  (org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (latex . t) (octave . t) (plantuml . t)))
 
- :hook (org-mode . org-indent-mode) (org-mode . org/load-configuration))
+ :hook
+ (org-mode . visual-line-mode)
+ (org-mode . org-indent-mode)
+ (org-mode . org/load-configuration))
 
 ;;------------------------------------------------------------------------------
 ;; Visuals

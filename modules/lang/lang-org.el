@@ -24,17 +24,28 @@
 
 ;;------------------------------------------------------------------------------
 ;; Code blocks
-(defun load-org-face-attributes (&optional frame)
+(defun org/load-face-attributes (&optional frame)
   "Set the face attributes."
   (interactive)
-  (set-face-attribute 'org-block nil :foreground 'unspecified :inherit 'fixed-pitch)
-  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+
+  ;; Header
+  (custom-theme-set-faces 'user
+                          `(org-level-1 ((t (:inherit outline-1 :height 1.55))))
+                          `(org-level-2 ((t (:inherit outline-2 :height 1.45))))
+                          `(org-level-3 ((t (:inherit outline-3 :height 1.25))))
+                          `(org-level-4 ((t (:inherit outline-4 :height 1.1))))
+                          `(org-document-title ((t (:height 2.0 :underline t)))))
+
+  ;; Body text configuration
+  (custom-theme-set-faces 'user
+                          '(org-block ((t (:inherit fixed-pitch))))
+                          '(org-table ((t (:inherit fixed-pitch))))
+                          '(org-formula ((t (:inherit fixed-pitch))))
+                          '(org-code ((t (:inherit (shadow fixed-pitch)))))
+                          '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+                          '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+                          '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+                          '(org-checkbox ((t (:inherit fixed-pitch))))))
 
 ;;------------------------------------------------------------------------------
 ;; List `org-agenda' files
@@ -81,8 +92,8 @@ the bibliography directory to `./citiation-database."
 ;;
 (defun org/load-configuration ()
   "Load configuration for `org-mode'"
-  (variable-pitch-mode 1)
-  (auto-fill-mode 1))
+  (visual-line-mode)
+  (variable-pitch-mode 1))
 
 ;;------------------------------------------------------------------------------
 ;; Configuration
@@ -96,6 +107,7 @@ the bibliography directory to `./citiation-database."
   org-cite-global-bibliography
   `(,(concat (getenv "HOME") "/Documents/citation-database/lit-ref.bib")
     ,(concat (getenv "HOME") "/Documents/citation-database/lib-ref.bib"))
+  org-hide-emphasis-markers t
   org-startup-with-inline-images t ; Display images by default
   org-display-remote-inline-images 'download ; Download web images
   org-export-with-smart-quotes t ; Put the correct quotes
@@ -110,10 +122,7 @@ the bibliography directory to `./citiation-database."
   org-plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
  (org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (latex . t) (octave . t) (plantuml . t)))
 
- :hook
- (org-mode . visual-line-mode)
- (org-mode . org-indent-mode)
- (org-mode . org/load-configuration))
+ :hook (org-mode . org-indent-mode) (org-mode . org/load-configuration))
 
 ;;------------------------------------------------------------------------------
 ;; Visuals
@@ -132,7 +141,7 @@ the bibliography directory to `./citiation-database."
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Hooks
-(add-hook 'org-mode-hook 'load-org-face-attributes)
+(add-hook 'org-mode-hook 'org/load-face-attributes)
 
 ;;==============================================================================
 ;; `org-agenda'

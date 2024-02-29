@@ -90,9 +90,9 @@ displayed."
 ;; Hooks
 (use-package diff-hl
   :ensure t
-  :config (global-diff-hl-mode)
-  :hook
-  (dired-mode . diff-hl-dired-mode))
+  :config
+  (global-diff-hl-mode 1)
+  (diff-hl-dir-mode 1))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Highlight current line
@@ -100,8 +100,10 @@ displayed."
 (use-package
  hl-line
  :init (set-face-attribute 'hl-line nil :inherit nil :box nil :underline '(:color "dim gray" :position 0))
-
- :hook (prog-mode . hl-line-mode) (text-mode . hl-line-mode))
+ :hook
+ (prog-mode . hl-line-mode)
+ (package-menu-mode . hl-line-mode)
+ (text-mode . hl-line-mode))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Searching

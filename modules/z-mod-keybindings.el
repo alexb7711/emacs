@@ -200,7 +200,6 @@
 ;;------------------------------------------------------------------------------
 ;; Comments (`mod-text-editing.el')
 (add-hook 'prog-mode-hook 'mod/comment-keybindings)
-(add-hook 'yaml-mode-hook 'mod/comment-keybindings)
 (add-hook 'text-mode-hook 'mod/comment-keybindings)
 
 (defun mod/comment-keybindings ()
@@ -250,7 +249,9 @@
 ;; Misc key bindings
 (global-set-key (kbd "RET") 'newline-and-indent)
 
-;; Unbind this god forsaken key
+;; Unbind these god forsaken key
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-z"))
+(global-unset-key (kbd "C-x C-c"))
 
 ;;; mod-keybindings.el ends here

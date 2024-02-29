@@ -74,28 +74,35 @@
   #'xref-find-definitions
   "?"
   #'xref-find-references
-  "g"
-  #'grep
   "r"
   #'eglot-rename
-  "s" #'find-name-dired)
+  )
+
+;;------------------------------------------------------------------------------
+;;
+(defvar-keymap mod/comment-keymap
+  :doc "Maps shortcuts for commenting text."
+  "b" #'comment-box
+  "c" #'mod/comment-dwim
+  "i" #'comment-indent
+  "l" #'comment-line
+  "r" #'comment-region
+  )
 
 ;;------------------------------------------------------------------------------
 ;;
 (defvar-keymap mod/find-keymap
   :doc
   "Maps shortcuts to find commands."
-  "B"
-  #'bookmark-jump
-  "b"
-  #'switch-to-buffer
-  "f"
-  #'find-file
-  "p"
-  #'project-switch-project
-  "r"
-  #'recentf-open
-  )
+  "B" #'bookmark-jump
+  "R" #'rgrep
+  "b" #'switch-to-buffer
+  "d" #'find-name-dired
+  "f" #'find-file
+  "g" #'grep
+  "p" #'project-switch-project
+  "r" #'recentf-open
+   )
 
 ;;------------------------------------------------------------------------------
 ;;
@@ -133,6 +140,8 @@
   #'split-window-right
   "B"
   mod/bookmark-keymap
+  "C"
+  mod/comment-keymap
   "SPC"
   #'set-mark-command
   "="
@@ -167,6 +176,7 @@
    "B" `("Bookmark" . ,mod/bookmark-keymap)
    "b" `("Buffer" . ,mod/buffer-keymap)
    "c" `("Coding" . ,mod/code-keymap)
+   "C" `("Comment" . ,mod/comment-keymap)
    "f" `("Find" . ,mod/find-keymap)
    "h" `("Help" . ,help-map)
    "p" `("Project" . ,project-prefix-map)

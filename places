@@ -19,7 +19,6 @@
                        (size . fit-page)
                        (origin 0.0 . 0.0)
                        (handler . pdf-view-bookmark-jump-handler)))])
- ("/home/alex/Documents/docs/sa-pap/main.tex" . 71956)
  ("/home/alex/Documents/"
   (dired-filename . "/home/alex/Documents/library"))
  ("/home/alex/Documents/library/emacs-tutorial.epub" . 432021)

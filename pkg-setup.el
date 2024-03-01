@@ -50,7 +50,6 @@
            diff-hl
            dired-sidebar
            doom-themes
-           elisp-autofmt
            figlet
            flycheck
            helm-bibtex

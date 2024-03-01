@@ -66,6 +66,13 @@
 (tab-bar-mode 1)
 
 ;;==============================================================================
+;; Native compilation
+(when (native-comp-available-p)
+  (setq native-comp-async-report-warnings-errors 'silent) ; Emacs 28 with native compilation
+  (setq native-compile-prune-cache t))
+
+
+;;==============================================================================
 ;; Defaults
 
 ;; Auto reload `dired' buffers

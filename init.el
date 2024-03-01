@@ -38,9 +38,13 @@
 ;;==============================================================================
 ;; Load in profile
 
+;; TODO: Remove
 ;; Change in custom file
-(setq custom-file (locate-user-emacs-file "custom-vars.el"))
-(load custom-file 'noerror 'nomessage)
+;; (setq custom-file (locate-user-emacs-file "custom-vars.el"))
+;; (load custom-file 'noerror 'nomessage)
+
+;; Disable the custom file
+(setq custom-file (make-temp-file "custom-vars-"))
 
 ;; Set the user details
 (setq user-full-name "Alexander Brown")

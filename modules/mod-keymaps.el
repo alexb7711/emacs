@@ -42,78 +42,68 @@
 (defvar-keymap mod/bookmark-keymap
   :doc
   "Maps key shortcuts to bookmark actions."
-  "s"
-  #'bookmark-save
-  "S"
-  #'bookmark-set
-  "f"
-  #'bookmark-jump
-  "b"
-  #'bookmark-bmenu-list)
+  "s" #'bookmark-save
+  "S" #'bookmark-set
+  "f" #'bookmark-jump
+  "b" #'bookmark-bmenu-list)
 
 ;;------------------------------------------------------------------------------
 ;;
 (defvar-keymap mod/buffer-keymap
   :doc
   "Maps shortcuts to buffer actions."
-  "b"
-  #'ibuffer
-  "f"
-  #'switch-to-buffer)
+  "b" #'ibuffer
+  "f" #'switch-to-buffer)
 
 ;;------------------------------------------------------------------------------
 ;;
 (defvar-keymap mod/code-keymap
   :doc
   "Maps shortcuts to code actions."
-  "R"
-  #'rgrep
-  ","
-  #'xref-go-back
-  "."
-  #'xref-find-definitions
-  "?"
-  #'xref-find-references
-  "g"
-  #'grep
-  "r"
-  #'eglot-rename
-  "s" #'find-name-dired)
+  "R" #'rgrep
+  "," #'xref-go-back
+  "." #'xref-find-definitions
+  "?" #'xref-find-references
+  "r" #'eglot-rename
+  )
+
+;;------------------------------------------------------------------------------
+;;
+(defvar-keymap mod/comment-keymap
+  :doc "Maps shortcuts for commenting text."
+  "b" #'comment-box
+  "c" #'mod/comment-dwim
+  "i" #'comment-indent
+  "l" #'comment-line
+  "r" #'comment-region
+  )
 
 ;;------------------------------------------------------------------------------
 ;;
 (defvar-keymap mod/find-keymap
   :doc
   "Maps shortcuts to find commands."
-  "B"
-  #'bookmark-jump
-  "b"
-  #'switch-to-buffer
-  "f"
-  #'find-file
-  "p"
-  #'project-switch-project
-  "r"
-  #'recentf-open
-  )
+  "B" #'bookmark-jump
+  "R" #'rgrep
+  "b" #'switch-to-buffer
+  "d" #'find-name-dired
+  "f" #'find-file
+  "g" #'grep
+  "p" #'project-switch-project
+  "r" #'recentf-open
+   )
 
 ;;------------------------------------------------------------------------------
 ;;
 (defvar-keymap mod/window-keymap
   :doc
   "Maps shortcuts to window commands."
-  "h"
-  #'windmove-right
-  "l"
-  #'windmove-left
-  "j"
-  #'windmove-down
-  "k"
-  #'windmove-up
-  "H"
-  #'tab-bar-history-back
-  "L"
-  #'tab-bar-history-forward)
+  "h" #'windmove-right
+  "l" #'windmove-left
+  "j" #'windmove-down
+  "k" #'windmove-up
+  "H" #'tab-bar-history-back
+  "L" #'tab-bar-history-forward)
 
 ;;==============================================================================
 ;; Prefix Maps
@@ -123,36 +113,22 @@
 (defvar-keymap mod/space-prefix-keymap
   :doc
   "Prefix keymap that is meant to be started with a `SPC'."
-  "0"
-  #'delete-window
-  "1"
-  #'delete-other-windows
-  "2"
-  #'split-window-below
-  "3"
-  #'split-window-right
-  "B"
-  mod/bookmark-keymap
-  "SPC"
-  #'set-mark-command
-  "="
-  mod/alignment-keymap
-  "b"
-  mod/buffer-keymap
-  "c"
-  mod/code-keymap
-  "f"
-  mod/find-keymap
-  "h"
-  help-map
-  "p"
-  project-prefix-map
-  "v"
-  vc-prefix-map
-  "w"
-  mod/window-keymap
-  "x"
-  #'execute-extended-command
+  "0" #'delete-window
+  "1" #'delete-other-windows
+  "2" #'split-window-below
+  "3" #'split-window-right
+  "B" mod/bookmark-keymap
+  "C" mod/comment-keymap
+  "SPC" #'set-mark-command
+  "=" mod/alignment-keymap
+  "b" mod/buffer-keymap
+  "c" mod/code-keymap
+  "f" mod/find-keymap
+  "h" help-map
+  "p" project-prefix-map
+  "v" vc-prefix-map
+  "w" mod/window-keymap
+  "x" #'execute-extended-command
   )
 
 ;;==============================================================================
@@ -167,6 +143,7 @@
    "B" `("Bookmark" . ,mod/bookmark-keymap)
    "b" `("Buffer" . ,mod/buffer-keymap)
    "c" `("Coding" . ,mod/code-keymap)
+   "C" `("Comment" . ,mod/comment-keymap)
    "f" `("Find" . ,mod/find-keymap)
    "h" `("Help" . ,help-map)
    "p" `("Project" . ,project-prefix-map)

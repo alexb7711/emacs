@@ -132,9 +132,9 @@ want to use in the modeline *in lieu of* the original.")
         (set-face-attribute 'fixed-pitch nil :font "Mononoki Nerd Font" :height 130)
         (set-face-attribute 'default nil :font "Mononoki Nerd Font" :height 130))
       (when (mod/font-available-p "Iosevka Nerd Font")
-        (set-face-attribute 'variable-pitch nil :font "Iosevka Nerd Font" :weight 'normal :height 135))
+        (set-face-attribute 'variable-pitch nil :font "Iosevka Nerd Font" :weight 'normal :height 130))
       (when (mod/font-available-p "Iosevka NF")
-        (set-face-attribute 'variable-pitch nil :font "Iosevka NF" :weight 'normal :height 135))))
+        (set-face-attribute 'variable-pitch nil :font "Iosevka NF" :weight 'normal :height 130))))
 
   ;; Font formatting
   (set-face-attribute 'font-lock-comment-face nil :slant 'italic)

@@ -61,20 +61,22 @@
     olivetti-minimum-body-width 120
     olivetti-recall-visual-line-mode-entry-state t))
 
- :hook
- (text-mode . olivetti-mode)
- (prog-mode . olivetti-mode)
- (comint-mode . olivetti-mode)
- (gnus-article-mode . olivetti-mode)
- (gnus-summary-mode . olivetti-mode)
- (gnus-topic-mode . olivetti-mode)
- (vc-dir-mode . olivetti-mode)
-
  :init
  ;;-----------------------------------------------------------------------------
  ;; Advice
  (advice-add 'olivetti-reset-window :after #'(lambda (orig-func &rest var) (set-window-margins nil 1)))
 )
+
+ ;;-----------------------------------------------------------------------------
+ ;; Hooks (because use-package is breaking `olivetti' for some reason)
+ (add-hook 'text-mode-hook #'olivetti-mode)
+ (add-hook 'prog-mode-hook #'olivetti-mode)
+ (add-hook 'comint-mode-hook #'olivetti-mode)
+ (add-hook 'gnus-article-mode-hook #'olivetti-mode)
+ (add-hook 'gnus-summary-mode-hook #'olivetti-mode)
+ (add-hook 'gnus-topic-mode-hook #'olivetti-mode)
+ (add-hook 'vc-dir-mode-hook #'olivetti-mode)
+
 
 ;;==============================================================================
 ;; Dedicated Windows

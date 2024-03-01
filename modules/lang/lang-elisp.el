@@ -36,25 +36,6 @@
    comment-fill-column 80
    display-fill-column-indicator-column 80))
 
-;;------------------------------------------------------------------------------
-;;
-(defun elisp/autofmt-on-save ()
-  "Auto format `elisp' files before saving buffer."
-  (when (eq major-mode 'emacs-lisp-mode)
-    (elisp-autofmt-buffer)))
-
-;;==============================================================================
-;; Configuration
-
-;; `elisp-autofmt'
-(use-package
- elisp-autofmt
- :defer t
- :after (elisp-mode)
- :config
- (if (not (eq system-type 'windows-nt))
-     (add-hook 'before-save-hook #'elisp/autofmt-on-save)))
-
 ;;==============================================================================
 ;; Hooks
 

@@ -22,6 +22,11 @@
 ;; `package-name' (`file-name-1.el', `file-name-2.el',...)
 
 ;;------------------------------------------------------------------------------
+;; Rebind leader key
+(global-unset-key (kbd "C-SPC"))
+(keymap-set global-map "C-SPC" mod/space-prefix-keymap)
+
+;;------------------------------------------------------------------------------
 ;; `bibtex' (`mod-org.el')
 (define-key bibtex-mode-map (kbd "C-<return>") 'bib/open-bibtex-pdf)
 (define-key bibtex-mode-map (kbd "C-c F") 'bib/format-bib-file)
@@ -200,7 +205,6 @@
 ;;------------------------------------------------------------------------------
 ;; Comments (`mod-text-editing.el')
 (add-hook 'prog-mode-hook 'mod/comment-keybindings)
-(add-hook 'yaml-mode-hook 'mod/comment-keybindings)
 (add-hook 'text-mode-hook 'mod/comment-keybindings)
 
 (defun mod/comment-keybindings ()
@@ -250,7 +254,9 @@
 ;; Misc key bindings
 (global-set-key (kbd "RET") 'newline-and-indent)
 
-;; Unbind this god forsaken key
+;; Unbind these god forsaken key
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-z"))
+(global-unset-key (kbd "C-x C-c"))
 
 ;;; mod-keybindings.el ends here

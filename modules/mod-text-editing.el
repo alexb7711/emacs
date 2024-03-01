@@ -246,21 +246,6 @@ If somewhere inside the line, toggle the comment status of the entire line."
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Filling
 
-;; Functions
-
-(defun mod/run-fill-paragraph ()
-  "Run the `fill-paragraph' function automatically in certain modes."
-  (interactive)
-  (when (eq major-mode 'org-mode)
-    (fill-paragraph)))
-
-;; Configuration
-
-;; Hooks
-
-;; Fill paragraphs before saving
-(add-hook 'before-save-hook #'mod/run-fill-paragraph)
-
 ;; Auto fill in comments
 (add-hook
  'prog-mode-hook

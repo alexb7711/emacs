@@ -22,6 +22,11 @@
 ;; `package-name' (`file-name-1.el', `file-name-2.el',...)
 
 ;;------------------------------------------------------------------------------
+;; Rebind leader key
+(global-unset-key (kbd "C-SPC"))
+(keymap-set global-map "C-SPC" mod/space-prefix-keymap)
+
+;;------------------------------------------------------------------------------
 ;; `bibtex' (`mod-org.el')
 (define-key bibtex-mode-map (kbd "C-<return>") 'bib/open-bibtex-pdf)
 (define-key bibtex-mode-map (kbd "C-c F") 'bib/format-bib-file)

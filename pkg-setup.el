@@ -47,6 +47,7 @@
            auctex
            auto-package-update
            csv-mode
+           denote
            diff-hl
            dired-sidebar
            doom-themes

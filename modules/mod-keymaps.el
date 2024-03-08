@@ -58,6 +58,15 @@
 
 ;;------------------------------------------------------------------------------
 ;;
+(defvar-keymap mod/dired-keymap
+  :doc
+  "Maps shortcuts to dired actions."
+  :parent dired-mode-map
+  "r" #'denote-dired-rename-files
+  )
+
+;;------------------------------------------------------------------------------
+;;
 (defvar-keymap mod/code-keymap
   :doc
   "Maps shortcuts to code actions."
@@ -106,6 +115,17 @@
   "H" #'tab-bar-history-back
   "L" #'tab-bar-history-forward)
 
+;;------------------------------------------------------------------------------
+;;
+(defvar-keymap mod/note-keymap
+  :doc
+  "Maps shortcuts to note taking actions."
+  "f" #'denote-open-or-create
+  "n" #'denote
+  "l" #'denote-link
+  "r" #'denote-rename-file-and-buffer
+  )
+
 ;;==============================================================================
 ;; Prefix Maps
 
@@ -118,15 +138,41 @@
   "1" #'delete-other-windows
   "2" #'split-window-below
   "3" #'split-window-right
+  "=" mod/alignment-keymap
   "B" mod/bookmark-keymap
   "C" mod/comment-keymap
+  "H" help-map
   "SPC" #'set-mark-command
-  "=" mod/alignment-keymap
   "b" mod/buffer-keymap
   "c" mod/code-keymap
   "f" mod/find-keymap
-  "h" help-map
+  "n" mod/note-keymap
   "p" project-prefix-map
+  "t" tab-bar-map
+  "v" vc-prefix-map
+  "w" mod/window-keymap
+  "x" #'execute-extended-command
+  )
+
+;;------------------------------------------------------------------------------
+;;
+(defvar-keymap mod/dired-space-prefix-keymap
+  :doc
+  "Prefix keymap that is meant to be started with a `SPC'."
+  "0" #'delete-window
+  "1" #'delete-other-windows
+  "2" #'split-window-below
+  "3" #'split-window-right
+  "=" mod/alignment-keymap
+  "B" mod/bookmark-keymap
+  "H" help-map
+  "SPC" #'set-mark-command
+  "b" mod/buffer-keymap
+  "d" mod/dired-keymap
+  "f" mod/find-keymap
+  "n" mod/note-keymap
+  "p" project-prefix-map
+  "t" tab-bar-map
   "v" vc-prefix-map
   "w" mod/window-keymap
   "x" #'execute-extended-command
@@ -142,14 +188,29 @@
  (which-key-add-keymap-based-replacements mod/space-prefix-keymap
    "=" `("Alignment" . ,mod/alignment-keymap)
    "B" `("Bookmark" . ,mod/bookmark-keymap)
+   "C" `("Comment" . ,mod/comment-keymap)
+   "H" `("Help" . ,help-map)
    "b" `("Buffer" . ,mod/buffer-keymap)
    "c" `("Coding" . ,mod/code-keymap)
-   "C" `("Comment" . ,mod/comment-keymap)
    "f" `("Find" . ,mod/find-keymap)
-   "h" `("Help" . ,help-map)
+   "n" `("Notes" . ,mod/note-keymap)
    "p" `("Project" . ,project-prefix-map)
+   "t" `("Tabs" . ,tab-bar-map)
+   "v" `("VC" . ,vc-prefix-map)
+   "w" `("Window" . ,mod/window-keymap)
+ (which-key-add-keymap-based-replacements mod/dired-space-prefix-keymap
+   "=" `("Alignment" . ,mod/alignment-keymap)
+   "B" `("Bookmark" . ,mod/bookmark-keymap)
+   "H" `("Help" . ,help-map)
+   "b" `("Buffer" . ,mod/buffer-keymap)
+   "d" `("Buffer" . ,mod/dired-keymap)
+   "f" `("Find" . ,mod/find-keymap)
+   "n" `("Notes" . ,mod/note-keymap)
+   "p" `("Project" . ,project-prefix-map)
+   "t" `("Tabs" . ,tab-bar-map)
    "v" `("VC" . ,vc-prefix-map)
    "w" `("Window" . ,mod/window-keymap))
+   )
  (which-key-mode 1))
 
 

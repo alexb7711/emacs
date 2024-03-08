@@ -29,6 +29,7 @@ follow for the modules. All the language configuration is found in the =lang= di
 - =mod-buffer-completion.el=: Configuration for completion in buffers.
 - =mod-compile.el=: Configuration for how the compile command behaves.
 - =mod-debugging.el=: Configuration for debugging. Needs major work still.
+- =mod-denote.el=: Configuration for the note management system
 - =mod-dired.el=: Configuration for the directory editor.
 - =mod-doc-view.el=: Configuration for document viewing (mainly PDF, may change the name)
 - =mod-epub.el=: Configures the EPUB reader, may consolidate with =mod-doc-view.el=.

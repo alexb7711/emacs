@@ -46,7 +46,8 @@
  dired-sidebar
  :ensure t
  :defer t
-
+ :config
+ (keymap-set dired-mode-map "SPC" mod/dired-space-prefix-keymap)
  :bind ("C-c b" . mod/sidebar-toggle))
 
 ;;------------------------------------------------------------------------------

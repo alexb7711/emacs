@@ -1,12 +1,12 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/alex/code/research/sa-pap/src/main.rs" . 297)
+(("/home/alex/"
+  (dired-filename . "/home/alex/mpv-shot0001.jpg"))
+ ("/home/alex/code/research/sa-pap/src/main.rs" . 297)
  ("/home/alex/Documents/agenda/self.org" . 1227)
  ("/home/alex/Documents/agenda/routine.org" . 1585)
  ("/home/alex/Documents/agenda/exercise.org" . 731)
  ("/home/alex/Documents/agenda/agenda.org" . 622)
  ("/home/alex/code/emacs/pkg-setup.el" . 282)
- ("/home/alex/"
-  (dired-filename . "/home/alex/.aspell.en.prepl"))
  ("/home/alex/Documents/library/"
   (dired-filename . "/home/alex/Documents/library/gendreau-2018-handb-metah.pdf"))
  ("/home/alex/Documents/library/gendreau-2018-handb-metah.pdf" .

@@ -126,6 +126,22 @@
   "r" #'denote-rename-file-and-buffer
   )
 
+;;------------------------------------------------------------------------------
+;;
+(defvar-keymap mod/tab-bar-keymap
+  :doc
+  "Maps shortcuts to note taking actions."
+  "0" #'tab-close
+  "1" #'tab-close-other
+  "2" #'tab-new
+  "D" #'dired-other-tab
+  "F" #'find-file-other-tab
+  "RET" #'tab-switch
+  "d" #'tab-duplicate
+  "m" #'tab-move
+  "r" #'tab-rename
+  "u" #'tab-undo)
+
 ;;==============================================================================
 ;; Prefix Maps
 
@@ -148,7 +164,7 @@
   "f" mod/find-keymap
   "n" mod/note-keymap
   "p" project-prefix-map
-  "t" tab-bar-map
+  "t" mod/tab-bar-keymap
   "v" vc-prefix-map
   "w" mod/window-keymap
   "x" #'execute-extended-command
@@ -172,7 +188,7 @@
   "f" mod/find-keymap
   "n" mod/note-keymap
   "p" project-prefix-map
-  "t" tab-bar-map
+  "t" mod/tab-bar-keymap
   "v" vc-prefix-map
   "w" mod/window-keymap
   "x" #'execute-extended-command
@@ -195,7 +211,7 @@
    "f" `("Find" . ,mod/find-keymap)
    "n" `("Notes" . ,mod/note-keymap)
    "p" `("Project" . ,project-prefix-map)
-   "t" `("Tabs" . ,tab-bar-map)
+   "t" `("Tabs" . ,mod/tab-bar-keymap)
    "v" `("VC" . ,vc-prefix-map)
    "w" `("Window" . ,mod/window-keymap)
  (which-key-add-keymap-based-replacements mod/dired-space-prefix-keymap
@@ -203,11 +219,11 @@
    "B" `("Bookmark" . ,mod/bookmark-keymap)
    "H" `("Help" . ,help-map)
    "b" `("Buffer" . ,mod/buffer-keymap)
-   "d" `("Buffer" . ,mod/dired-keymap)
+   "d" `("Buffer" . ,mod/buffer-keymap)
    "f" `("Find" . ,mod/find-keymap)
    "n" `("Notes" . ,mod/note-keymap)
    "p" `("Project" . ,project-prefix-map)
-   "t" `("Tabs" . ,tab-bar-map)
+   "t" `("Tabs" . ,mod/tab-bar-keymap)
    "v" `("VC" . ,vc-prefix-map)
    "w" `("Window" . ,mod/window-keymap))
    )

@@ -252,7 +252,7 @@
 
 ;;------------------------------------------------------------------------------
 ;; Misc key bindings
-(global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "C-<return>") 'set-mark-command)
 
 ;; Unbind these god forsaken key
 (global-unset-key (kbd "C-z"))

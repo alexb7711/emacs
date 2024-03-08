@@ -53,7 +53,8 @@
   :doc
   "Maps shortcuts to buffer actions."
   "b" #'ibuffer
-  "f" #'switch-to-buffer)
+  "f" #'switch-to-buffer
+  "k" #'kill-buffer)
 
 ;;------------------------------------------------------------------------------
 ;;

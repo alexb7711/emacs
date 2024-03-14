@@ -1,26 +1,67 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/alex/"
-  (dired-filename . "/home/alex/mpv-shot0001.jpg"))
- ("/home/alex/code/research/sa-pap/src/main.rs" . 297)
- ("/home/alex/Documents/agenda/self.org" . 1227)
- ("/home/alex/Documents/agenda/routine.org" . 1585)
- ("/home/alex/Documents/agenda/exercise.org" . 731)
- ("/home/alex/Documents/agenda/agenda.org" . 622)
- ("/home/alex/code/emacs/pkg-setup.el" . 282)
- ("/home/alex/Documents/library/"
-  (dired-filename . "/home/alex/Documents/library/gendreau-2018-handb-metah.pdf"))
- ("/home/alex/Documents/library/gendreau-2018-handb-metah.pdf" .
-  [((pdf-view-bookmark "gendreau-2018-handb-metah.pdf"
-                       (filename . "~/Documents/library/gendreau-2018-handb-metah.pdf")
+(("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/sa-pseudo.org" . 1277)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/schedule-sa-heuristic.tex" . 1066)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/schedule-milp.tex" . 1023)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/schedule-quinn.tex" . 1048)
+ ("c:/Users/1556048963C/AppData/Roaming/Documents/citation-database/lit-ref.bib" . 39611)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/optimization-problem.org" . 7774)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/purge.org" . 416)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/new-charger.org" . 918)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/wait.org" . 515)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/charge-schedule-generation.org"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/schedule-sa-quick.tex" . 336)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/tweak-schedule.org" . 665)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/new-visit.org" . 167)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/introduction.org" . 5479)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/main.org" . 706)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/optimization-algorithm.org" . 4473)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/example.org"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/preamble.org" . 7416)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/schedule-sa-heuristic.tex"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/conclusion.org" . 3793)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/charge-schedule-generation.org" . 627)
+ ("c:/Users/1556048963C/AppData/Roaming/.config/emacs/modules/lang/lang-rust.el" . 1690)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/data"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/example.org" . 3066)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/tab/variables.org" . 2899)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/eq/slide-visit.org" . 502)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/library/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/library/home-buying-kit-for-dummies.epub"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/main.tex"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/data/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/data/heuristic"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/library/home-buying-kit-for-dummies.epub" . 29065)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/data/quick/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/data/quick/20-08-58"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/simulated-annealing.org" . 16020)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/data/quick/20-08-58/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/data/quick/20-08-58/sa-quick-schedule.csv"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/main.pdf" .
+  [((pdf-view-bookmark "main.pdf"
+                       (filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/main.pdf")
                        (position . 1)
-                       (last-modified 25995 30864 91444 731000)
-                       (page . 5)
+                       (last-modified 26097 42925 468044 0)
+                       (page . 31)
                        (slice)
                        (size . fit-page)
-                       (origin 0.0 . 0.0)
+                       (origin)
                        (handler . pdf-view-bookmark-jump-handler)))])
- ("/home/alex/Documents/"
-  (dired-filename . "/home/alex/Documents/library"))
- ("/home/alex/Documents/library/emacs-tutorial.epub" . 432021)
- ("/home/alex/Documents/literature/"
-  (dired-filename . "/home/alex/Documents/literature/.git")))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/data/" . 284)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/src/lp/objectives/std_obj.rs" . 8633)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/src/config/general.yaml" . 400)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/src/sa/route/route_csv_generator.rs" . 5967)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/src/config/schedule.yaml" . 1089)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/sa-pap-paper/sections/img/data/heuristic/" . 689)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/src/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/src/config"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/src/config/"
+  (dired-filename . "c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/src/config/general.yaml"))
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/milp-pap/src/util/data_output.py" . 5784)
+ ("c:/Users/1556048963C/AppData/Roaming/.config/emacs/places" . 44)
+ ("c:/Users/1556048963C/AppData/Roaming/.config/emacs/modules/z-mod-keybindings.el" . 8880)
+ ("c:/Users/1556048963C/OneDrive - United States Air Force/Documents/code/sa-pap/src/lp/constraints/dynamic/charge_propagation.rs" . 1822))

@@ -40,8 +40,8 @@
      'after-make-frame-functions
      (lambda (frame)
        (with-selected-frame frame
-         (load-theme 'wheatgrass t))))
-  (load-theme 'wheatgrass t))
+         (load-theme 'doom-material t))))
+  (load-theme 'doom-material t))
 
 ;;------------------------------------------------------------------------------
 ;; Modeline

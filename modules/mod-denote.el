@@ -25,13 +25,14 @@
 ;;; Code:
 
 ;; Variables
-(defvar mod/note-directory "~/Documents/agenda")
+(defvar mod/note-directory (expand-file-name "~/Documents/blog/content"))
 
 (use-package denote
   :init
   ;; General configuration
   (setq
-   denote-directory mod/note-directory)
+   denote-directory mod/note-directory
+   denote-prompts '(subdirectory title keywords))
 
   ;; Include `denote' as an option when using `org-capture'
   (with-eval-after-load 'org-capture
@@ -42,7 +43,10 @@
                    :no-save t
                    :immediate-finish nil
                    :kill-buffer t
-                   :jump-to-captured t))))
+                   :jump-to-captured t)))
+
+  :config
+  (denote-rename-buffer-mode 1))
 
 (provide 'mod-denote)
 ;;; mod-denote.el ends here

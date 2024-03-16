@@ -219,7 +219,7 @@
    "B" `("Bookmark" . ,mod/bookmark-keymap)
    "H" `("Help" . ,help-map)
    "b" `("Buffer" . ,mod/buffer-keymap)
-   "d" `("Buffer" . ,mod/buffer-keymap)
+   "d" `("Dired" . ,mod/dired-keymap)
    "f" `("Find" . ,mod/find-keymap)
    "n" `("Notes" . ,mod/note-keymap)
    "p" `("Project" . ,project-prefix-map)

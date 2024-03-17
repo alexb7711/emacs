@@ -35,10 +35,6 @@
 (setq
  dired-dwim-target t) ; Suggest other visible dired buffer
 
-;; Disable opening Dired buffers in other windows. This has the added benefit of
-;; killing the current `dired' buffer
-(put 'dired-find-alternate-file 'disabled nil)
-
 ;; Make going to the previous directory also kill the current buffer.
 (add-hook
  'dired-mode-hook

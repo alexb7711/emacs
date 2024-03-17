@@ -25,14 +25,14 @@
 ;;; Code:
 
 ;; Variables
-(defvar mod/note-directory (expand-file-name "~/Documents/blog/content"))
+(defvar mod/note-directory (expand-file-name "~/Documents/notes"))
 
 (use-package denote
   :init
   ;; General configuration
   (setq
    denote-directory mod/note-directory
-   denote-prompts '(subdirectory title keywords))
+   denote-prompts '(title keywords))
 
   ;; Include `denote' as an option when using `org-capture'
   (with-eval-after-load 'org-capture

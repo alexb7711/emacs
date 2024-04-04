@@ -78,7 +78,8 @@ the bibliography directory to `./citiation-database."
   (interactive)
   (when (vc-root-dir)
     (setq org-cite-global-bibliography
-          `(,(concat (expand-file-name (vc-root-dir)) "citation-database/lit-ref.bib")
+          `(,(concat (expand-file-name (vc-root-dir)) "citation-database/misc.bib")
+            ,(concat (expand-file-name (vc-root-dir)) "citation-database/lit-ref.bib")
             ,(concat (expand-file-name (vc-root-dir)) "citation-database/lib-ref.bib")))))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

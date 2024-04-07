@@ -94,9 +94,10 @@
   :doc
   "Maps shortcuts to find commands."
   "B" #'bookmark-jump
+  "D" #'find-name-dired
   "R" #'rgrep
   "b" #'switch-to-buffer
-  "d" #'find-name-dired
+  "d" #'dired
   "f" #'find-file
   "g" #'grep
   "p" #'project-switch-project

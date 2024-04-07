@@ -46,6 +46,7 @@
            all-the-icons-gnus
            auctex
            auto-package-update
+           cmake-mode
            csv-mode
            denote
            diff-hl

@@ -109,11 +109,8 @@
 
 ;;------------------------------------------------------------------------------
 ;; `icomplete' (`mod-minibuffer-completions.el')
-(define-key icomplete-minibuffer-map (kbd "<backtab>") 'icomplete-force-complete) ; Complete the next item in the
-; selection list
-(define-key
- icomplete-minibuffer-map (kbd "C-<return>") ; Force the next complete and exit
- 'icomplete-force-complete-and-exit)
+(define-key icomplete-minibuffer-map (kbd "<backtab>") 'icomplete-force-complete)
+(define-key icomplete-minibuffer-map (kbd "C-<return>") 'icomplete-force-complete-and-exit)
 
 ;;------------------------------------------------------------------------------
 ;; `imenu' (`mod-imenu.el')

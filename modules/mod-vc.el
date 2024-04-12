@@ -44,7 +44,11 @@
   (setq dir (concat dir (file-name-base url)))
 
   ;; Clone the repository
-  (shell-command (format "git clone --recurse-submodules -j8 %s %s" url dir)))
+  (message (shell-quote-argument (format "git clone --recurse-submodules -j4 %s %s" url dir)))
+  (shell-command
+   (format "git clone --recurse-submodules %s %s"
+           (shell-quote-argument url)
+           (shell-quote-argument dir))))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;

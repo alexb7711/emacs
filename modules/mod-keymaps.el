@@ -143,6 +143,14 @@
   "r" #'tab-rename
   "u" #'tab-undo)
 
+;;------------------------------------------------------------------------------
+;;
+(defvar-keymap mod/version-control-keymap
+  :doc
+  "Maps shortcuts to version control actions."
+  :parent vc-prefix-map
+  "c" #'mod/clone)
+
 ;;==============================================================================
 ;; Prefix Maps
 
@@ -166,7 +174,7 @@
   "n" mod/note-keymap
   "p" project-prefix-map
   "t" mod/tab-bar-keymap
-  "v" vc-prefix-map
+  "v" mod/version-control-keymap
   "w" mod/window-keymap
   "x" #'execute-extended-command
   )
@@ -190,7 +198,7 @@
   "n" mod/note-keymap
   "p" project-prefix-map
   "t" mod/tab-bar-keymap
-  "v" vc-prefix-map
+  "v" mod/version-control-keymap
   "w" mod/window-keymap
   "x" #'execute-extended-command
   )
@@ -213,7 +221,7 @@
    "n" `("Notes" . ,mod/note-keymap)
    "p" `("Project" . ,project-prefix-map)
    "t" `("Tabs" . ,mod/tab-bar-keymap)
-   "v" `("VC" . ,vc-prefix-map)
+   "v" `("VC" . ,mod/version-control-keymap)
    "w" `("Window" . ,mod/window-keymap)
  (which-key-add-keymap-based-replacements mod/dired-space-prefix-keymap
    "=" `("Alignment" . ,mod/alignment-keymap)
@@ -225,7 +233,7 @@
    "n" `("Notes" . ,mod/note-keymap)
    "p" `("Project" . ,project-prefix-map)
    "t" `("Tabs" . ,mod/tab-bar-keymap)
-   "v" `("VC" . ,vc-prefix-map)
+   "v" `("VC" . ,mod/version-control-keymap)
    "w" `("Window" . ,mod/window-keymap))
    )
  (which-key-mode 1))

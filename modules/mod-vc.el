@@ -85,8 +85,10 @@
 ;;------------------------------------------------------------------------------
 ;; Configuration
 
-(if (eq system-type 'windows-nt)
-    (setq vc-git-program "C:/Users/1556048963C/AppData/Local/Programs/Git/bin/git.exe")
+
+(setq mod/work-git-path "C:/Users/1556048963C/AppData/Local/Programs/Git/bin/git.exe")
+(if (and (eq system-type 'windows-nt) (file-directory-p mod/work-git-path))
+    (setq vc-git-program mod/work-git-path)
   (setq vc-git-program "git"))
 
 ;;===========================================================================

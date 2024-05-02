@@ -56,8 +56,24 @@
   "Update and clean out up-to-date files."
   (interactive)
   (revert-buffer) ; Update the buffer
-  (sleep-for 1) ; Sleep for 1 second
   (vc-dir-hide-up-to-date)) ; Remove up-to-date items
+
+;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;
+(defun mod/output-to-current-buffer (orig-fun &rest args)
+  "Thus function outputs the vc text to the current buffer as temporary text.
+The function will then ensure that the `*vc-git*' buffer stays hidden."
+
+  (let
+      ((vc-git-buffer (concat "*vc-git : " (expand-file-name (vc-root-dir)) "*")))
+    (with-current-buffer vc-git-buffer
+      (message (buffer-string))
+      )
+    ))
+
+(advice-add 'vc-revert :after 'mod/output-to-current-buffer)
+(advice-add 'vc-update :after 'mod/output-to-current-buffer)
+(advice-add 'vc-push :after 'mod/output-to-current-buffer)
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; URL:
@@ -76,7 +92,7 @@
     ;; If the URL being cloned is a `https::' url
     (if (string-match-p "^https:" url)
         (browse-url (format "%s/compare/%s?expand=1" (replace-regexp-in-string "\\.git$" "" url) branch))
-      ;; Otherwise the url is a `ssh' link
+     ;; Otherwise the url is a `ssh' link
       (browse-url
        (format "https://github.com/%s/compare/%s?expand=1"
                (replace-regexp-in-string "\\`.+github\\.com:\\(.+\\)\\.git\\'" "\\1" url)
@@ -84,7 +100,6 @@
 
 ;;------------------------------------------------------------------------------
 ;; Configuration
-
 
 (setq mod/work-git-path "C:/Users/1556048963C/AppData/Local/Programs/Git/bin/git.exe")
 (if (and (eq system-type 'windows-nt) (file-directory-p mod/work-git-path))

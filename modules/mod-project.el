@@ -32,7 +32,7 @@
 ;;==============================================================================
 ;; Hooks
 
-(add-hook 'window-state-change-hook #'mod/set-pwd-vc-root)
+;; (add-hook 'window-state-change-hook #'mod/set-pwd-vc-root)
 (add-hook 'ibuffer-hook #'mod/vc-ibuffer-filter)
 (add-hook 'ibuffer-sidebar-mode-hook #'mod/vc-ibuffer-filter)
 

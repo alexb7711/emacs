@@ -89,7 +89,7 @@
 ;;==============================================================================
 ;; Misc. window placements
 (setq display-buffer-alist
-      '(("\\*e?shell\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . bottom) (slot . 0))
+      '(("\\**-?e?shell\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . bottom) (slot . 0))
         ("\\*\\(Backtrace\\|Warnings|\\|Compile-Log|\\Messages\\)\\*"
          (display-buffer-in-side-window)
          (window-height . 0.25)

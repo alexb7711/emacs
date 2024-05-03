@@ -132,7 +132,7 @@
  :ensure t
 
  :bind
- (:map org-mode-map ("C-c ]" . org-cite-insert) ("C-c i" . latex-insert-block) ("<f1>" . compile) ("<f2>" . recompile))
+ (:map org-mode-map ("C-c ]" . org-cite-insert) ("C-c i" . latex-insert-block) ("<f1>" . mod/compile-from-root-dir) ("<f2>" . mod/recompile-from-root-dir))
  ("C-c o t" . org-timer-set-timer))
 
 ;;------------------------------------------------------------------------------
@@ -193,8 +193,8 @@
 (define-key text-mode-map (kbd "<f2>") 'recompile)
 
 (with-eval-after-load 'tex
-  (define-key TeX-mode-map (kbd "<f1>") 'compile)
-  (define-key TeX-mode-map (kbd "<f2>") 'recompile))
+  (define-key TeX-mode-map (kbd "<f1>") 'mod/compile-from-root-dir)
+  (define-key TeX-mode-map (kbd "<f2>") 'mod/recompile-from-root-dir))
 
 ;;------------------------------------------------------------------------------
 ;; Movement

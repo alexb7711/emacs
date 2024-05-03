@@ -63,6 +63,26 @@
   "Run compile command on currently opened buffer."
   (call-process-shell-command (concat "compile " (buffer-file-name)) nil 0))
 
+;;------------------------------------------------------------------------------
+;;
+(defun mod/compile-from-root-dir ()
+  (interactive)
+  (let ((default-directory
+         (if (vc-root-dir)
+             (vc-root-dir)
+           default-directory)))
+    (call-interactively #'compile)))
+
+;;------------------------------------------------------------------------------
+;;
+(defun mod/recompile-from-root-dir ()
+  (interactive)
+  (let ((default-directory
+         (if (vc-root-dir)
+             (vc-root-dir)
+           default-directory)))
+    (call-interactively #'recompile)))
+
 ;;==============================================================================
 ;; Hooks
 (add-hook 'compilation-start-hook 'mod/hide-compilation-buffer)

@@ -71,9 +71,21 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
       )
     ))
 
-(advice-add 'vc-revert :after 'mod/output-to-current-buffer)
-(advice-add 'vc-pull :after 'mod/output-to-current-buffer)
-(advice-add 'vc-push :after 'mod/output-to-current-buffer)
+;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;
+(defun mod/push (orig-fun &rest args)
+  "Output push message to echo area."
+  (message "Pushing..."))
+
+(advice-add 'vc-push :after 'mod/push)
+
+;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;
+(defun mod/pull (orig-fun &rest args)
+  "Output pull message to echo area."
+  (message "Pulling..."))
+
+(advice-add 'vc-pull :after 'mod/pull)
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; URL:

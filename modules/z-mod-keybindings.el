@@ -231,6 +231,10 @@
 (define-key viper-vi-global-user-map (kbd "L") 'windmove-right)
 (define-key viper-vi-global-user-map (kbd "H") 'windmove-left)
 
+;; Rectangles
+(define-key viper-vi-global-user-map (kbd "v") 'set-mark-command)
+(define-key viper-vi-global-user-map (kbd "V") 'set-mark-command)
+
 ;; Eshell
 (setq mod/eshell-viper-map (make-sparse-keymap))
 (define-key mod/eshell-viper-map (kbd "<return>") 'eshell-send-input)

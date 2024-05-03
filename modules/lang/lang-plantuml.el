@@ -36,7 +36,7 @@
 
  :init (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
  (setq
-  plantuml-output-type "txt"
+  plantuml-output-type "svg"
   plantuml-executable-path "/usr/bin/plantuml" ; Path to plantuml
   plantuml-default-exec-mode 'executable) ; Set exec mode
  )

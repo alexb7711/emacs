@@ -72,7 +72,7 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
     ))
 
 (advice-add 'vc-revert :after 'mod/output-to-current-buffer)
-(advice-add 'vc-update :after 'mod/output-to-current-buffer)
+(advice-add 'vc-pull :after 'mod/output-to-current-buffer)
 (advice-add 'vc-push :after 'mod/output-to-current-buffer)
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

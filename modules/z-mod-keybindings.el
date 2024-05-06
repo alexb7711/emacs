@@ -245,8 +245,8 @@
 (keymap-set viper-vi-global-user-map "SPC" mod/space-prefix-keymap)
 
 ;; Viper minibuffer
-(define-key viper-minibuffer-map (kbd "<return>") 'icomplete-force-complete-and-exit)
-(define-key viper-minibuffer-map (kbd "C-<return>") 'viper-exit-minibuffer)
+;; (define-key viper-minibuffer-map (kbd "<return>") 'icomplete-force-complete-and-exit)
+;; (define-key viper-minibuffer-map (kbd "C-<return>") 'viper-exit-minibuffer)
 
 ;;------------------------------------------------------------------------------
 ;; Window management

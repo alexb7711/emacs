@@ -73,7 +73,7 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;
-(defun mod/push ()
+(defun mod/push (orig-fun &rest args)
   "Output push message to echo area."
   (message "Pushing..."))
 
@@ -81,7 +81,7 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;
-(defun mod/pull ()
+(defun mod/pull (orig-fun &rest args)
   "Output pull message to echo area."
   (message "Pulling..."))
 

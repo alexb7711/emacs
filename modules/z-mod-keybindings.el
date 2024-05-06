@@ -133,6 +133,7 @@
 
  :bind
  (:map org-mode-map ("C-c ]" . org-cite-insert) ("C-c i" . latex-insert-block) ("<f1>" . compile) ("<f2>" . recompile))
+ (:map org-beamer-mode-map ("C-c C-c" . org-beamer-export-to-pdf))
  ("C-c o t" . org-timer-set-timer))
 
 ;;------------------------------------------------------------------------------

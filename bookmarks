@@ -26,10 +26,11 @@
  (rear-context-string . "l\\[b\\]\\[0\\])]]\n\n")
  (position . 779))
 ("code"
- (filename . "~/code/")
+ (filename . "c:/users/1556048963C/OneDrive - United States Air Force/Documents/code/")
  (front-context-string . "dotfiles\n  drwxr")
  (rear-context-string . "0K Jun 17 14:15 ")
- (position . 208))
+ (position . 208)
+ (last-modified 26165 17656 830305 0))
 ("emacs"
  (filename . "~/.config/emacs")
  (front-context-string . "1-my-general.el\n")

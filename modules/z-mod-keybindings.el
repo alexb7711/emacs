@@ -10,6 +10,7 @@
 (require 'pdf-tools nil t)
 (require 'tex-mode nil t)
 (require 'vc-dir nil t)
+(require 'ox-beamer nil t)
 
 ;;==============================================================================
 ;; Package specific custom key-bindings
@@ -133,6 +134,7 @@
 
  :bind
  (:map org-mode-map ("C-c ]" . org-cite-insert) ("C-c i" . latex-insert-block) ("<f1>" . mod/compile-from-root-dir) ("<f2>" . mod/recompile-from-root-dir))
+ (:map org-beamer-mode-map ("C-c C-c" . org-beamer-export-to-pdf))
  ("C-c o t" . org-timer-set-timer))
 
 ;;------------------------------------------------------------------------------
@@ -244,8 +246,8 @@
 (keymap-set viper-vi-global-user-map "SPC" mod/space-prefix-keymap)
 
 ;; Viper minibuffer
-(define-key viper-minibuffer-map (kbd "<return>") 'icomplete-force-complete-and-exit)
-(define-key viper-minibuffer-map (kbd "C-<return>") 'viper-exit-minibuffer)
+;; (define-key viper-minibuffer-map (kbd "<return>") 'icomplete-force-complete-and-exit)
+;; (define-key viper-minibuffer-map (kbd "C-<return>") 'viper-exit-minibuffer)
 
 ;;------------------------------------------------------------------------------
 ;; Window management

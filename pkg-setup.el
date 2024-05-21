@@ -28,7 +28,7 @@
 
 ;;==============================================================================
 ;; Configure packages
-(if (eq system-type 'gnu/linux)
+(if (not (equal (system-name) "KRSMW-6322DVB")) ; Work computer
     (setq package-archives '(("melpa" . "https://melpa.org/packages/") ("elpa" . "https://elpa.gnu.org/packages/")))
   (setq package-archives '(("melpa" . "https://melpa.org/packages/"))))
 
@@ -52,7 +52,6 @@
            diff-hl
            dired-sidebar
            doom-themes
-           figlet
            flycheck
            helm-bibtex
            ibuffer-sidebar
@@ -71,6 +70,7 @@
            rust-mode
            saveplace-pdf-view
            scad-mode
+           treesit-auto
            which-key
            yaml-mode))
   (unless (package-installed-p package)

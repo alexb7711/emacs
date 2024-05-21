@@ -45,15 +45,6 @@
  cc-mode
  :ensure t
  :defer t
-
- :config
- (when (treesit-language-available-p 'c++)
-   (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-ts-mode))
-   (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-ts-mode)))
- (when (treesit-language-available-p 'c)
-   (add-to-list 'auto-mode-alist '("\\.c\\'" . c-ts-mode))
-   (add-to-list 'auto-mode-alist '("\\.h\\'" . c-ts-mode)))
-
  :hook (c-mode . c/config-c-c++-modes) (c++-mode . c/config-c-c++-modes))
 
 (provide 'lang-cc)

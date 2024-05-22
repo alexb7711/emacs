@@ -30,18 +30,19 @@
 (require 'recentf nil t)
 
 ;;==============================================================================
-;; Cleanup Emacs
-(tooltip-mode -1) ; Turn off GUI tooltips
-(menu-bar-mode -1) ; Disable tool bar
-(tool-bar-mode -1) ; Disable tool bar
-(scroll-bar-mode -1) ; Disable scroll bar
-(if (not (eq system-type 'windows-nt))
-    (global-auto-revert-mode t)) ; Auto reload files
-(setq inhibit-startup-screen t) ; Disable splash screen
-
+;; Disable/Enable core Emacs behaviors
+(tooltip-mode -1)                                  ; Turn off GUI tooltips
+(menu-bar-mode -1)                                 ; Disable tool bar
+(tool-bar-mode -1)                                 ; Disable tool bar
+(scroll-bar-mode -1)                               ; Disable scroll bar
+;; (if (not (eq system-type 'windows-nt))             ;
+;;     (global-auto-revert-mode t))                   ; Auto reload files
+(global-auto-revert-mode t)                        ; Auto reload files
 (setq
- frame-resize-pixelwise t ; Fix gaps in window managers
- window-resize-pixelwise nil) ; Prevent crashes
+ inhibit-startup-screen t                          ; Disable splash screen
+ custom-file (make-temp-file "custom-vars-")       ; Disable the custom file
+ frame-resize-pixelwise t                          ; Fix gaps in window managers
+ window-resize-pixelwise nil)                      ; Prevent crashes
 
 ;;------------------------------------------------------------------------------
 ;; `*scratch*'
@@ -60,6 +61,13 @@
  (set-face-attribute 'tab-bar-tab nil :background "dimgray")
  (set-face-attribute 'tab-bar-tab-inactive nil :background "black")
  :config (tab-bar-history-mode 1))
+
+;; Functions
+(defun mod/load-tab-bar(&optinonal frame)
+  "Loads in tab-bar-mode after a frame has been created."
+  (unless frame
+    (setq frame (selected-frame)))
+  )
 
 ;;------------------------------------------------------------------------------
 ;; Enable tabs

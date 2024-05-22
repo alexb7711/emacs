@@ -390,17 +390,12 @@ If somewhere inside the line, toggle the comment status of the entire line."
 
 (defun mod/load-whitespace (&optional frame)
   "Function to load `whitespace' parameters in FRAME when running daemon."
-  (interactive)
 
-  (unless frame
-    (setq frame (selected-frame)))
-
-  (with-selected-frame frame
-    (set-face-attribute 'whitespace-indentation nil
-                        :inherit nil
-                        :background nil
-                        :foreground "light gray"
-                        :strike-through t)))
+  (mod/load-face-with-daemon 'whitespace-indentation frame
+                             :inherit nil
+                             :background nil
+                             :foreground "light gray"
+                             :strike-through t))
 ;; Defaults
 
 (setq-default whitespace-style '(face tabs indentation::tab trailing))

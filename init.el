@@ -7,7 +7,7 @@
 ;;;
 
 ;;==============================================================================
-;; Load in modules
+;; Load modules
 
 ;; Define directories
 (defvar emacs-dir (file-name-directory load-file-name)
@@ -22,29 +22,18 @@
 (if (eq system-type 'windows-nt)
     (setq package-check-signature nil))
 
-(load (concat emacs-dir "pkg-setup.el"))
+;; (load (concat emacs-dir "pkg-setup.el"))
 
 ;; Add to load path
 (add-to-list 'load-path module-dir)
 (add-to-list 'load-path lang-dir)
 
-;; Require *.el files in modules directory
-(unless (file-exists-p module-dir)
-  (make-directory module-dir))
-
+;; Load the modules
 (mapc 'load (directory-files module-dir nil "^[a-z0-9].*\.el$"))
 (mapc 'load (directory-files lang-dir nil "^lang-.*\.el$"))
 
 ;;==============================================================================
 ;; Load in profile
-
-;; TODO: Remove
-;; Change in custom file
-;; (setq custom-file (locate-user-emacs-file "custom-vars.el"))
-;; (load custom-file 'noerror 'nomessage)
-
-;; Disable the custom file
-(setq custom-file (make-temp-file "custom-vars-"))
 
 ;; Set the user details
 (setq user-full-name "Alexander Brown")

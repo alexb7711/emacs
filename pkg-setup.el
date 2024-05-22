@@ -48,7 +48,6 @@
            auto-package-update
            cmake-mode
            csv-mode
-           denote
            diff-hl
            dired-sidebar
            doom-themes

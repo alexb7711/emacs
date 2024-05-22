@@ -97,7 +97,7 @@
          (slot . 1))
         ("\\*grep\\*" (display-buffer-in-side-window) (window-height . 0.15) (side . bottom) (slot . -1))
         ("\\*vc-log\\*\\(:?<.*>\\)?" (display-buffer-below-selected) (window-height . 0.25))
-        ("\\*vc-git\\(:?.*\\)?\\*" (display-buffer-no-window) (allow-no-window . t))
+        ("\\*vc-git\\(:?.*\\)?\\*" (display-buffer-same-window))
         ("\\*[Hh]elp\\*" (display-buffer-in-side-window) (window-height . 0.3) (side . right) (slot . 1))
         ("\\*Completions\\*" (display-buffer-below-selected) (window-height . 0.2) (side . bottom) (slot . 0))
         ("\\*compilation\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . top) (slot . 0))

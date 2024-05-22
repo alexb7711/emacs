@@ -72,22 +72,6 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
     ))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;;
-(defun mod/push (orig-fun &rest args)
-  "Output push message to echo area."
-  (message "Pushing..."))
-
-(advice-add 'vc-push :after 'mod/push)
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;;
-(defun mod/pull (orig-fun &rest args)
-  "Output pull message to echo area."
-  (message "Pulling..."))
-
-(advice-add 'vc-pull :after 'mod/pull)
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; URL:
 ;; http://endlessparentheses.com/easily-create-github-prs-from-magit.html
 ;;

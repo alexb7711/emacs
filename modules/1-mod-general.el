@@ -31,46 +31,29 @@
 
 ;;==============================================================================
 ;; Cleanup Emacs
-(tooltip-mode -1) ; Turn off GUI tooltips
-(menu-bar-mode -1) ; Disable tool bar
-(tool-bar-mode -1) ; Disable tool bar
-(scroll-bar-mode -1) ; Disable scroll bar
-(if (not (eq system-type 'windows-nt))
-    (global-auto-revert-mode t)) ; Auto reload files
-(setq inhibit-startup-screen t) ; Disable splash screen
+(tooltip-mode -1)                       ; Turn off GUI tooltips
+(menu-bar-mode -1)                      ; Disable tool bar
+(tool-bar-mode -1)                      ; Disable tool bar
+(scroll-bar-mode -1)                    ; Disable scroll bar
+(global-auto-revert-mode t)             ; Auto reload files
 
 (setq
- frame-resize-pixelwise t ; Fix gaps in window managers
- window-resize-pixelwise nil) ; Prevent crashes
-
-;;------------------------------------------------------------------------------
-;; `*scratch*'
-(setq
- initial-scratch-message nil ; Disable scratch buffer text
- initial-major-mode 'org-mode) ; Enable `Org' mode in scratch buffer
+ inhibit-startup-screen t               ; Disable splash screen
+ frame-resize-pixelwise t               ; Resize frame by pixels
+ window-resize-pixelwise t)             ; Resize window by pixels
 
 ;;==============================================================================
-;; `tmod-bar'
-(use-package
- tab-bar
- :init
- (setq tab-bar-separator "|")
- (set-face-attribute 'tab-bar nil :height 90)
- (set-face-attribute 'tab-bar nil :foreground "moccasin" :background "gray2")
- (set-face-attribute 'tab-bar-tab nil :background "dimgray")
- (set-face-attribute 'tab-bar-tab-inactive nil :background "black")
- :config (tab-bar-history-mode 1))
+;; `*scratch*'
+(setq
+ initial-scratch-message nil            ; Disable scratch buffer text
+ initial-major-mode 'org-mode)          ; Enable `Org' mode in scratch buffer
 
-;;------------------------------------------------------------------------------
-;; Enable tabs
-(tab-bar-mode 1)
 
 ;;==============================================================================
 ;; Native compilation
 (when (native-comp-available-p)
   (setq native-comp-async-report-warnings-errors 'silent) ; Emacs 28 with native compilation
   (setq native-compile-prune-cache t))
-
 
 ;;==============================================================================
 ;; Defaults

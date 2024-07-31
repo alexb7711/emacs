@@ -28,9 +28,12 @@
 
 ;;==============================================================================
 ;; Configure packages
-(if (not (equal (system-name) "KRSMW-6322DVB")) ; Work computer
-    (setq package-archives '(("melpa" . "https://melpa.org/packages/") ("elpa" . "https://elpa.gnu.org/packages/")))
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/"))))
+(if (equal (system-name) "KRSMW-6322DVB") ; Work computer
+      (setq package-archives
+      `(("melpa" . "https://melpa.org/packages/")
+        ("gnu"   . ,(concat emacs-dir "elpa-mirror/gnu"))))
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			   ("elpa" . "https://elpa.gnu.org/packages/"))))
 
 ;;==============================================================================
 ;; Enable package manager

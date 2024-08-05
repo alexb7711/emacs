@@ -387,6 +387,7 @@ If somewhere inside the line, toggle the comment status of the entire line."
 
 (defun mod/load-whitespace (&optional frame)
   "Function to load `whitespace' parameters."
+  (require 'whitespace nil t)
   (set-face-attribute 'whitespace-indentation nil
                       :background nil
                       :foreground "dim gray"

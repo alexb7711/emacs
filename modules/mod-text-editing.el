@@ -37,17 +37,21 @@
 (add-hook 'prog-mode-hook #'mod/highlight-flags)
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Visual lines mode
+;; Truncate Lines and Visual lines mode
 
 ;; Configuration
-
-(setq-default truncate-lines t)
 
 (setq line-move-visual t) ; Move by visual lines
 
 ;; Hooks
 
-(add-hook 'text-mode-hook #'(lambda () (visual-line-mode 1)))
+(add-hook 'text-mode-hook #'(lambda ()
+                              (visual-line-mode 1)
+                              (toggle-truncate-lines 1)))
+
+(add-hook 'prog-mode-hook #'(lambda ()
+                              (visual-line-mode 0)
+                              (toggle-truncate-lines 1)))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Symbol recognition
@@ -97,7 +101,7 @@ displayed."
 
 (use-package
  hl-line
- :init (set-face-attribute 'hl-line nil :inherit nil :box nil :underline '(:color "dim gray" :position 0))
+ :init (set-face-attribute 'hl-line nil :inherit nil :box nil :underline nil)
  :hook
  (prog-mode . hl-line-mode)
  (package-menu-mode . hl-line-mode)
@@ -151,8 +155,7 @@ displayed."
 ;; Use spaces instead of tabs
 (setq-default
  indent-tabs-mode nil ; Space instead of tabs
- tab-always-indent nil ; When at beginning of line indent,
- ; otherwise tab
+ tab-always-indent nil ; When at beginning of line indent, otherwise tab
  tab-width 2 ; Set tab width
  )
 
@@ -386,13 +389,13 @@ If somewhere inside the line, toggle the comment status of the entire line."
 ;; Functions
 
 (defun mod/load-whitespace (&optional frame)
-  "Function to load `whitespace' parameters."
-  (require 'whitespace nil t)
-  (set-face-attribute 'whitespace-indentation nil
-                      :background nil
-                      :foreground "dim gray"
-                      :strike-through t))
+  "Function to load `whitespace' parameters in FRAME when running daemon."
 
+  (mod/load-face-with-daemon 'whitespace-indentation frame
+                             :inherit nil
+                             :background nil
+                             :foreground "light gray"
+                             :strike-through t))
 ;; Defaults
 
   (setq-default whitespace-style '(face tabs indentation::tab trailing))
@@ -400,8 +403,11 @@ If somewhere inside the line, toggle the comment status of the entire line."
 ;; Hooks
 
 ;; Load in `whitespace'
-(add-hook 'prog-mode-hook #'mod/load-whitespace)
-(add-hook 'text-mode-hook #'mod/load-whitespace)
+(if (daemonp)
+    (add-hook 'after-make-frame-functions #'mod/load-whitespace)
+  (mod/load-whitespace))
+
+(add-hook 'prog-mode-hook #'whitespace-mode)
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Display which function you are under in the modeline
@@ -420,10 +426,7 @@ If somewhere inside the line, toggle the comment status of the entire line."
 
 (use-package
  flycheck
- :ensure t
  :defer t
-
  :config (flycheck-mode 1))
-
 (provide 'mod-text-editing)
 ;;; mod-text-editing.el ends here

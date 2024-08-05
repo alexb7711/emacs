@@ -1,9 +1,9 @@
-;;; lang-yaml.el --- Configure YAML editing            -*- lexical-binding: t; -*-
+;;; mod-treesitter.el --- Configuration to automatically install tresitter language grammars  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023  Alexander Brown
+;; Copyright (C) 2024  Alexander Brown
 
-;; Author: Alexander Brown <alex.brown7711@gmail.com>
-;; Keywords:
+;; Author: Alexander Brown <a01704744@usu.edu>
+;; Keywords: languages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,19 +20,16 @@
 
 ;;; Commentary:
 
-;; https://github.com/yoshiki/yaml-mode
+;;
 
 ;;; Code:
-(require 'yaml-mode)
 
-;;==============================================================================
-;; Functions
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
-;;==============================================================================
-;; Configuration
-
-;;==============================================================================
-;; Hooks
-
-(provide 'lang-yaml)
-;;; lang-yaml.el ends here
+(provide 'mod-treesitter)
+;;; mod-treesitter.el ends here

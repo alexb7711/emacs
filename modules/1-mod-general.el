@@ -30,17 +30,25 @@
 (require 'recentf nil t)
 
 ;;==============================================================================
-;; Cleanup Emacs
-(tooltip-mode -1)                       ; Turn off GUI tooltips
-(menu-bar-mode -1)                      ; Disable tool bar
-(tool-bar-mode -1)                      ; Disable tool bar
-(scroll-bar-mode -1)                    ; Disable scroll bar
-(global-auto-revert-mode t)             ; Auto reload files
-
+;; Disable/Enable core Emacs behaviors
+(tooltip-mode -1)                                  ; Turn off GUI tooltips
+(menu-bar-mode -1)                                 ; Disable tool bar
+(tool-bar-mode -1)                                 ; Disable tool bar
+(scroll-bar-mode -1)                               ; Disable scroll bar
+;; (if (not (eq system-type 'windows-nt))             ;
+;;     (global-auto-revert-mode t))                   ; Auto reload files
+(global-auto-revert-mode t)                        ; Auto reload files
 (setq
- inhibit-startup-screen t               ; Disable splash screen
- frame-resize-pixelwise t               ; Resize frame by pixels
- window-resize-pixelwise t)             ; Resize window by pixels
+ inhibit-startup-screen t                          ; Disable splash screen
+ custom-file (make-temp-file "custom-vars-")       ; Disable the custom file
+ frame-resize-pixelwise t                          ; Fix gaps in window managers
+ window-resize-pixelwise nil)                      ; Prevent crashes
+
+;;------------------------------------------------------------------------------
+;; `*scratch*'
+(setq
+ initial-scratch-message nil ; Disable scratch buffer text
+ initial-major-mode 'org-mode) ; Enable `Org' mode in scratch buffer
 
 ;;==============================================================================
 ;; `*scratch*'
@@ -48,6 +56,15 @@
  initial-scratch-message nil            ; Disable scratch buffer text
  initial-major-mode 'org-mode)          ; Enable `Org' mode in scratch buffer
 
+;; Functions
+(defun mod/load-tab-bar(&optinonal frame)
+  "Loads in tab-bar-mode after a frame has been created."
+  (unless frame
+    (setq frame (selected-frame))))
+
+;;------------------------------------------------------------------------------
+;; Enable tabs
+(tab-bar-mode 1)
 
 ;;==============================================================================
 ;; Native compilation

@@ -28,9 +28,12 @@
 
 ;;==============================================================================
 ;; Configure packages
-(if (eq system-type 'gnu/linux)
-    (setq package-archives '(("melpa" . "https://melpa.org/packages/") ("elpa" . "https://elpa.gnu.org/packages/")))
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/"))))
+(if (equal (system-name) "KRSMW-6322DVB") ; Work computer
+      (setq package-archives
+      `(("melpa" . "https://melpa.org/packages/")
+        ("gnu"   . ,(concat emacs-dir "elpa-mirror/gnu"))))
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			   ("elpa" . "https://elpa.gnu.org/packages/"))))
 
 ;;==============================================================================
 ;; Enable package manager
@@ -47,11 +50,9 @@
            auto-package-update
            cmake-mode
            csv-mode
-           denote
            diff-hl
            dired-sidebar
            doom-themes
-           figlet
            flycheck
            helm-bibtex
            ibuffer-sidebar
@@ -70,6 +71,7 @@
            rust-mode
            saveplace-pdf-view
            scad-mode
+           treesit-auto
            which-key
            yaml-mode))
   (unless (package-installed-p package)

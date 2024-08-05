@@ -113,32 +113,32 @@ want to use in the modeline *in lieu of* the original.")
 ;;
 (defun mod/load-fonts (&optional frame)
   "Function to load fonts in the current FRAME."
-  (when frame
-    (remove-hook 'after-make-frame-functions #'mod/load-fonts)
-    (select-frame frame))
+  ;; (when frame
+  ;;   (remove-hook 'after-make-frame-functions #'mod/load-fonts)
+  ;;   (select-frame frame))
 
   ;; Font types
   (if (eq system-type 'windows-nt)
       (progn
         (when (mod/font-available-p "Mononoki Nerd Font")
-          (set-face-attribute 'fixed-pitch nil :font "Mononoki Nerd Font" :height 110)
-          (set-face-attribute 'default nil :font "Mononoki Nerd Font" :height 110))
+          (mod/load-face-with-daemon 'fixed-pitch nil :font "Mononoki Nerd Font" :height 110)
+          (mod/load-face-with-daemon 'default nil :font "Mononoki Nerd Font" :height 110))
         (when (mod/font-available-p "Iosevka Nerd Font")
-          (set-face-attribute 'variable-pitch nil :font "Iosevka Nerd Font" :weight 'normal :height 110))
+          (mod/load-face-with-daemon 'variable-pitch nil :font "Iosevka Nerd Font" :weight 'normal :height 110))
         (when (mod/font-available-p "Iosevka NF")
-          (set-face-attribute 'variable-pitch nil :font "Iosevka NF" :weight 'normal :height 110)))
+          (mod/load-face-with-daemon 'variable-pitch nil :font "Iosevka NF" :weight 'normal :height 110)))
     (progn
       (when (mod/font-available-p "Mononoki Nerd Font")
-        (set-face-attribute 'fixed-pitch nil :font "Mononoki Nerd Font" :height 130)
-        (set-face-attribute 'default nil :font "Mononoki Nerd Font" :height 130))
+        (mod/load-face-with-daemon 'fixed-pitch nil :font "Mononoki Nerd Font" :height 130)
+        (mod/load-face-with-daemon 'default nil :font "Mononoki Nerd Font" :height 130))
       (when (mod/font-available-p "Iosevka Nerd Font")
-        (set-face-attribute 'variable-pitch nil :font "Iosevka Nerd Font" :weight 'normal :height 130))
+        (mod/load-face-with-daemon 'variable-pitch nil :font "Iosevka Nerd Font" :weight 'normal :height 130))
       (when (mod/font-available-p "Iosevka NF")
-        (set-face-attribute 'variable-pitch nil :font "Iosevka NF" :weight 'normal :height 130))))
+        (mod/load-face-with-daemon 'variable-pitch nil :font "Iosevka NF" :weight 'normal :height 130))))
 
   ;; Font formatting
-  (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
-  (set-face-attribute 'font-lock-keyword-face nil :slant 'italic))
+  (mod/load-face-with-daemon 'font-lock-comment-face nil :slant 'italic)
+  (mod/load-face-with-daemon 'font-lock-keyword-face nil :slant 'italic))
 
 ;;------------------------------------------------------------------------------
 ;; Hooks

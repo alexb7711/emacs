@@ -28,11 +28,8 @@
 
   ;; PEP8
   tab-width 4 ; Set tab width
-  )
+  ))
 
- :config
- (when (treesit-language-available-p 'python)
-   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))))
 
 ;;==============================================================================
 ;; Python formatting

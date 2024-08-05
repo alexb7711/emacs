@@ -58,11 +58,6 @@
   )
 
  :config
- ;; Enable `tree-sitter' when available
- (if (treesit-language-available-p 'rust)
-   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
- (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode)))
-
  (if (eq system-type 'windows-nt)
      (setq rust-rustfmt-bin "C:/msys64/mingw64/bin/rustfmt.exe")
    (setq rust-rustfmt-bin "/usr/bin/rustfmt"))

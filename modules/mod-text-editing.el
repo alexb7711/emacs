@@ -1,4 +1,3 @@
-
 ;;; mod-text-editing.el -- Summary
 ;;; Commentary:
 ;;;
@@ -15,7 +14,6 @@
 (require 'newcomment nil t)
 (require 'org-ref nil t)
 (require 'rainbow-delimiters nil t)
-(require 'whitespace nil t)
 
 ;;==============================================================================
 ;; General (Natural language and programming)
@@ -176,6 +174,8 @@ displayed."
 ;; Functions
 (defun mod/delete-trailing-whitespace ()
   "Function wrapper for deleting trailing whitespace."
+  (require 'whitespace nil t)
+
   (when (not (eq major-mode 'fundamental-mode))
     (delete-trailing-whitespace)))
 
@@ -398,7 +398,7 @@ If somewhere inside the line, toggle the comment status of the entire line."
                              :strike-through t))
 ;; Defaults
 
-(setq-default whitespace-style '(face tabs indentation::tab trailing))
+  (setq-default whitespace-style '(face tabs indentation::tab trailing))
 
 ;; Hooks
 

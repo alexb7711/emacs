@@ -5,6 +5,7 @@
 ;;; Code:
 
 (require 'bibtex nil t)
+(require 'ox-beamer nil t)
 (require 'gnus-topic nil t)
 (require 'org nil t)
 (require 'pdf-tools nil t)

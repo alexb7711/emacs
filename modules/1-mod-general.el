@@ -51,23 +51,16 @@
  initial-major-mode 'org-mode) ; Enable `Org' mode in scratch buffer
 
 ;;==============================================================================
-;; `tmod-bar'
-(use-package
- tab-bar
- :init
- (setq tab-bar-separator "|")
- (set-face-attribute 'tab-bar nil :height 90)
- (set-face-attribute 'tab-bar nil :foreground "moccasin" :background "gray2")
- (set-face-attribute 'tab-bar-tab nil :background "dimgray")
- (set-face-attribute 'tab-bar-tab-inactive nil :background "black")
- :config (tab-bar-history-mode 1))
+;; `*scratch*'
+(setq
+ initial-scratch-message nil            ; Disable scratch buffer text
+ initial-major-mode 'org-mode)          ; Enable `Org' mode in scratch buffer
 
 ;; Functions
 (defun mod/load-tab-bar(&optinonal frame)
   "Loads in tab-bar-mode after a frame has been created."
   (unless frame
-    (setq frame (selected-frame)))
-  )
+    (setq frame (selected-frame))))
 
 ;;------------------------------------------------------------------------------
 ;; Enable tabs
@@ -78,7 +71,6 @@
 (when (native-comp-available-p)
   (setq native-comp-async-report-warnings-errors 'silent) ; Emacs 28 with native compilation
   (setq native-compile-prune-cache t))
-
 
 ;;==============================================================================
 ;; Defaults

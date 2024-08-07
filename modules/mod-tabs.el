@@ -1,9 +1,9 @@
-;;; lang-latex.el --- LaTeX Configuration              -*- lexical-binding: t; -*-
+;;; mod-tabs.el --- Configuration for tabs.          -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023  Alexander Brown
+;; Copyright (C) 2024  Alexander Brown
 
-;; Author: Alexander Brown <alex.brown7711@gmail.com>
-;; Keywords: docs, tex
+;; Author: Alexander Brown <a01704744@usu.edu>
+;; Keywords: tools
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,8 +24,18 @@
 
 ;;; Code:
 
-;; (require 'tex nil t)
-;; (require 'reftex nil t)
+(defun mod/load-tab-bar ()
+  "Load `tab-bar' in the specified FRAME."
+  (set-face-attribute 'tab-bar nil :inherit t :height 90)
+  (setq tab-bar-separator "|")
+  (tab-bar-history-mode 1))
 
-(provide 'lang-latex)
-;;; lang-latex.el ends here
+(use-package tab-bar
+  :init
+  (add-hook 'tab-bar-mode-hook #'mod/load-tab-bar)
+
+  :config
+  (tab-bar-mode 1))
+
+(provide 'mod-tabs)
+;;; mod-tabs.el ends here

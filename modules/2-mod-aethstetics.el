@@ -40,8 +40,8 @@
      'after-make-frame-functions
      (lambda (frame)
        (with-selected-frame frame
-         (load-theme 'doom-material t))))
-  (load-theme 'doom-material t))
+         (load-theme 'misterioso t))))
+  (load-theme 'misterioso t))
 
 ;;------------------------------------------------------------------------------
 ;; Modeline
@@ -61,6 +61,7 @@
     (auto-fill-function . "")
     (flycheck-mode . "")
     (whitespace-mode . "")
+    (superword-mode . "")
     (flyspell-mode . ""))
   "Alist for `clean-mode-line'.
 
@@ -86,8 +87,7 @@ want to use in the modeline *in lieu of* the original.")
 
 ;; Display column number in modeline
 (column-number-mode)
-;; Time on modeline
-(display-time-mode 1)
+
 ;; Make sure modeline VC branch updates automatically
 (setq auto-revert-check-vc-info t)
 

@@ -47,7 +47,6 @@
          '(all-the-icons
            all-the-icons-dired
            all-the-icons-gnus
-           auctex
            auto-package-update
            cmake-mode
            csv-mode

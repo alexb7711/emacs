@@ -22,7 +22,7 @@
 (if (eq system-type 'windows-nt)
     (setq package-check-signature nil))
 
-;; (load (concat emacs-dir "pkg-setup.el"))
+(load (concat emacs-dir "pkg-setup.el"))
 
 ;; Add to load path
 (add-to-list 'load-path module-dir)

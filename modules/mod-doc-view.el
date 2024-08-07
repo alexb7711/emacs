@@ -25,7 +25,7 @@
 
 ;;; Code:
 
-(require 'saveplace-pdf-view)
+(require 'saveplace-pdf-view nil t)
 
 ;;==============================================================================
 ;; PDF

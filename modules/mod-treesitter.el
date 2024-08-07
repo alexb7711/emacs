@@ -26,6 +26,7 @@
 
 (use-package treesit-auto
   :custom
+  (setq treesit-auto-langs '(awk bash bibtex c cmake cpp html latex make markdown org perl python rust yaml))
   (treesit-auto-install 'prompt)
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)

@@ -155,7 +155,7 @@ displayed."
 ;; Use spaces instead of tabs
 (setq-default
  indent-tabs-mode nil ; Space instead of tabs
- tab-always-indent nil ; When at beginning of line indent, otherwise tab
+ tab-always-indent 'complete ; Pressing TAB will attempt a completion
  tab-width 2 ; Set tab width
  )
 
@@ -391,7 +391,7 @@ If somewhere inside the line, toggle the comment status of the entire line."
 (defun mod/load-whitespace (&optional frame)
   "Function to load `whitespace' parameters in FRAME when running daemon."
 
-  (mod/load-face-with-daemon 'whitespace-indentation frame
+  (mod/load-face-with-daemon 'whitespace-indentation nil
                              :inherit nil
                              :background nil
                              :foreground "light gray"
@@ -403,10 +403,11 @@ If somewhere inside the line, toggle the comment status of the entire line."
 ;; Hooks
 
 ;; Load in `whitespace'
-(if (daemonp)
-    (add-hook 'after-make-frame-functions #'mod/load-whitespace)
-  (mod/load-whitespace))
+;; (if (daemonp)
+;;     (add-hook 'after-make-frame-functions #'mod/load-whitespace)
+;;   (mod/load-whitespace))
 
+(add-hook 'prog-mode-hook #'mod/load-whitespace)
 (add-hook 'prog-mode-hook #'whitespace-mode)
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

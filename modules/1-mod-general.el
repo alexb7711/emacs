@@ -44,12 +44,6 @@
  frame-resize-pixelwise t                          ; Fix gaps in window managers
  window-resize-pixelwise nil)                      ; Prevent crashes
 
-;;------------------------------------------------------------------------------
-;; `*scratch*'
-(setq
- initial-scratch-message nil ; Disable scratch buffer text
- initial-major-mode 'org-mode) ; Enable `Org' mode in scratch buffer
-
 ;;==============================================================================
 ;; `*scratch*'
 (setq
@@ -69,7 +63,7 @@
 ;;==============================================================================
 ;; Native compilation
 (when (native-comp-available-p)
-  (setq native-comp-async-report-warnings-errors 'silent) ; Emacs 28 with native compilation
+  (setq native-comp-async-report-warnings-errors 'silent)
   (setq native-compile-prune-cache t))
 
 ;;==============================================================================
@@ -83,11 +77,12 @@
 (defalias 'yes-or-no-p 'y-or-n-p) ; Shorten resposes to y/n
 
 (setq
- tooltip-use-echo-area t ; Open tooltips in echo area
+ visible-bell t                                 ; Disable audible bell
+ tooltip-use-echo-area t                        ; Open tooltips in echo area
  large-file-warning-threshold (* 100 1024 1024) ; Large file warning at 100MB
- use-dialog-box nil ; Disable GUI boxes
- x-select-enable-clipboard t ; Allow copy/paste from system clipboard
- auto-save-default t) ; Enable auto saving
+ use-dialog-box nil                             ; Disable GUI boxes
+ x-select-enable-clipboard t            ; Allow copy/paste from system clipboard
+ auto-save-default t)                   ; Enable auto saving
 
 (setq-default
  x-stretch-cursor t ; Stretch cursor to glyph length

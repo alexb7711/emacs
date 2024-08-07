@@ -24,6 +24,7 @@
 
 ;;; Code:
 
+;;==============================================================================
 (defun mod/load-face-with-daemon(face frame &rest args)
     "Set FACE from ARGS for FRAME when loading Emacs with or without the daemon.
 This function is a wrapper for `set-face-attribute'. It is meant to generalize
@@ -39,5 +40,18 @@ hooked to `after-make-frame-functions'."
       (with-selected-frame frame
         (apply #'set-face-attribute face frame args)))
 
+;;==============================================================================
+    (defun mod/display-disabled-commands ()
+      "Report commands are disabled."
+      (interactive)
+      (with-output-to-temp-buffer "*Commands that were disabled*"
+        (mapatoms
+         (function
+          (lambda (symbol)
+            (when (get symbol 'disabled)
+              ;; (put symbol 'disabled nil)
+              (prin1 symbol)
+              (princ "\n")))))))
+
 (provide '0-runemacs-core)
-;;; 3-runemacs-core.el ends here
+;;; 0-runemacs-core.el ends here

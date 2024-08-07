@@ -1,4 +1,4 @@
-;;; 3-runemacs-core.el --- Core custom commands for RuneMacs  -*- lexical-binding: t; -*-
+;;; 0-runemacs-core.el --- Core custom commands for RuneMacs  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024  Alexander Brown
 
@@ -39,5 +39,5 @@ hooked to `after-make-frame-functions'."
       (with-selected-frame frame
         (apply #'set-face-attribute face frame args)))
 
-(provide '3-runemacs-core)
+(provide '0-runemacs-core)
 ;;; 3-runemacs-core.el ends here

@@ -113,9 +113,9 @@ want to use in the modeline *in lieu of* the original.")
 ;;
 (defun mod/load-fonts (&optional frame)
   "Function to load fonts in the current FRAME."
-  ;; (when frame
-  ;;   (remove-hook 'after-make-frame-functions #'mod/load-fonts)
-  ;;   (select-frame frame))
+  (when frame
+    (remove-hook 'after-make-frame-functions #'mod/load-fonts)
+    (select-frame frame))
 
   ;; Font types
   (if (eq system-type 'windows-nt)

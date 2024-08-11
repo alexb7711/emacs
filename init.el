@@ -55,5 +55,8 @@
             (format "%.2f seconds" (float-time (time-subtract after-init-time before-init-time)))
             gcs-done)))
 
+;; Enable the Emacs server
+(server-start)
+
 (provide 'init)
 ;;; init.el ends here

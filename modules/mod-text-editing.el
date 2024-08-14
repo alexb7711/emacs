@@ -101,7 +101,7 @@ displayed."
 
 (use-package
  hl-line
- :init (set-face-attribute 'hl-line nil :inherit nil :box nil :underline nil)
+ :init (set-face-attribute 'hl-line nil :inherit nil :box t :underline nil)
  :hook
  (prog-mode . hl-line-mode)
  (package-menu-mode . hl-line-mode)

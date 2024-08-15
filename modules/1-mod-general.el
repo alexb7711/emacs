@@ -35,9 +35,8 @@
 (menu-bar-mode -1)                                 ; Disable tool bar
 (tool-bar-mode -1)                                 ; Disable tool bar
 (scroll-bar-mode -1)                               ; Disable scroll bar
-;; (if (not (eq system-type 'windows-nt))             ;
-;;     (global-auto-revert-mode t))                   ; Auto reload files
 (global-auto-revert-mode t)                        ; Auto reload files
+
 (setq
  inhibit-startup-screen t                          ; Disable splash screen
  custom-file (make-temp-file "custom-vars-")       ; Disable the custom file

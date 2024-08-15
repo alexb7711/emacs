@@ -204,6 +204,12 @@
 (define-key text-mode-map (kbd "M-n") 'forward-paragraph)
 (define-key text-mode-map (kbd "M-p") 'backward-paragraph)
 
+(define-key text-mode-map (kbd "M-RET") 'mod/force-newline)
+(define-key prog-mode-map (kbd "M-RET") 'mod/force-newline)
+
+(define-key text-mode-map (kbd "C-a") 'mod/smarter-move-beginning-of-line)
+(define-key prog-mode-map (kbd "C-a") 'mod/smarter-move-beginning-of-line)
+
 ;;------------------------------------------------------------------------------
 ;; Comments (`mod-text-editing.el')
 (add-hook 'prog-mode-hook 'mod/comment-keybindings)
@@ -246,10 +252,6 @@
 ;; Viper VI prefix key
 (keymap-set viper-vi-global-user-map "SPC" mod/space-prefix-keymap)
 
-;; Viper minibuffer
-;; (define-key viper-minibuffer-map (kbd "<return>") 'icomplete-force-complete-and-exit)
-;; (define-key viper-minibuffer-map (kbd "C-<return>") 'viper-exit-minibuffer)
-
 ;;------------------------------------------------------------------------------
 ;; Window management
 (global-set-key (kbd "C-<left>") 'shrink-window-horizontally)
@@ -263,6 +265,7 @@
 ;;------------------------------------------------------------------------------
 ;; Misc key bindings
 (global-set-key (kbd "C-<return>") 'set-mark-command)
+(define-key text-mode-map (kbd "M-Q") 'mod/unfill-paragraph)
 
 ;; Unbind these god forsaken key
 (global-unset-key (kbd "C-z"))

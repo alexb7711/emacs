@@ -19,7 +19,41 @@
 ;; General (Natural language and programming)
 
 ;;------------------------------------------------------------------------------
-;; Buffer feedback
+;; Better Newlines
+(defun mod/force-newline ()
+  "Inserts a newline character, but from the end of the current line."
+  (interactive)
+  (move-end-of-line 1)
+  (newline-and-indent))
+
+;;------------------------------------------------------------------------------
+;; Better Beginning of line
+(defun mod/smarter-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.
+
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+  ;; Accept an integer value
+  (interactive "^p")
+
+  ;; If `arg' is `nil', set `arg' to 1. Otherwise keep `arg' as is
+  (setq arg (or arg 1))
+
+  ;; If `arg' != 1
+  (when (/= arg 1)
+    ;; Move `arg' number of lines
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+
+  (let ((orig-point (point)))
+    (back-to-indentation)               ; Go to the first character
+    (when (= orig-point (point))        ; If the current point matches the indentation
+      (move-beginning-of-line 1))))     ; Go to the beginning of the line
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Highlight TODO/FIXME/BUG flags in text
@@ -351,6 +385,14 @@ If somewhere inside the line, toggle the comment status of the entire line."
 ;; Hooks
 
 (add-hook 'text-mode-hook 'abbrev-mode) ; Enable `abbrev' in non-programming modes
+
+;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Unfill Paragraph
+(defun mod/unfill-paragraph ()
+  "Convert a multi-line paragraph into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Automatic table detection

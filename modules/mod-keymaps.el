@@ -54,7 +54,8 @@
   "Maps shortcuts to buffer actions."
   "b" #'ibuffer
   "f" #'switch-to-buffer
-  "k" #'kill-buffer)
+  "k" #'kill-this-buffer
+  "K" #'kill-buffer)
 
 ;;------------------------------------------------------------------------------
 ;;

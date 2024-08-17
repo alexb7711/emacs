@@ -32,13 +32,8 @@ method that faces are set for RuneMacs.
 
 NOTE: This function should be called from a function that is
 hooked to `after-make-frame-functions'."
-    ;; If a frame was not supplied, get the current frame
-    (unless frame
-      (setq frame (selected-frame)))
-
     ;; Set the face attribute
-      (with-selected-frame frame
-        (apply #'set-face-attribute face frame args)))
+    (apply #'set-face-attribute face frame args))
 
 ;;==============================================================================
     (defun mod/display-disabled-commands ()

@@ -113,9 +113,10 @@ want to use in the modeline *in lieu of* the original.")
 ;;
 (defun mod/load-fonts (&optional frame)
   "Function to load fonts in the current FRAME."
+
+  ;; Ensure the function only runs once
   (when frame
-    (remove-hook 'after-make-frame-functions #'mod/load-fonts)
-    (select-frame frame))
+    (remove-hook 'server-after-make-frame-hook #'mod/load-fonts))
 
   ;; Font types
   (if (eq system-type 'windows-nt)
@@ -143,10 +144,9 @@ want to use in the modeline *in lieu of* the original.")
 ;;------------------------------------------------------------------------------
 ;; Hooks
 
-;; Load font
 (if (daemonp)
-    (add-hook 'after-make-frame-functions #'mod/load-fonts)
-  (funcall #'mod/load-fonts frame-initial-frame))
+    (add-hook 'server-after-make-frame-hook #'mod/load-fonts)
+  (funcall #'mod/load-fonts nil))
 
 (provide '2-mod-aethstetics)
 ;;; 2-mod-aethstetics.el ends here

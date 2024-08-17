@@ -44,54 +44,6 @@
   (load-theme 'misterioso t))
 
 ;;------------------------------------------------------------------------------
-;; Modeline
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Modeline cleanup
-;; https://www.masteringemacs.org/article/hiding-replacing-modeline-strings
-;;
-
-(defvar mode-line-cleaner-alist
-  `((eldoc-mode . "")
-    (company-mode . "")
-    (git-gutter-mode . "")
-    (visual-line-mode . "")
-    (which-key-mode . "")
-    (olivetti-mode . "")
-    (auto-fill-function . "")
-    (flycheck-mode . "")
-    (whitespace-mode . "")
-    (superword-mode . "")
-    (flyspell-mode . ""))
-  "Alist for `clean-mode-line'.
-
-When you add a new element to the alist, keep in mind that you
-must pass the correct minor/major mode symbol and a string you
-want to use in the modeline *in lieu of* the original.")
-
-(defun clean-mode-line ()
-  "Cleanup the modeline."
-  (interactive)
-  (cl-loop
-   for cleaner in mode-line-cleaner-alist do
-   (let* ((mode (car cleaner))
-          (mode-str (cdr cleaner))
-          (old-mode-str (cdr (assq mode minor-mode-alist))))
-     (when old-mode-str
-       (setcar old-mode-str mode-str))
-     ;; major mode
-     (when (eq mode major-mode)
-       (setq mode-name mode-str)))))
-
-(add-hook 'after-change-major-mode-hook 'clean-mode-line)
-
-;; Display column number in modeline
-(column-number-mode)
-
-;; Make sure modeline VC branch updates automatically
-(setq auto-revert-check-vc-info t)
-
-;;------------------------------------------------------------------------------
 ;; Transparent Emacs
 (set-frame-parameter (selected-frame) 'alpha '(95 . 95))
 (add-to-list 'default-frame-alist '(alpha . (95 . 95)))

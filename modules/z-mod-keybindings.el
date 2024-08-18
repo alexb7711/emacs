@@ -5,13 +5,15 @@
 ;;; Code:
 
 (require 'bibtex nil t)
-(require 'ox-beamer nil t)
+(require 'flycheck nil t)
+(require 'flyspell nil t)
 (require 'gnus-topic nil t)
 (require 'org nil t)
+(require 'ox-beamer nil t)
+(require 'ox-beamer nil t)
 (require 'pdf-tools nil t)
 (require 'tex-mode nil t)
 (require 'vc-dir nil t)
-(require 'ox-beamer nil t)
 
 ;;==============================================================================
 ;; Package specific custom key-bindings
@@ -100,6 +102,12 @@
  :defer t
 
  :hook (text-mode . mod/flyspell-keybindings) (text-mode-hook . mod/flyspell-keybindings))
+
+;;------------------------------------------------------------------------------
+;; `flycheck' (`mod-text-editing.el')
+
+(define-key flycheck-mode-map (kbd "<f9>") 'flycheck-previous-error)
+(define-key flycheck-mode-map (kbd "<f10>") 'flycheck-next-error)
 
 ;;------------------------------------------------------------------------------
 ;; `ibuffer'

@@ -38,7 +38,6 @@
     (which-key-mode . "")
     (olivetti-mode . "")
     (auto-fill-function . "")
-    (flycheck-mode . "")
     (whitespace-mode . "")
     (superword-mode . "")
     (flyspell-mode . ""))
@@ -73,27 +72,20 @@ want to use in the modeline *in lieu of* the original.")
 
 (require 'which-func)
 (defvar mod/mode-line-misc-info
-  `(,which-function-mode    ;Only display if mode is enabled.
-   (,which-func-mode       ;Only display if buffer supports it.
-    ("" ,which-func-format " ")))
-   "Custom miscellaneous information.")
+  '(("[" eglot--mode-line-format "] ")
+    (which-function-mode    ;Only display if mode is enabled.
+    (which-func-mode       ;Only display if buffer supports it.
+     ("" which-func-format " "))))
+  "Custom miscellaneous information.")
 
 ;;------------------------------------------------------------------------------
 ;; Set `modeline'
 (setq-default mode-line-format
               `(
                 ("%e"
-                 ;; mode-line-front-space
-                 ;; (:propertize
-                 ;;  ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
-                 ;;  display
-                 ;;  (min-width
-                 ;;   (5.0)))
                  ("  " viper-mode-string)
-                 ;; mode-line-frame-identification
                  "| "
                  mode-line-buffer-identification
-                 ;; mode-line-position
                  " | "
                  mode-line-modes
                  "| "

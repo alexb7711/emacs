@@ -157,7 +157,9 @@ displayed."
 ;; Configuration
 
 ;; Cursor scrolling
-(setq scroll-conservatively 100000)
+(setq
+ scroll-conservatively 100000
+ scroll-preserve-screen-position 'always)
 
 ;; Mouse Scrolling
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
@@ -350,7 +352,7 @@ If somewhere inside the line, toggle the comment status of the entire line."
   flyspell-issue-welcome-flag nil)
 
  :config
- ;; Specify path to aspell on Windows
+ ;; Specify path to `hunspell' on Windows
  (if (eq system-type 'windows-nt)
      (progn
        (setq
@@ -433,27 +435,26 @@ If somewhere inside the line, toggle the comment status of the entire line."
 (defun mod/load-whitespace (&optional frame)
   "Function to load `whitespace' parameters in FRAME when running daemon."
 
+  (require 'whitespace nil t)
+
+  (whitespace-mode 1)
+
   (mod/load-face-with-daemon 'whitespace-indentation nil
                              :inherit nil
                              :background nil
+                             :foreground nil
                              :foreground "light gray"
                              :strike-through t))
 ;; Defaults
 
-  (setq-default whitespace-style '(face tabs indentation::tab trailing))
+(setq-default whitespace-style '(face tabs indentation::tab trailing))
 
 ;; Hooks
 
-;; Load in `whitespace'
-;; (if (daemonp)
-;;     (add-hook 'after-make-frame-functions #'mod/load-whitespace)
-;;   (mod/load-whitespace))
-
 (add-hook 'prog-mode-hook #'mod/load-whitespace)
-(add-hook 'prog-mode-hook #'whitespace-mode)
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Display which function you are under in the modeline
+;; Display which function you are under in the `modeline'
 
 ;; Hooks
 
@@ -470,6 +471,8 @@ If somewhere inside the line, toggle the comment status of the entire line."
 (use-package
  flycheck
  :defer t
- :config (flycheck-mode 1))
+ :hook
+ (prog-mode . flycheck-mode))
+
 (provide 'mod-text-editing)
 ;;; mod-text-editing.el ends here

@@ -63,7 +63,10 @@ point reaches the beginning or end of the buffer, stop there."
 ;; https://emacs.stackexchange.com/questions/37963/highlight-a-specific-phrase-in-any-emacs-buffer-regardless-of-mode
 ;; `C-h f font-lock-add-keywords'
 (defun mod/highlight-flags ()
-  (font-lock-add-keywords nil '(("\\<\\(TODO\\):" 1 'warning prepend) ("\\<\\(FIXME\\|BUG\\):" 1 'error prepend))))
+  (font-lock-add-keywords
+   nil
+   '(("\\<\\(TODO\\):" 1 'warning prepend)
+     ("\\<\\(FIXME\\|BUG\\):" 1 'error prepend))))
 
 ;; Hooks
 
@@ -292,45 +295,6 @@ If somewhere inside the line, toggle the comment status of the entire line."
      (setq-local comment-auto-fill-only-comments t)
      (auto-fill-mode 1)))
 
-;;------------------------------------------------------------------------------
-;; `langtool'
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; `langtool' function
-(defun mod/langtool ()
-  "Function to reload `langtool' after each save."
-  (if (eq system-type 'windows-nt)
-      (setq langtool-java-bin "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/java.exe")
-    (setq langtool-language-tool-jar "C:/msys64/usr/share/languagetool/languagetool-commandline.jar")
-    (setq langtool-java-classpath "/usr/share/languagetool:/usr/share/java/languagetool/*"))
-
-  ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ;;
-  (defun mod/langtool-wrapper ()
-    "Function wrapper for deleting trailing whitespace."
-    (when (or (eq major-mode 'org-mode) (eq major-mode 'latex-mode) (eq major-mode 'markdown-mode))
-      (langtool-check)))
-
-
-  (add-hook 'after-save-hook 'mod/langtool-wrapper) ; Check after save
-  (require 'langtool nil t))
-
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Configure
-(use-package
- langtool
- :ensure t
- :defer t
-
- :hook
- (latex-mode . mod/langtool)
- (markdown-mode . mod/langtool)
- (org-mode . mod/langtool)
- (latex-mode . mod/langtool)
- (markdown-mode . mod/langtool)
- (org-mode . mod/langtool))
-
 
 ;;------------------------------------------------------------------------------
 ;; Flyspell
@@ -371,108 +335,16 @@ If somewhere inside the line, toggle the comment status of the entire line."
  (latex-mode . flyspell-mode)
  (markdown-mode . flyspell-mode)
  (org-mode . flyspell-mode)
- (prog-mode . flyspell-prog-mode))
-;; (after-save . flyspell-buffer))
+ (prog-mode . flyspell-prog-mode)
+ (after-save . flyspell-buffer))
 
 ;;==============================================================================
 ;; Natural language
-
-;;------------------------------------------------------------------------------
-;; General
-
-;; Configuration
-
-(setq sentence-end-double-space nil) ; Sentences end with a single space
-
-;; Hooks
-
-(add-hook 'text-mode-hook 'abbrev-mode) ; Enable `abbrev' in non-programming modes
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Unfill Paragraph
-(defun mod/unfill-paragraph ()
-  "Convert a multi-line paragraph into a single line of text."
-  (interactive)
-  (let ((fill-column (point-max)))
-    (fill-paragraph nil)))
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Automatic table detection
-(when (not (eq (buffer-file-name) "*vc-log*"))
-
-  ;; Configuration
-  (setq prettify-symbols-unprettify-at-point 'right-edge) ; Make symols devolve to plain text to
-
-  ;; Hooks
-
-  (add-hook 'text-mode-hook 'prettify-symbols-mode)) ; Make sybols look nice to read
-; edit when at point
+(load-file (concat module-dir "/lang/lang-document-editing.el"))
 
 ;;==============================================================================
 ;; Programming modes
-
-;;------------------------------------------------------------------------------
-;; Buffer feedback
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; 80 character marker
-
-;; Configuration
-
-(setq
- display-fill-column-indicator-column t
- display-fill-column-indicator-character "U+2502")
-
-;; Hooks
-
-(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode) ; Turn on marker
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Display tabs and trailing `whitespace'
-
-;; Functions
-
-(defun mod/load-whitespace (&optional frame)
-  "Function to load `whitespace' parameters in FRAME when running daemon."
-
-  (require 'whitespace nil t)
-
-  (whitespace-mode 1)
-
-  (mod/load-face-with-daemon 'whitespace-indentation nil
-                             :inherit nil
-                             :background nil
-                             :foreground nil
-                             :foreground "light gray"
-                             :strike-through t))
-;; Defaults
-
-(setq-default whitespace-style '(face tabs indentation::tab trailing))
-
-;; Hooks
-
-(add-hook 'prog-mode-hook #'mod/load-whitespace)
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Display which function you are under in the `modeline'
-
-;; Hooks
-
-(add-hook 'prog-mode-hook 'which-function-mode)
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Flycheck
-;; Requirements:
-;;    - C/C++: `gcc or clang'
-;;    - Python: `python-pylint'
-;;    - Rust: `rust-cargo'
-;;
-
-(use-package
- flycheck
- :defer t
- :hook
- (prog-mode . flycheck-mode))
+(load-file (concat module-dir "/lang/lang-programming.el"))
 
 (provide 'mod-text-editing)
 ;;; mod-text-editing.el ends here

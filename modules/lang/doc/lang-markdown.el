@@ -1,9 +1,9 @@
-;;; lang-latex.el --- LaTeX Configuration              -*- lexical-binding: t; -*-
+;;; lang-markdown.el --- Configuration for markdown.  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023  Alexander Brown
+;; Copyright (C) 2024  Alexander Brown
 
-;; Author: Alexander Brown <alex.brown7711@gmail.com>
-;; Keywords: docs, tex
+;; Author: Alexander Brown <a01704744@usu.edu>
+;; Keywords: docs
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,8 +24,7 @@
 
 ;;; Code:
 
-;; (require 'tex nil t)
-;; (require 'reftex nil t)
+(add-hook 'markdown-mode-hook 'auto-fill-mode)
 
-(provide 'lang-latex)
-;;; lang-latex.el ends here
+(provide 'lang-markdown)
+;;; lang-markdown.el ends here

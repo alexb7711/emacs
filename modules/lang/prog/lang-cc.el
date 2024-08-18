@@ -32,12 +32,13 @@
 ;;
 (defun c/config-c-c++-modes ()
   "Configurations shared by C/C++."
-  (c-toggle-auto-newline 1) ; Automatically create new lines
+  (c-toggle-auto-newline 1)             ; Automatically create new lines
+
   (setq
-   c-default-style "bsd" ; Set C-style
-   c-tab-always-indent nil ; Indent line if at the beginning,
-   ; otherwise add space
-   c-basic-offset 2)) ; Set tab width to 2 spaces
+   c-default-style "bsd"                ; Set C-style
+   c-tab-always-indent nil              ; Indent line if at the beginning,
+                                        ; otherwise add space
+   c-basic-offset 2))                   ; Set tab width to 2 spaces
 
 ;;==============================================================================
 ;; Configuration
@@ -45,7 +46,11 @@
  cc-mode
  :ensure t
  :defer t
- :hook (c-mode . c/config-c-c++-modes) (c++-mode . c/config-c-c++-modes))
+ :hook
+ (c-ts-mode . c/config-c-c++-modes)
+ (c++-ts-mode . c/config-c-c++-modes)
+ (c-mode . c/config-c-c++-modes)
+ (c++-mode . c/config-c-c++-modes))
 
 (provide 'lang-cc)
 ;;; lang-cc.el ends here

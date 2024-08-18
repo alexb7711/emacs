@@ -19,6 +19,10 @@
   "Personal configuration.")
 (defvar lang-dir (expand-file-name "lang" module-dir)
   "Language configuration.")
+(defvar doc-dir (expand-file-name "doc" lang-dir)
+  "Document editing configuration.")
+(defvar prog-dir (expand-file-name "prog" lang-dir)
+  "Programming language configuration.")
 
 ;; TODO: Check if there is a way to only do this for a certain computer
 ;; Work is weird and can't access ELPA or MELPA securely

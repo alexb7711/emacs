@@ -33,7 +33,12 @@
 ;;==============================================================================
 ;; Configuration
 (setq
- dired-dwim-target t) ; Suggest other visible dired buffer
+ dired-dwim-target t                    ; Suggest other visible dired buffer
+ dired-omit-files
+ (rx (or (seq bol (? ".") "#")          ; Emacs autosave files
+         (seq bol "." (not (any ".")))  ; dot-files
+         (seq "~" eol)                  ; backup-files
+         ))
 
 ;; Make going to the previous directory also kill the current buffer.
 (add-hook

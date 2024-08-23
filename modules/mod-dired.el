@@ -39,6 +39,7 @@
          (seq bol "." (not (any ".")))  ; dot-files
          (seq "~" eol)                  ; backup-files
          ))
+ )
 
 ;; Make going to the previous directory also kill the current buffer.
 (add-hook

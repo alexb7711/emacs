@@ -78,6 +78,10 @@ want to use in the modeline *in lieu of* the original.")
      ("" which-func-format " "))))
   "Custom miscellaneous information.")
 
+(defvar mod/mode-line-modified
+   '("<%1+> ")
+   "Mode line construct for displaying whether the current buffer is modified.")
+
 ;;------------------------------------------------------------------------------
 ;; Set `modeline'
 (setq-default mode-line-format
@@ -85,6 +89,7 @@ want to use in the modeline *in lieu of* the original.")
                 ("%e"
                  ("  " viper-mode-string)
                  "| "
+                 mod/mode-line-modified
                  mode-line-buffer-identification
                  " | "
                  mode-line-modes

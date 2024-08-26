@@ -58,7 +58,7 @@
    (setq-default
     olivetti-style nil
     olivetti-body-width nil
-    olivetti-minimum-body-width 120
+    olivetti-minimum-body-width 124
     olivetti-recall-visual-line-mode-entry-state t))
 
  :init

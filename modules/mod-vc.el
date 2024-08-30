@@ -48,7 +48,8 @@
   (shell-command
    (format "git clone --recurse-submodules %s %s"
            (shell-quote-argument url)
-           (shell-quote-argument dir))))
+           dir)))
+           ;; (shell-quote-argument dir))))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;

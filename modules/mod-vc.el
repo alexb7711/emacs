@@ -41,7 +41,9 @@
   (interactive "MURL: \nDDirectory: ")
 
   ;; Append the name of the project to the selected directory
-  (setq dir (concat dir (file-name-base url)))
+  (if (eq system-type 'windows-nt)
+      (setq dir (shell-quote-argument (concat dir (file-name-base url))))
+    (setq dir (concat dir (file-name-base url))))
 
   ;; Clone the repository
   (message (shell-quote-argument (format "git clone --recurse-submodules -j4 %s %s" url dir)))
@@ -49,7 +51,6 @@
    (format "git clone --recurse-submodules %s %s"
            (shell-quote-argument url)
            dir)))
-           ;; (shell-quote-argument dir))))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;

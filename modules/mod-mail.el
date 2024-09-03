@@ -24,37 +24,5 @@
 
 ;;; Code:
 
-(require 'cl-lib)
-
-;;==============================================================================
-;; Variables
-(defvar mod/maildir "/var/mail"
-  "Base directory for mail")
-
-(defvar mod/maildir-skip ["news" "RMAIL"]
-  "Directories to skip when recursively finding `'maildir'")
-
-(defvar mod/mailsubdir
-  (seq-filter
-   (lambda (mod/maildir) (not (seq-some (lambda (x) (string-match x mod/maildir)) mod/maildir-skip)))
-   (directory-files-recursively mod/maildir "\\`[^.]*\\'" t))
-  "List of `maildir'")
-(setq mod/mailsubdir (cl-delete-if (lambda (k) (string-match-p "new$" k)) mod/mailsubdir))
-(setq mod/mailsubdir (cl-delete-if (lambda (k) (string-match-p "cur$" k)) mod/mailsubdir))
-(setq mod/mailsubdir (cl-delete-if (lambda (k) (string-match-p "tmp$" k)) mod/mailsubdir))
-(setq mod/mailsubdir (cl-delete-if (lambda (k) (string-match-p "[0-9]$" k)) mod/mailsubdir))
-
-
-;;==============================================================================
-;; Configuration
-(setq
- rmail-primary-inbox-list (cl-loop for x in mod/mailsubdir collect (concat "maildir://" x))
- rmail-file-name
- "/var/mail/RMAIL" ; Primary Rmail file
- rmail-secondary-file-directory "/var/mail/"
- rmail-remote-password-required nil
- rmail-preserve-inbox 0
- rmail-delete-after-output 1)
-
 (provide 'mod-mail)
 ;;; mod-mail.el ends here

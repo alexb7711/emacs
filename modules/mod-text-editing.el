@@ -316,15 +316,15 @@ If somewhere inside the line, toggle the comment status of the entire line."
   flyspell-issue-welcome-flag nil)
 
  :config
- ;; Specify path to `hunspell' on Windows
- (if (eq system-type 'windows-nt)
-     (progn
-       (setq
-        ispell-program-name "hunspell.exe"
-        ispell-local-dictionary "en_US")
-       (setenv "LANG" "en_US")
-       (ispell-hunspell-add-multi-dic "en_US"))
-   (setq ispell-program-name "aspell"))
+ ;; Specify path to `hunspell' on Windows if it is installed
+ (if (and (executable-find "hunspell.exe") (eq system-type 'windows-nt))
+    (progn
+      (setq
+       ispell-program-name "hunspell.exe"
+       ispell-local-dictionary "en_US")
+      (setenv "LANG" "en_US")
+      (ispell-hunspell-add-multi-dic "en_US"))
+ (setq ispell-program-name "aspell"))
 
  ;; Ignore source code blocks in org mode
  (add-to-list 'ispell-skip-region-alist '("^#+BEGIN_SRC" . "^#+END_SRC"))

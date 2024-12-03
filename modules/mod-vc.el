@@ -26,7 +26,9 @@
 
 (require 'ediff nil t)
 (require 'vc nil t)
+(require 'vc-dir nil t)
 (require 'vc-git nil t)
+(require 'ediff-vers nil t)
 
 ;;==============================================================================
 ;; `vc'
@@ -64,7 +66,12 @@
 ;;
 (defun mod/output-to-current-buffer (orig-fun &rest args)
   "Thus function outputs the vc text to the current buffer as temporary text.
-The function will then ensure that the `*vc-git*' buffer stays hidden."
+The function will then ensure that the `*vc-git*' buffer stays
+hidden."
+
+  ;; Unused variables
+  (ignore orig-fun)
+  (ignore args)
 
   (let
       ((vc-git-buffer (concat "*vc-git : " (expand-file-name (vc-root-dir)) "*")))
@@ -99,7 +106,7 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
 ;;------------------------------------------------------------------------------
 ;; Configuration
 
-(setq mod/work-git-path "C:/Users/1556048963C/AppData/Local/Programs/Git/bin/git.exe")
+(defvar mod/work-git-path "C:/Users/1556048963C/AppData/Local/Programs/Git/bin/git.exe")
 (if (and (eq system-type 'windows-nt) (file-directory-p mod/work-git-path))
     (setq vc-git-program mod/work-git-path)
   (setq vc-git-program "git"))
@@ -122,18 +129,20 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
 
 (defvar cc/ediff-revision-session-p nil
   "If t then `cc/ediff-revision-actual' has been called.
-  This state variable is used to insert added behavior to the overridden
-  function `ediff-janitor'.")
+This state variable is used to insert added behavior to the
+overridden function `ediff-janitor'.")
 
 (defun cc/ediff-revision-from-menu (e)
   "Invoke `ediff-revision' on E with variable `buffer-file-name'."
   (interactive "e")
+  (ignore e)
   (cc/ediff-revision))
 
 (defun cc/ediff-revision ()
-  "Run Ediff on the current `buffer-file-name' provided that it is `vc-registered'.
-  This function handles the interactive concerns found in `ediff-revision'.
-  This function will also test if a diff should apply to the current buffer."
+  "Run Ediff on the current `buffer-file-name' provided that it
+is `vc-registered'. This function handles the interactive
+concerns found in `ediff-revision'. This function will also test
+if a diff should apply to the current buffer."
   (interactive)
   (when (and (bound-and-true-p buffer-file-name) (vc-registered (buffer-file-name)))
     (if (and (buffer-modified-p) (y-or-n-p (format "Buffer %s is modified.  Save buffer? " (buffer-name))))
@@ -148,9 +157,11 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
     (message (concat buffer-file-name " is not under version control.")))))
 
 (defun cc/ediff-revision-actual ()
-  "Invoke Ediff logic to diff the modified repo file to its counterpart in the
-  current branch.
-  This function handles the actual diff behavior called by `ediff-revision'."
+  "Invoke Ediff logic to diff the modified repo file to its
+counterpart in the current branch.
+
+This function handles the actual diff behavior called by
+`ediff-revision'."
   (let ((rev1 "")
         (rev2 ""))
     (setq cc/ediff-revision-session-p t)
@@ -159,13 +170,15 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
 
 (defun ediff-janitor (ask keep-variants)
   "Kill buffers A, B, and, possibly, C, if these buffers aren't modified.
-  In merge jobs, buffer C is not deleted here, but rather according to
-  `ediff-quit-merge-hook'.
-  ASK non-nil means ask the user whether to keep each unmodified buffer, unless
-  KEEP-VARIANTS is non-nil, in which case buffers are never killed.
-  A side effect of cleaning up may be that you should be careful when comparing
-  the same buffer in two separate Ediff sessions: quitting one of them might
-  delete this buffer in another session as well.
+In merge jobs, buffer C is not deleted here, but rather according
+to `ediff-quit-merge-hook'.
+
+ASK non-nil means ask the user whether to keep each unmodified
+buffer, unless KEEP-VARIANTS is non-nil, in which case buffers
+are never killed. A side effect of cleaning up may be that you
+should be careful when comparing the same buffer in two separate
+Ediff sessions: quitting one of them might delete this buffer in
+another session as well.
 
   CC MODIFICATION: This method overrides the original Ediff function."
   (let ((ask
@@ -193,14 +206,14 @@ The function will then ensure that the `*vc-git*' buffer stays hidden."
 
 (defun cc/stash-window-configuration-for-ediff ()
   "Store window configuration to register 🧊.
-  Use of emoji is to avoid potential use of keyboard character to reference
-  the register."
+Use of emoji is to avoid potential use of keyboard character to
+reference the register."
   (window-configuration-to-register ?🧊))
 
 (defun cc/restore-window-configuration-for-ediff ()
   "Restore window configuration from register 🧊.
-  Use of emoji is to avoid potential use of keyboard character to reference
-  the register."
+Use of emoji is to avoid potential use of keyboard character to
+reference the register."
   (jump-to-register ?🧊))
 
 ;;----------------------------------------------------------------------------

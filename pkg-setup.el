@@ -28,7 +28,8 @@
 
 ;;==============================================================================
 ;; Configure packages
-(if (equal (system-name) "KRSMW-6322DVB") ; Work computer
+(if (or (equal (system-name) "KRSML-8TDXBV3")
+        (equal (system-name) "KRSMW-6322DVB")) ; Work computers
       (setq package-archives
       `(("melpa" . "https://melpa.org/packages/")
         ("gnu"   . ,(concat emacs-dir "elpa-mirror/gnu"))))

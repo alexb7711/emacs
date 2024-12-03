@@ -111,6 +111,11 @@ hidden."
     (setq vc-git-program mod/work-git-path)
   (setq vc-git-program "git"))
 
+(setq
+ vc-suppress-confirm t
+ vc-command-messages "log"
+ change-log-version-info-enabled t)
+
 ;;===========================================================================
 ;; `ediff'
 

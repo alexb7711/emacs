@@ -71,7 +71,6 @@
            rainbow-delimiters
            rust-mode
            saveplace-pdf-view
-           scad-mode
            treesit-auto
            which-key
            yaml-mode))

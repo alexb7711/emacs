@@ -91,7 +91,8 @@
 
 (defun mod/flyspell-keybindings ()
   "Key bindings for `Flyspell'."
-  (define-key flyspell-mode-map (kbd "C-'") 'flyspell-auto-correct-previous-word))
+  (define-key flyspell-mode-map (kbd "C-.") 'ispell-word)
+  (define-key flyspell-mode-map (kbd "C-,") 'flyspell-auto-correct-previous-word))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Configuration

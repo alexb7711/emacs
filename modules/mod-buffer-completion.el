@@ -59,24 +59,6 @@
 ;; `abbrev'
 
 ;;------------------------------------------------------------------------------
-;; Functions
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;;
-(defun mod/language-text-completion ()
-  "Adds the completion functions when editing natural lanugage files."
-  (add-to-list 'completion-at-point-functions '(mod/complete-path-at-point mod/dabbrev-completion-at-point)))
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Add` dabbrev'
-(defun mod/dabbrev-completion-at-point ()
-  (dabbrev--reset-global-variables)
-  (let* ((abbrev (dabbrev--abbrev-at-point))
-         (candidates (dabbrev--find-all-expansions abbrev t))
-         (bnd (bounds-of-thing-at-point 'symbol)))
-    (list (car bnd) (cdr bnd) candidates)))
-
-;;------------------------------------------------------------------------------
 ;; Configuration
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

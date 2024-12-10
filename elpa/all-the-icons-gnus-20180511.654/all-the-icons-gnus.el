@@ -1,7 +1,8 @@
 ;;; all-the-icons-gnus.el --- Shows icons for in Gnus  -*- lexical-binding: t; -*-
 
 ;; Author: Nicolas Lamirault <nicolas.lamirault@gmail.com>
-;; Version: 0.1.0
+;; Package-Version: 20180511.654
+;; Package-Revision: 27f78996da07
 ;; Keywords: mail tools
 ;; Package-Requires: ((emacs "24.4") (dash "2.12.0") (all-the-icons "3.1.0"))
 

@@ -7,7 +7,8 @@
 ;; URL: http://github.com/vedang/pdf-tools/
 ;; Keywords: files, multimedia
 ;; Package: pdf-tools
-;; Version: 1.1.0
+;; Package-Version: 20240429.407
+;; Package-Revision: 30b50544e55b
 ;; Package-Requires: ((emacs "26.3") (tablist "1.0") (let-alist "1.0.4"))
 
 ;; This program is free software; you can redistribute it and/or modify

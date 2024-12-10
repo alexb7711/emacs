@@ -4,7 +4,8 @@
 
 ;; Author: Renan Ranelli
 ;; URL: http://github.com/rranelli/auto-package-update.el
-;; Version: 1.7
+;; Package-Version: 20211108.2025
+;; Package-Revision: ad95435fefe2
 ;; Keywords: package, update
 ;; Package-Requires: ((emacs "24.4") (dash "2.1.0"))
 

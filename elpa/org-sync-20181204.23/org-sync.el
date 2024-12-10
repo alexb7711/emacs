@@ -8,7 +8,8 @@
 ;; Keywords: org, synchronization, issue tracking, GitHub, Redmine
 ;; Homepage: https://github.com/arbox/org-sync
 ;; Package-Requires: ((cl-lib "0.5") (org "8.2") (emacs "24"))
-;; Version: 0.3.0
+;; Package-Version: 20181204.23
+;; Package-Revision: e34a385fa9e6
 
 ;;
 ;; This program is free software; you can redistribute it and/or modify

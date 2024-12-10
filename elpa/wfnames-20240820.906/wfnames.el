@@ -6,7 +6,8 @@
 
 ;; Compatibility: GNU Emacs 24.4+"
 ;; Package-Requires: ((emacs "24.4"))
-;; Version: 1.2
+;; Package-Version: 20240820.906
+;; Package-Revision: 3652cbd131b2
 ;; Keywords: wfnames, convenience, files, editing, helm
 
 ;; This program is free software; you can redistribute it and/or modify

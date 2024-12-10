@@ -3,7 +3,8 @@
 ;; Copyright (C) 2015-2021 Bar Magal & Contributors
 
 ;; Author: Bar Magal (2015)
-;; Version: 0.9
+;; Package-Version: 20210420.1200
+;; Package-Revision: 76f2335ee6f2
 ;; Homepage: https://github.com/bmag/imenu-list
 ;; Package-Requires: ((emacs "24.3"))
 

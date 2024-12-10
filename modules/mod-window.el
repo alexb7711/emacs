@@ -26,8 +26,6 @@
 
 
 (require 'dired-sidebar nil t)
-(require 'ibuffer-sidebar nil t)
-(require 'ibuffer-vc nil t)
 
 ;;==============================================================================
 ;; Focus on the text
@@ -113,10 +111,9 @@
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;
 (defun mod/sidebar-toggle ()
-  "Toggle both `dired-siderbar' and `ibuffer-sidebar'."
+  "Toggle both `dired-siderbar'."
   (interactive)
-  (dired-sidebar-toggle-sidebar)
-  (ibuffer-sidebar-toggle-sidebar))
+  (dired-sidebar-toggle-sidebar))
 
 ;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;
@@ -166,19 +163,7 @@ ARGS are args for `ibuffer-update-title-and-summary'."
   dired-sidebar-use-term-integration t ; Display +/- when in term mode
   dired-sidebar-use-magit-integration nil ; Disable `magit' integration
   dired-sidebar-pop-to-sidebar-on-toggle-open nil ; Set `dired-sidebar' as active window
-  dired-sidebar-no-delete-other-windows t
-
-  ;; `ibuffer-sidebar'
-  ibuffer-sidebar-pop-to-sidebar-on-toggle-open nil ; Set `ibuffer-sidebar' as active window
-  ibuffer-sidebar-display-alist
-  '((side . left) ; Set position/height of ...
-    (slot . 1) ; `ibuffer-sidebar' window
-    (window-height . 0.3)))
-
- :config
- (advice-add 'ibuffer-sidebar-refresh-buffer :after #'mod/restart-ibuffer-sidebar-mode-after-refresh)
- (advice-add 'buffer-sidebar-remove-column-headings :override #'mod/buffer-sidebar-remove-column-headings)
- (advice-add 'ibuffer-vc-set-filter-groups-by-vc-root :override #'mod/ibuffer-vc-set-filter-groups-by-vc-root))
+  dired-sidebar-no-delete-other-windows t))
 
 (provide 'mod-window)
 ;;; mod-window.el ends here

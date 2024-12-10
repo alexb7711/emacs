@@ -56,8 +56,6 @@
            doom-themes
            flycheck
            helm-bibtex
-           ibuffer-sidebar
-           ibuffer-vc
            imenu-list
            langtool
            nov

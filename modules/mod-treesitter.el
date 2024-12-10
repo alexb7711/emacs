@@ -24,13 +24,14 @@
 
 ;;; Code:
 
-(use-package treesit-auto
-  :custom
-  (setq treesit-auto-langs '(awk bash bibtex c cmake cpp html latex make markdown org perl python rust yaml))
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+(unless (equal (system-name) "KRSML-8TDXBV3") ; Ignore work laptop
+  (use-package treesit-auto
+    :custom
+    (setq treesit-auto-langs '(awk bash bibtex c cmake cpp html latex make markdown org perl python rust yaml))
+    (treesit-auto-install 'prompt)
+    :config
+    (treesit-auto-add-to-auto-mode-alist 'all)
+    (global-treesit-auto-mode)))
 
 (provide 'mod-treesitter)
 ;;; mod-treesitter.el ends here

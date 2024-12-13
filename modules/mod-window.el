@@ -75,6 +75,7 @@
 (add-hook 'gnus-topic-mode-hook #'olivetti-mode)
 (add-hook 'nov-mode-hook #'olivetti-mode)
 (add-hook 'vc-dir-mode-hook #'olivetti-mode)
+(add-hook 'Info-mode-hook #'olivetti-mode)
 
 ;;==============================================================================
 ;; Dedicated Windows

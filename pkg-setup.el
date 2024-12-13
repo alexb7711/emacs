@@ -44,34 +44,44 @@
 
 ;;==============================================================================
 ;; Install packages
-(dolist (package
-         '(all-the-icons
-           all-the-icons-dired
-           all-the-icons-gnus
-           auto-package-update
-           cmake-mode
-           csv-mode
-           diff-hl
-           dired-sidebar
-           doom-themes
-           flycheck
-           helm-bibtex
-           imenu-list
-           langtool
-           nov
-           olivetti
-           org
-           org-caldav
-           org-sync
-           pdf-tools
-           plantuml-mode
-           python-black
-           rainbow-delimiters
-           rust-mode
-           saveplace-pdf-view
-           treesit-auto
-           which-key
-           yaml-mode))
+(defvar common-packages
+  '(all-the-icons
+    all-the-icons-dired
+    all-the-icons-gnus
+    auto-package-update
+    cmake-mode
+    csv-mode
+    diff-hl
+    dired-sidebar
+    doom-themes
+    flycheck
+    helm-bibtex
+    imenu-list
+    langtool
+    nov
+    olivetti
+    org
+    org-caldav
+    org-sync
+    plantuml-mode
+    python-black
+    rainbow-delimiters
+    rust-mode
+    which-key
+    yaml-mode)
+  "List of packages common to all RuneMacs instances.")
+
+(defvar special-packages
+  '(pdf-tools saveplace-pdf-view treesit-auto)
+  "List of special packages for special machines.")
+
+;; If on a personal PC, install PDF-Tools
+(unless (or (equal (system-name) "KRSML-8TDXBV3")
+            (equal (system-name) "KRSMW-6322DVB")) ; Work computers
+  (setq packages (append common-packages special-packages)))
+
+;; Install the packages
+(dolist (package packages)
   (unless (package-installed-p package)
     (package-install package)))
 

@@ -25,6 +25,15 @@
 ;;; Code:
 
 ;;==============================================================================
+;; Variables
+(defvar mod/force-legacy t
+  "Flag to enable/disable forcing legacy completion frameworks.")
+
+;;==============================================================================
+;; Functions
+
+;;------------------------------------------------------------------------------
+;;
 (defun mod/load-face-with-daemon(face frame &rest args)
     "Set FACE from ARGS for FRAME when loading Emacs with or without the daemon.
 This function is a wrapper for `set-face-attribute'. It is meant to generalize
@@ -35,7 +44,8 @@ hooked to `after-make-frame-functions'."
     ;; Set the face attribute
     (apply #'set-face-attribute face frame args))
 
-;;==============================================================================
+;;------------------------------------------------------------------------------
+;;
     (defun mod/display-disabled-commands ()
       "Report commands are disabled."
       (interactive)

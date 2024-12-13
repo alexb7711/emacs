@@ -29,20 +29,16 @@
 
 ;;==============================================================================
 ;; PDF
-(use-package
- pdf-tools
- :ensure t
- :defer t
+(unless (or (equal (system-name) "KRSML-8TDXBV3")
+            (equal (system-name) "KRSMW-6322DVB")) ; Work computers
+  (use-package
+    pdf-tools
+    :ensure t
+    :defer t
 
- :config
- ;; Load `pdf-tools' when required
- (pdf-loader-install) (save-place-mode 1))
-
-;; :hook
-;; ;; Add hook
-;; (pdf-view-mode #'save-place-local-mode)
-;; (doc-view-mode #'save-place-local-mode)
-;; (doc-view-mode #'pdf-tools-enable-minor-modes))
+    :config
+    ;; Load `pdf-tools' when required
+    (pdf-loader-install) (save-place-mode 1)))
 
 (provide 'mod-doc-view)
 

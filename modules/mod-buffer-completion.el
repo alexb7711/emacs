@@ -26,10 +26,14 @@
 ;;; Code:
 
 ;;==============================================================================
-;; Defaults
+;; `abbrev'
 
-;;==============================================================================
-;; Symbol completion
+;;------------------------------------------------------------------------------
+;; Configuration
+
+;; Automatically add spelling corrections into `abbrev' file
+(if (file-exists-p abbrev-file-name)
+    (quietly-read-abbrev-file))
 
 ;;------------------------------------------------------------------------------
 ;; `*Completions*'
@@ -45,58 +49,12 @@
   completions-max-height 4
   completions-header-format nil))
 
-;;------------------------------------------------------------------------------
-;; Add file completion at point
-(autoload 'ffap-file-at-point "ffap")
-(defun mod/complete-path-at-point ()
-  "Return completion data for UNIX path at point."
-  (let ((fn (ffap-file-at-point))
-        (fap (thing-at-point 'filename)))
-    (when (and (or fn (equal "/" fap)) (save-excursion (search-backward fap (line-beginning-position) t)))
-      (list (match-beginning 0) (match-end 0) #'completion-file-name-table :exclusive 'no))))
+;;==============================================================================
+;; Load in completion frameworks
 
-;;------------------------------------------------------------------------------
-;; `abbrev'
-
-;;------------------------------------------------------------------------------
-;; Configuration
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Automatically add spelling corrections into `abbrev' file
-(if (file-exists-p abbrev-file-name)
-    (quietly-read-abbrev-file))
-
-;;------------------------------------------------------------------------------
-;; Hooks
-(add-hook 'text-mode #'mod/language-text-completion)
-(add-hook 'org-mode #'mod/language-text-completion)
-
-;;-----------------------------------------------------------------------------
-;; LSP (Eglot)
-;; Requirements:
-;;    - C/C++: `ccls'
-;;    - Python: `python-lsp-server'
-;;    - Rust: `rust-analyzer'
-(use-package
- eglot
- :ensure t
- :defer t
-
- :init (setq eglot-autoshutdown t)
-
- :config
- (if (eq system-type 'windows-nt)
-     (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) "C:/msys64/usr/bin/rust-analyzer.exe")))
-
- :hook
- (c++-mode . eglot-ensure)
- (c++-ts-mode . eglot-ensure)
- (c-mode . eglot-ensure)
- (c-ts-mode . eglot-ensure)
- (python-mode . eglot-ensure)
- (python-ts-mode . eglot-ensure)
- (rust-mode . eglot-ensure)
- (rust-ts-mode . eglot-ensure))
+(if (or (version< emacs-version "29.0") mod/force-legacy)
+    (load-file (concat module-dir "/completion/legacy.el"))
+  (load-file (concat module-dir "/completion/modern.el")))
 
 (provide 'mod-buffer-completion)
 ;;; mod-buffer-completion.el ends here

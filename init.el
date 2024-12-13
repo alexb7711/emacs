@@ -60,7 +60,8 @@
             gcs-done)))
 
 ;; Enable the Emacs server
-(server-start)
+(unless (bound-and-true-p server-mode)
+  (server-start))
 
 (provide 'init)
 ;;; init.el ends here

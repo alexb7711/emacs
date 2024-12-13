@@ -115,39 +115,6 @@
   (interactive)
   (dired-sidebar-toggle-sidebar))
 
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;;
-(defun mod/restart-ibuffer-sidebar-mode-after-refresh (&rest var)
-  "Restart `ibuffer-sidebar-mode' before a refresh."
-  (when (ibuffer-sidebar-showing-sidebar-p)
-    (let ((buf (get-buffer ibuffer-sidebar-name)))
-      (with-current-buffer buf
-        (ibuffer-vc-set-filter-groups-by-vc-root)))))
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;;
-(defun mod/ibuffer-sidebar-remove-column-headings (&rest _args)
-  "Function ran after `ibuffer-update-title-and-summary' that removes headings.
-
-F should be function `ibuffer-update-title-and-summary'.
-ARGS are args for `ibuffer-update-title-and-summary'."
-  (when (and (bound-and-true-p ibuffer-sidebar-mode) (not ibuffer-sidebar-display-column-titles))
-    (with-current-buffer (current-buffer)
-      (goto-char 1)
-      (search-forward "-\n" nil t)
-      (delete-region 1 (point)))))
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;;
-(defun mod/ibuffer-vc-set-filter-groups-by-vc-root ()
-  "Set the current filter groups to filter by vc root dir."
-  (interactive)
-  (setq ibuffer-filter-groups (ibuffer-vc-generate-filter-groups-by-vc-root))
-  (let ((ibuf (get-buffer "*Ibuffer*")))
-    (when ibuf
-      (with-current-buffer ibuf
-        (ibuffer-update nil t)))))
-
 ;;------------------------------------------------------------------------------
 ;; Configuration
 

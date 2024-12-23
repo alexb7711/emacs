@@ -24,11 +24,12 @@
 
 ;;; Code:
 
+(require 'add-log nil t)
 (require 'ediff nil t)
+(require 'ediff-vers nil t)
 (require 'vc nil t)
 (require 'vc-dir nil t)
 (require 'vc-git nil t)
-(require 'ediff-vers nil t)
 
 ;;==============================================================================
 ;; `vc'

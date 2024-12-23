@@ -26,6 +26,7 @@
 
 
 (require 'dired-sidebar nil t)
+(require 'olivetti nil t)
 
 ;;==============================================================================
 ;; Focus on the text
@@ -88,20 +89,50 @@
 ;;==============================================================================
 ;; Misc. window placements
 (setq display-buffer-alist
-      '(("\\**-?e?shell\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . bottom) (slot . 0))
-        ("\\*\\(Backtrace\\|Warnings|\\|Compile-Log|\\Messages\\)\\*"
+      '(("\\**-?e?shell\\*"
+         (display-buffer-in-side-window)
+         (window-height . 0.25)
+         (side . bottom)
+         (slot . 0))
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log|\\Messages\\)\\*"
          (display-buffer-in-side-window)
          (window-height . 0.25)
          (side . bottom)
          (slot . 1))
-        ("\\*grep\\*" (display-buffer-in-side-window) (window-height . 0.15) (side . bottom) (slot . -1))
-        ("\\*vc-log\\*\\(:?<.*>\\)?" (display-buffer-below-selected) (window-height . 0.25))
-        ("\\*vc-git\\(:?.*\\)?\\*" (display-buffer-same-window))
-        ("\\*[Hh]elp\\*" (display-buffer-in-side-window) (window-height . 0.3) (side . right) (slot . 1))
-        ("\\*Completions\\*" (display-buffer-below-selected) (window-height . 0.2) (side . bottom) (slot . 0))
-        ("\\*compilation\\*" (display-buffer-in-side-window) (window-height . 0.25) (side . top) (slot . 0))
-        ("\\*Ilist\\*" (display-buffer-in-side-window) (window-width . 0.1) (side . right) (slot . 0))
-        ("\\*Flycheck Errors\\*" (display-buffer-below-selected) (window-width . 0.3) (side . right) (slot . 1))))
+        ("\\*grep\\*" (display-buffer-in-side-window)
+         (window-height . 0.15)
+         (side . bottom)
+         (slot . -1))
+        ("\\*vc-log\\*\\(:?<.*>\\)?"
+         (display-buffer-below-selected)
+         (window-height . 0.25))
+        ("\\*vc-git\\(:?.*\\)?\\*"
+         (display-buffer-same-window))
+        ("\\*[Hh]elp\\*"
+         (display-buffer-in-side-window)
+         (window-height . 0.3)
+         (side . right)
+         (slot . 1))
+        ("\\*Completions\\*"
+         (display-buffer-below-selected)
+         (window-height . 0.2)
+         (side . bottom)
+         (slot . 0))
+        ("\\*compilation\\*"
+         (display-buffer-in-side-window)
+         (window-height . 0.25)
+         (side . top)
+         (slot . 0))
+        ("\\*Ilist\\*"
+         (display-buffer-in-side-window)
+         (window-width . 0.1)
+         (side . right)
+         (slot . 0))
+        ("\\*Flymake diagnostics for .*\\*"
+         (display-buffer-below-selected)
+         (window-width . 0.15)
+         (side . right)
+         (slot . 1))))
 
 ;;==============================================================================
 ;; Sidebars
@@ -127,7 +158,7 @@
  :init
  (setq
   dired-sidebar-theme 'icons ; Display icons
-  dired-sidebar-subtree-line-prefix "  |" ; Column separator
+  dired-sidebar-subtree-line-prefix " |" ; Column separator
   dired-sidebar-use-term-integration t ; Display +/- when in term mode
   dired-sidebar-use-magit-integration nil ; Disable `magit' integration
   dired-sidebar-pop-to-sidebar-on-toggle-open nil ; Set `dired-sidebar' as active window

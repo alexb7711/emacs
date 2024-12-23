@@ -24,6 +24,7 @@
 
 ;;; Code:
 
+(require 'compile)
 
 ;;==============================================================================
 ;; Functions
@@ -31,7 +32,7 @@
 ;;------------------------------------------------------------------------------
 ;;
 (defun mod/compile-cmd-on-mode ()
-  "Changes the default compile command based on the `major-mode'."
+  "Change the default compile command based on the `major-mode'."
   (setq compile-command "make -k")
 
   (cond
@@ -45,7 +46,8 @@
 ;;------------------------------------------------------------------------------
 ;;
 (defun mod/hide-compilation-buffer (proc)
-  "Hide the `*compilation*' buffer."
+  "Hide the `*compilation*' PROC buffer."
+  (ignore proc)
   (let ((window (get-buffer-window "*compilation*")))
     (ignore-errors
       (delete-window window))))
@@ -53,19 +55,20 @@
 ;;------------------------------------------------------------------------------
 ;;
 (defun mod/disp-compile-on-error (buf str)
-  "Display the `*compilation*' buffer when an error occurs."
+  "Display the `*compilation*' for BUF when an error is found in STR."
   (when (string-match ".*exited abnormally.*" str)
-    (display-buffer buf)))
-
-;;------------------------------------------------------------------------------
-;; Compile script
-(defun compiler-script ()
-  "Run compile command on currently opened buffer."
-  (call-process-shell-command (concat "compile " (buffer-file-name)) nil 0))
+    (let* ((comp-buf (if (processp buf)
+                         (process-buffer buf)
+                       buf))
+           (window (get-buffer-window comp-buf)))
+      (if window
+          (select-window window)
+        (switch-to-buffer-other-window comp-buf)))))
 
 ;;------------------------------------------------------------------------------
 ;;
 (defun mod/compile-from-root-dir ()
+  "Run compile function from the project root directory (if it exists)."
   (interactive)
   (let ((default-directory
          (if (vc-root-dir)
@@ -76,6 +79,7 @@
 ;;------------------------------------------------------------------------------
 ;;
 (defun mod/recompile-from-root-dir ()
+  "Recompile function from the project root directory (if it exists)."
   (interactive)
   (let ((default-directory
          (if (vc-root-dir)
@@ -85,7 +89,7 @@
 
 ;;==============================================================================
 ;; Hooks
-(add-hook 'compilation-start-hook 'mod/hide-compilation-buffer)
+(add-hook 'compilation-start-hook 'mod/hide-compilation-buffer) ; TODO: TEST
 (add-hook 'compilation-finish-functions #'mod/disp-compile-on-error)
 (add-hook 'prog-mode-hook #'mod/compile-cmd-on-mode)
 (add-hook 'text-mode-hook #'mod/compile-cmd-on-mode)

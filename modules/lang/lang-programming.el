@@ -54,8 +54,8 @@
 
   (mod/load-face-with-daemon 'whitespace-indentation nil
                              :inherit nil
-                             :background nil
-                             :foreground nil
+                             :background "unspecified"
+                             :foreground "unspecified"
                              :foreground "light gray"
                              :strike-through t))
 ;; Defaults
@@ -72,20 +72,6 @@
 ;; Hooks
 
 (add-hook 'prog-mode-hook 'which-function-mode)
-
-;;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Flycheck
-;; Requirements:
-;;    - C/C++: `gcc or clang'
-;;    - Python: `python-pylint'
-;;    - Rust: `rust-cargo'
-;;
-
-(use-package
- flycheck
- :defer t
- :hook
- (prog-mode . flycheck-mode))
 
 ;;======================================================================================================================
 ;; Load programming language files

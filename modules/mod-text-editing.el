@@ -7,7 +7,7 @@
 ;;; Code:
 
 (require 'display-line-numbers nil t)
-(require 'flycheck nil t)
+(require 'flymake nil t)
 (require 'flyspell nil t)
 (require 'hl-line nil t)
 (require 'langtool nil t)
@@ -17,6 +17,17 @@
 
 ;;==============================================================================
 ;; General (Natural language and programming)
+
+;;------------------------------------------------------------------------------
+;; `flymake'
+;;
+
+(use-package
+ flymake
+ :defer t
+ :hook
+ (text-mode . flymake-mode)
+ (prog-mode . flymake-mode))
 
 ;;------------------------------------------------------------------------------
 ;; Better Newlines

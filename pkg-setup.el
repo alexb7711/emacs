@@ -54,7 +54,6 @@
     diff-hl
     dired-sidebar
     doom-themes
-    flycheck
     helm-bibtex
     imenu-list
     langtool

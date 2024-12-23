@@ -5,15 +5,20 @@
 ;;; Code:
 
 (require 'bibtex nil t)
-(require 'flycheck nil t)
+(require 'diff-mode nil t)
+(require 'esh-mode nil t)
+(require 'flymake nil t)
 (require 'flyspell nil t)
 (require 'gnus-topic nil t)
 (require 'org nil t)
 (require 'ox-beamer nil t)
 (require 'ox-beamer nil t)
 (require 'pdf-tools nil t)
+(require 'tex nil t)
 (require 'tex-mode nil t)
 (require 'vc-dir nil t)
+(require 'viper-keym nil t)
+(require 'yaml-mode nil t)
 
 ;;==============================================================================
 ;; Package specific custom key-bindings
@@ -105,10 +110,10 @@
  :hook (text-mode . mod/flyspell-keybindings) (text-mode-hook . mod/flyspell-keybindings))
 
 ;;------------------------------------------------------------------------------
-;; `flycheck' (`mod-text-editing.el')
+;; `flymake' (`mod-text-editing.el')
 
-(define-key flycheck-mode-map (kbd "<f9>") 'flycheck-previous-error)
-(define-key flycheck-mode-map (kbd "<f10>") 'flycheck-next-error)
+(define-key flymake-mode-map (kbd "<f11>") 'flymake-goto-prev-error)
+(define-key flymake-mode-map (kbd "<f12>") 'flymake-goto-next-error)
 
 ;;------------------------------------------------------------------------------
 ;; `ibuffer'
@@ -182,6 +187,7 @@
 
  :bind (:map yaml-mode-map ("<tab>" . 'yaml-indent-line)))
 
+
 ;;------------------------------------------------------------------------------
 ;; `vc' (`vc-el.org')
 (with-eval-after-load "vc-hooks"
@@ -199,8 +205,8 @@
 
 ;;------------------------------------------------------------------------------
 ;; Compile
-(define-key prog-mode-map (kbd "<f1>") 'compile)
-(define-key prog-mode-map (kbd "<f2>") 'recompile)
+(define-key prog-mode-map (kbd "<f1>") 'mod/compile-from-root-dir)
+(define-key prog-mode-map (kbd "<f2>") 'mod/recompile-from-root-dir)
 (define-key text-mode-map (kbd "<f1>") 'compile)
 (define-key text-mode-map (kbd "<f2>") 'recompile)
 
@@ -239,7 +245,6 @@
 
 ;;------------------------------------------------------------------------------
 ;; `viper'
-(define-key viper-insert-global-user-map (kbd "<backspace>") 'backward-delete-char-untabify)
 (define-key viper-vi-global-user-map (kbd "C-<up>") 'enlarge-window)
 (define-key viper-vi-global-user-map (kbd "C-<down>") 'shrink-window)
 
@@ -254,9 +259,8 @@
 (define-key viper-vi-global-user-map (kbd "V") 'set-mark-command)
 
 ;; Eshell
-(setq mod/eshell-viper-map (make-sparse-keymap))
-(define-key mod/eshell-viper-map (kbd "<return>") 'eshell-send-input)
-(viper-modify-major-mode 'eshell-mode 'insert-state mod/eshell-viper-map)
+(viper-modify-major-mode 'eshell-mode 'insert-state eshell-mode-map)
+(viper-modify-major-mode 'diff-mode 'vi-state diff-mode-shared-map)
 
 ;; Viper VI prefix key
 (keymap-set viper-vi-global-user-map "SPC" mod/space-prefix-keymap)
@@ -281,4 +285,5 @@
 (global-unset-key (kbd "C-x C-z"))
 (global-unset-key (kbd "C-x C-c"))
 
+(provide 'z-mod-keybindings)
 ;;; mod-keybindings.el ends here

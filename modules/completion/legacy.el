@@ -108,7 +108,7 @@
 
 ;;==============================================================================
 ;; Advice
-(defadvice find-tag (before mod/refresh-etags activate)
+(defadvice find-tag (before mod/refresh-etags compile)
   "Rerun etags and reload tags if tag not found and redo find-tag.
    If buffer is modified, ask about save before running etags."
   (condition-case err

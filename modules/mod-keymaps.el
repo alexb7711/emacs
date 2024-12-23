@@ -24,6 +24,9 @@
 
 ;;; Code:
 
+(require 'which-key nil t)
+(require 'eglot nil t)
+
 ;;==============================================================================
 ;; Key Maps
 
@@ -56,15 +59,6 @@
   "f" #'switch-to-buffer
   "k" #'kill-this-buffer
   "K" #'kill-buffer)
-
-;;------------------------------------------------------------------------------
-;;
-(defvar-keymap mod/dired-keymap
-  :doc
-  "Maps shortcuts to dired actions."
-  :parent dired-mode-map
-  "r" #'denote-dired-rename-files
-  )
 
 ;;------------------------------------------------------------------------------
 ;;
@@ -119,17 +113,6 @@
 
 ;;------------------------------------------------------------------------------
 ;;
-(defvar-keymap mod/note-keymap
-  :doc
-  "Maps shortcuts to note taking actions."
-  "f" #'denote-open-or-create
-  "n" #'denote
-  "l" #'denote-link
-  "r" #'denote-rename-file-and-buffer
-  )
-
-;;------------------------------------------------------------------------------
-;;
 (defvar-keymap mod/tab-bar-keymap
   :doc
   "Maps shortcuts to note taking actions."
@@ -172,7 +155,6 @@
   "b" mod/buffer-keymap
   "c" mod/code-keymap
   "f" mod/find-keymap
-  "n" mod/note-keymap
   "p" project-prefix-map
   "t" mod/tab-bar-keymap
   "v" mod/version-control-keymap
@@ -194,9 +176,7 @@
   "H" help-map
   "SPC" #'set-mark-command
   "b" mod/buffer-keymap
-  "d" mod/dired-keymap
   "f" mod/find-keymap
-  "n" mod/note-keymap
   "p" project-prefix-map
   "t" mod/tab-bar-keymap
   "v" mod/version-control-keymap
@@ -219,7 +199,6 @@
    "b" `("Buffer" . ,mod/buffer-keymap)
    "c" `("Coding" . ,mod/code-keymap)
    "f" `("Find" . ,mod/find-keymap)
-   "n" `("Notes" . ,mod/note-keymap)
    "p" `("Project" . ,project-prefix-map)
    "t" `("Tabs" . ,mod/tab-bar-keymap)
    "v" `("VC" . ,mod/version-control-keymap)
@@ -229,9 +208,7 @@
    "B" `("Bookmark" . ,mod/bookmark-keymap)
    "H" `("Help" . ,help-map)
    "b" `("Buffer" . ,mod/buffer-keymap)
-   "d" `("Dired" . ,mod/dired-keymap)
    "f" `("Find" . ,mod/find-keymap)
-   "n" `("Notes" . ,mod/note-keymap)
    "p" `("Project" . ,project-prefix-map)
    "t" `("Tabs" . ,mod/tab-bar-keymap)
    "v" `("VC" . ,mod/version-control-keymap)

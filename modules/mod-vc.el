@@ -113,7 +113,7 @@ hidden."
 
 (setq
  vc-suppress-confirm t
- vc-command-messages "log"
+ vc-command-messages nil
  change-log-version-info-enabled t)
 
 ;;===========================================================================

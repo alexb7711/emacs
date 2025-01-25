@@ -46,9 +46,8 @@
 (use-package
  eglot
  :ensure t
- :defer t
 
- :init (setq eglot-autoshutdown t)
+ :init (setq eglot-autoshutdown nil)
 
  :config
  (if (eq system-type 'windows-nt)

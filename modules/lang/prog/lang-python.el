@@ -6,9 +6,12 @@
 ;;; Code:
 
 ;;==============================================================================
+;; `python-mode'
+
+;;------------------------------------------------------------------------------
 ;; Functions
 
-;;==============================================================================
+;;------------------------------------------------------------------------------
 ;; Configuration
 
 ;; Add `treesitter' when available
@@ -30,6 +33,13 @@
   tab-width 4 ; Set tab width
   ))
 
+;;------------------------------------------------------------------------------
+;; Hooks
+(add-hook 'python-mode-hook
+          #'(lambda ()
+
+              (setq
+               python-shell-virtualenv-root (concat (vc-root-dir) ".venv"))))
 
 ;;==============================================================================
 ;; Python formatting
@@ -42,7 +52,9 @@
  :defer t
  :after (python)
 
- :hook (python-ts-mode . python-black-on-save-mode))
+ :hook ;(python-ts-mode . python-black-on-save-mode)
+ (python-ts-mode . python-black-on-save-mode-enable-dwim)
+ (python-mode . python-black-on-save-mode-enable-dwim))
 
 (provide 'lang-python)
 ;;; lang-text-editing.el ends here

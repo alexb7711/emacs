@@ -21,6 +21,8 @@
 ;;------------------------------------------------------------------------------
 ;; `flymake'
 ;;
+;; Requirements:
+;; - Python: `pyflakes'
 
 (use-package
  flymake

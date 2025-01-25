@@ -26,7 +26,7 @@
 
 ;;==============================================================================
 ;; Variables
-(defvar mod/force-legacy t
+(defvar mod/force-legacy nil
   "Flag to enable/disable forcing legacy completion frameworks.")
 
 ;;==============================================================================

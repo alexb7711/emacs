@@ -54,8 +54,8 @@
 
   (mod/load-face-with-daemon 'whitespace-indentation nil
                              :inherit nil
-                             :background "unspecified"
-                             :foreground "unspecified"
+                             :background 'unspecified
+                             :foreground 'unspecified
                              :foreground "light gray"
                              :strike-through t))
 ;; Defaults
